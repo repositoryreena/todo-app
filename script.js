@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const completed = document.getElementById("completed");
   const incompleted = document.getElementById("incompleted");
 
+  // Select all list elements.  Iterate over each task item.  Remove show filter and add hide filter.  Check for completed tasks.  Display completed tasks.
   function addIncompletedFilter() {
     const lis = taskList.querySelectorAll("li");
     lis.forEach((li) => {
@@ -22,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
+  // Select all list items.  Iterate over each task item.  Remove show filter and add hide filter.  Check for incompleted tasks.  Display incompleted tasks.
   function addCompletedFilter() {
     const lis = taskList.querySelectorAll("li");
     lis.forEach((li) => {
@@ -55,6 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let draggedItem = null; // Declare the draggedItem variable
 
   // Add a new task to a to do list in an HTML document.  Create a new list item.  Set the text content to whatever is passed in as the text argument.  The value of taskText is being passed as an argument to the addTask function in this part of the code: addTask(taskText).  A new button is created with a check mark.  When clicked it will toggle between completed and its default state.  The saveTasks function is called.  Create a delete button.  When clicked the li is removed from the DOM and the saveTasks function is called to update the task list.  The complete and delete buttons are appended to the li.  The li is appended to taskList which is a ul where tasks are listed.
+
+  // Get the due date.  Mark the task draggable.  Allows the item to be dragged around the list.  Add drag and drop listeners.  When dragging starts (dragstart event), the task li that is being dragged is stored in the variable dragItem, and the class dragging is added to it to visually indicate that it is being dragged.  When the dragging ends (dragend event), the dragging class is removed from the dragged item, and draggedItem is set to null.  The dragover event allows the dragged item to be placed over another item by preventing the default behavior (which is to not allow dropping).  The drop event is triggered when the dragged task is dropped onto another task.  The event prevents the default drop behavior and then checks if the item being dragged is different from the target (the item being dropped onto).  It then reorders the tasks based on the indidces of the dragged item and the target item (li).  The dragged item is either inserted before or after the target item.  The task list is saved with the new order by calling saveTasks().  The task text is updated to include the due date.  
+
+  // Array.from creates a new shallow copied Array instance from an iterable or array like object.  
 
   function addTask(text) {
     const dateText = dateInput.value;
