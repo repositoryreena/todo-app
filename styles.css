@@ -28,3 +28,15 @@ li {
 .showFilter {
     display: block;
 }
+
+li {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 5px;
+    cursor: grab;
+}
+
+li.dragging {
+    opacity: 0.5; /* Make the dragged item semi-transparent */
+    cursor: grabbing; /* Change the cursor style while dragging */
+}
