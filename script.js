@@ -1,11 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("todo-form");
     const input = document.getElementById("task-input");
+    const dateInput = document.getElementById("date-input");
     const taskList = document.getElementById("task-list");
+
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         const taskText = input.value.trim();
+
+        
+
         if (taskText === "") return;
 
         addTask(taskText);
@@ -15,8 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add a new task to a to do list in an HTML document.  Create a new list item.  Set the text content to whatever is passed in as the text argument.  The value of taskText is being passed as an argument to the addTask function in this part of the code: addTask(taskText).  A new button is created with a check mark.  When clicked it will toggle between completed and its default state.  The saveTasks function is called.  Create a delete button.  When clicked the li is removed from the DOM and the saveTasks function is called to update the task list.  The complete and delete buttons are appended to the li.  The li is appended to taskList which is a ul where tasks are listed.
     function addTask(text) {
+
+        const dateText = dateInput.value
+
         const li = document.createElement("li");
         li.textContent = text;
+        li.textContent += " " + dateText;
 
         const completeBtn = document.createElement("button");
         completeBtn.textContent = "✔";
@@ -32,8 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
             saveTasks();
         });
 
+
         li.appendChild(completeBtn);
         li.appendChild(deleteBtn);
+
+
         taskList.appendChild(li);
     }
 
@@ -41,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function saveTasks() {
         const tasks = [];
         document.querySelectorAll("#task-list li").forEach((li) => {
-            tasks.push({ text: li.firstChild.textContent, completed: li.classList.contains("completed") });
+            tasks.push({ text: li.firstChild.textContent, completed: li.classList.contains("completed")}, dateInput);
         });
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }
@@ -55,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         storedTasks.forEach((task) => {
             addTask(task.text);
             if (task.completed) taskList.lastChild.classList.add("completed");
+            
         });
     }
 
