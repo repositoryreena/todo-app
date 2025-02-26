@@ -41,8 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const result = tasks.filter((task) => task.completed);
 
-
-
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const taskText = input.value.trim();
@@ -54,59 +52,49 @@ document.addEventListener("DOMContentLoaded", () => {
     input.value = "";
   });
 
-  let draggedItem = null;  // Declare the draggedItem variable
+  let draggedItem = null; // Declare the draggedItem variable
 
   // Add a new task to a to do list in an HTML document.  Create a new list item.  Set the text content to whatever is passed in as the text argument.  The value of taskText is being passed as an argument to the addTask function in this part of the code: addTask(taskText).  A new button is created with a check mark.  When clicked it will toggle between completed and its default state.  The saveTasks function is called.  Create a delete button.  When clicked the li is removed from the DOM and the saveTasks function is called to update the task list.  The complete and delete buttons are appended to the li.  The li is appended to taskList which is a ul where tasks are listed.
 
-
-
   function addTask(text) {
-
     const dateText = dateInput.value;
 
     const li = document.createElement("li");
 
-
-
     li.textContent = text;
 
-    
+    li.setAttribute("draggable", "true");
 
-li.setAttribute("draggable", "true");
+    li.addEventListener("dragstart", (e) => {
+      draggedItem = e.target;
+      draggedItem.classList.add("dragging");
+    });
 
-li.addEventListener('dragstart', (e) => {
-    draggedItem = e.target;
-    draggedItem.classList.add('dragging');
-});
+    li.addEventListener("dragend", () => {
+      draggedItem.classList.remove("dragging");
+      draggedItem = null;
+    });
 
-li.addEventListener('dragend', () => {
-    draggedItem.classList.remove('dragging');
-    draggedItem = null;
-});
+    li.addEventListener("dragover", (e) => {
+      e.preventDefault(); // Allow the drop
+    });
 
-li.addEventListener('dragover', (e) => {
-    e.preventDefault();  // Allow the drop
-});
-
-li.addEventListener('drop', (e) => {
-    e.preventDefault();
-    if (draggedItem !== li) {
-        const allItems = Array.from(taskList.children);  // Ensure taskList is used
+    li.addEventListener("drop", (e) => {
+      e.preventDefault();
+      if (draggedItem !== li) {
+        const allItems = Array.from(taskList.children); // Ensure taskList is used
         const draggedIndex = allItems.indexOf(draggedItem);
         const targetIndex = allItems.indexOf(li);
 
         // Insert the dragged item before or after the target item
         if (draggedIndex < targetIndex) {
-            li.after(draggedItem);
+          li.after(draggedItem);
         } else {
-            li.before(draggedItem);
+          li.before(draggedItem);
         }
-        saveTasks();  // Save the updated task order to localStorage
-    }
-});
-
-    
-
+        saveTasks(); // Save the updated task order to localStorage
+      }
+    });
 
     li.textContent += " " + dateText;
 
