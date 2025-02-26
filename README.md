@@ -27,7 +27,7 @@ The goal of this project was to build a fully functional to-do list app while pr
 ## how it works
 
 ### 1. Adding Tasks
-Users can input a task into the input field and submit it by pressing the "Add Task" button. The task is then added to a dynamic list on the page.
+Users can input a task into the input field and submit it by pressing the "Add Task" button. The task is then added to a dynamic list on the page.  Add due dates to tasks.
 
 ### 2. Marking Tasks as Complete
 Each task has a "✔" button that toggles the task's completion status. Completed tasks are visually represented by a strike-through and gray text.
@@ -45,6 +45,10 @@ The project includes test cases written with Jest to ensure the functionality wo
 - Marking tasks as completed
 - Deleting tasks
 - Ensuring tasks persist across page reloads
+
+### 6. Implement a filter to show only completed/incompleted tasks
+
+### 7. Drag and drop feature to reorder tasks
 
 ## setup instructions
 
