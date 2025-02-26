@@ -20,3 +20,11 @@ li {
     text-decoration: line-through;
     color: gray;
 }
+
+.hideFilter {
+    display: none;
+}
+
+.showFilter {
+    display: block;
+}

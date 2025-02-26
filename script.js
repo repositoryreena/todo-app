@@ -4,6 +4,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const dateInput = document.getElementById("date-input");
     const taskList = document.getElementById("task-list");
 
+    // console.log(taskList)
+
+    // const filter = document.getElementById("filter")
+    const completed = document.getElementById('completed')
+    const incompleted = document.getElementById('incompleted')
+
+    function addIncompletedFilter(){
+const lis = taskList.querySelectorAll("li")
+lis.forEach((li) => {
+    li.classList.remove("showFilter")
+    li.classList.add("hideFilter")
+    if (li.classList.contains("completed")) {
+        console.log(li)
+        li.classList.remove("hideFilter")
+        li.classList.add("showFilter")
+    }
+})
+    }
+
+    function addCompletedFilter(){
+        const lis = taskList.querySelectorAll("li")
+        lis.forEach((li) => {
+            li.classList.remove("showFilter")
+            li.classList.add("hideFilter")
+            if (!li.classList.contains("completed")) {
+                li.classList.remove("hideFilter")
+                li.classList.add("showFilter")
+            }
+        })
+            }
+
+    incompleted.addEventListener("click", addCompletedFilter)
+    completed.addEventListener("click", addIncompletedFilter)
+
+    let tasks = JSON.parse(localStorage.getItem("tasks"))
+
+    const result=tasks.filter(task=>task.completed)
+
+    // result.forEach((task) => {
+    //     if (task.completed) taskList.classList.add("completedFilter");
+        
+    // });
+    
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -20,6 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add a new task to a to do list in an HTML document.  Create a new list item.  Set the text content to whatever is passed in as the text argument.  The value of taskText is being passed as an argument to the addTask function in this part of the code: addTask(taskText).  A new button is created with a check mark.  When clicked it will toggle between completed and its default state.  The saveTasks function is called.  Create a delete button.  When clicked the li is removed from the DOM and the saveTasks function is called to update the task list.  The complete and delete buttons are appended to the li.  The li is appended to taskList which is a ul where tasks are listed.
     function addTask(text) {
+
+        
 
         const dateText = dateInput.value
 
@@ -53,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function saveTasks() {
         const tasks = [];
         document.querySelectorAll("#task-list li").forEach((li) => {
-            tasks.push({ text: li.firstChild.textContent, completed: li.classList.contains("completed")}, dateInput);
+            tasks.push({ text: li.firstChild.textContent, completed: li.classList.contains("completed")});
         });
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }
