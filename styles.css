@@ -34,9 +34,29 @@ li {
     padding: 10px;
     margin-bottom: 5px;
     cursor: grab;
+    display: flex;
+    justify-content: right;
+    text-align: right;
 }
 
 li.dragging {
-    opacity: 0.5; /* Make the dragged item semi-transparent */
+    opacity: 1; /* Make the dragged item semi-transparent */
     cursor: grabbing; /* Change the cursor style while dragging */
+    outline: 2px dashed #007bff; /* Add a dashed outline */
+    outline-offset: 4px; /* Slightly offset the outline for better visibility */
+}
+
+
+
+.due-date {
+    font-size: 0.9em;
+    color: gray;
+    margin-left: 10px;
+}
+
+
+button.active {
+    background-color: #4CAF50; /* Green color for active filter */
+    color: white;
+    border: 1px solid #4CAF50;
 }
