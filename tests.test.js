@@ -1,11 +1,16 @@
 // Create a new list item.  Set the text content.  Set a custom attribute.  Return the li element.
 
 function addTaskToList(taskText, dueDate) {
+    if (!taskText.trim()) {
+        return null; // Return null if taskText is empty or only contains spaces
+    }
+
     const li = document.createElement("li");
     li.textContent = `${taskText} (Due: ${dueDate})`;
     li.setAttribute("data-dueDate", dueDate);
     return li;
 }
+
 
 // Filter the tasks array.  Return a new array containing only the tasks that match the condition provided inside the filter method.  Check if the completed property of each task matches the status passed to the function.  Check if task.completed is equal to status.  If the condition is true, that task will be included in the filtered result.
 
@@ -60,3 +65,28 @@ test("Reorder tasks via drag and drop", () => {
     expect(reorderedTasks[0].text).toBe("Task 2");
     expect(reorderedTasks[2].text).toBe("Task 1");
 });
+
+// Test: Do not add empty task
+test("Do not add empty task", () => {
+    const taskText = "";
+    const dueDate = "2025-03-01";
+    const taskItem = addTaskToList(taskText, dueDate);
+    expect(taskItem).toBeNull();  // Ensure no task is added if the task text is empty
+});
+
+// Test: Do not render HTML tags
+test("Do not render HTML tags", () => {
+    const taskText = "<strong>Injected HTML</strong>";
+    const dueDate = "2025-03-01";
+    const taskItem = addTaskToList(taskText, dueDate);
+    expect(taskItem.textContent).toBe("<strong>Injected HTML</strong> (Due: 2025-03-01)"); // Check that HTML tags are escaped and not rendered
+});
+
+// Test: Do not add task with only a date
+test("Do not add task with only a date", () => {
+    const taskText = "";
+    const dueDate = "2025-03-01";
+    const taskItem = addTaskToList(taskText, dueDate);
+    expect(taskItem).toBeNull();  // Ensure no task is added if only the date is provided
+});
+
