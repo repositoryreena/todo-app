@@ -69,6 +69,10 @@ dateInput.setAttribute("min", formattedDate);
   // Get the due date.  Mark the task draggable.  Allows the item to be dragged around the list.  Add drag and drop listeners.  When dragging starts (dragstart event), the task li that is being dragged is stored in the variable dragItem, and the class dragging is added to it to visually indicate that it is being dragged.  When the dragging ends (dragend event), the dragging class is removed from the dragged item, and draggedItem is set to null.  The dragover event allows the dragged item to be placed over another item by preventing the default behavior (which is to not allow dropping).  The drop event is triggered when the dragged task is dropped onto another task.  The event prevents the default drop behavior and then checks if the item being dragged is different from the target (the item being dropped onto).  It then reorders the tasks based on the indidces of the dragged item and the target item (li).  The dragged item is either inserted before or after the target item.  The task list is saved with the new order by calling saveTasks().  The task text is updated to include the due date.  
 
   // Array.from creates a new shallow copied Array instance from an iterable or array like object.
+
+// Create the edit button.  Aria-label attribute with the value Edit task improves accessibility by providing a description for screen readers.  Add event listener for click.  Prompt the user for task text and due date.  Get the current task's text to pre fill the prompt for the task.  Get the current due date to pre-fill the prompt for the due date.  Update the task text.  The first child of the li is updated with the new task text.  Validate the date format using a regular expression.  Check if the date is not in the past.  If the date is in the past, an alert is shown to the user.  If the date is valid, the due date is updated and the displayed due date is updated.  If the date format is invalid an alert is shown.  Save tasks to local storage.
+
+
     function addTask(text) {
       const dateText = dateInput.value;
       const li = document.createElement("li");
