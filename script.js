@@ -7,6 +7,81 @@ document.addEventListener("DOMContentLoaded", () => {
   const completedButton = document.getElementById("completed");
   const incompletedButton = document.getElementById("incompleted");
 
+  const categoryForm = document.getElementById("category-form");
+  const categoryInput = document.getElementById("category-input");
+  const categoryList = document.getElementById("category-list");
+
+  // Load stored categories from localStorage
+  let categories = JSON.parse(localStorage.getItem("categories")) || [];
+
+  // Function to add a new category
+  function addCategory(categoryName) {
+    const category = document.createElement("div");
+    category.classList.add("category");
+    category.textContent = categoryName;
+    category.setAttribute("contenteditable", "true"); // Make it editable
+    category.setAttribute("tabindex", "0"); // Allow it to be focusable for keyboard edits
+
+    category.addEventListener("focus", () => {
+      category.classList.add("editing");
+    });
+
+    category.addEventListener("blur", () => {
+      category.classList.remove("editing");
+      saveCategories(); // Save when user clicks away
+      if (category.textContent.trim() === "") {
+        deleteCategory(category); // Delete if empty
+      }
+    });
+
+    // Allow editing the category name when the user presses Enter
+    category.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Prevent form submission
+        category.blur(); // Remove focus and save changes
+        if (category.textContent.trim() === "") {
+          deleteCategory(category); // Delete if empty
+        }
+      }
+    });
+
+    categoryList.appendChild(category);
+  }
+
+  // Function to delete a category (completely remove it from DOM and localStorage)
+  function deleteCategory(category) {
+    // Remove from localStorage
+    categories = categories.filter(cat => cat !== category.textContent.trim());
+    saveCategories();
+
+    // Remove from the DOM
+    category.remove();
+  }
+
+  // Event listener for category form submission
+  categoryForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const categoryName = categoryInput.value.trim();
+    if (categoryName === "") return; // Don't allow empty categories
+
+    categories.push(categoryName);
+    saveCategories(); // Save to localStorage
+
+    addCategory(categoryName);
+    categoryInput.value = ""; // Clear input after adding
+  });
+
+  // Load saved categories from localStorage
+  categories.forEach((category) => {
+    addCategory(category);
+  });
+
+  // Function to save categories to localStorage
+  function saveCategories() {
+    const categoryNames = Array.from(categoryList.children).map((category) => category.textContent.trim());
+    localStorage.setItem("categories", JSON.stringify(categoryNames));
+  }
+
   // Get today's date in the format YYYY-MM-DD
   const today = new Date();
   const yyyy = today.getFullYear();
