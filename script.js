@@ -33,6 +33,38 @@ document.addEventListener("DOMContentLoaded", () => {
       deleteCategory(category);
     });
   
+    // Create buttons for sorting tasks
+    const sortDateBtn = document.createElement("button");
+    sortDateBtn.textContent = "Sort by Date";
+    sortDateBtn.addEventListener("click", () => {
+      sortTasksByDate(category);
+    });
+  
+    const sortPriorityBtn = document.createElement("button");
+    sortPriorityBtn.textContent = "Sort by Priority";
+    sortPriorityBtn.addEventListener("click", () => {
+      sortTasksByPriority(category);
+    });
+  
+    // Create buttons for filtering tasks
+    const showCompletedBtn = document.createElement("button");
+    showCompletedBtn.textContent = "Show Completed";
+    showCompletedBtn.addEventListener("click", () => {
+      filterTasks(category, 'completed');
+    });
+  
+    const showIncompleteBtn = document.createElement("button");
+    showIncompleteBtn.textContent = "Show Incomplete";
+    showIncompleteBtn.addEventListener("click", () => {
+      filterTasks(category, 'incomplete');
+    });
+  
+    const showAllBtn = document.createElement("button");
+    showAllBtn.textContent = "Show All";
+    showAllBtn.addEventListener("click", () => {
+      filterTasks(category, 'all');
+    });
+  
     // Append category name and delete button to category header
     categoryHeader.appendChild(deleteCategoryBtn);
     category.appendChild(categoryHeader);
@@ -53,18 +85,32 @@ document.addEventListener("DOMContentLoaded", () => {
     taskInput.placeholder = "Enter a task";
     const taskDateInput = document.createElement("input");
     taskDateInput.type = "date";
+  
+    // Create priority selection dropdown
+    const prioritySelect = document.createElement("select");
+    const priorities = ["Critical", "Normal", "Low"];
+    priorities.forEach((priority) => {
+      const option = document.createElement("option");
+      option.value = priority;
+      option.textContent = priority;
+      prioritySelect.appendChild(option);
+    });
+  
     taskForm.appendChild(taskInput);
     taskForm.appendChild(taskDateInput);
+    taskForm.appendChild(prioritySelect);
   
     // Event listener to add task when form is submitted
     taskForm.addEventListener("submit", (event) => {
       event.preventDefault();
       const taskText = taskInput.value.trim();
       const taskDate = taskDateInput.value;
+      const taskPriority = prioritySelect.value;
       if (taskText === "") return;
-      addTaskToCategory(taskText, taskDate, taskUl);
+      addTaskToCategory(taskText, taskDate, taskPriority, taskUl);
       taskInput.value = "";
       taskDateInput.value = "";
+      prioritySelect.value = "Normal"; // Reset priority to default
       saveCategories(); // Save categories to localStorage
     });
   
@@ -74,10 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault(); // Prevent form submission
         const taskText = taskInput.value.trim();
         const taskDate = taskDateInput.value;
+        const taskPriority = prioritySelect.value;
         if (taskText !== "") {
-          addTaskToCategory(taskText, taskDate, taskUl);
+          addTaskToCategory(taskText, taskDate, taskPriority, taskUl);
           taskInput.value = "";
           taskDateInput.value = "";
+          prioritySelect.value = "Normal"; // Reset priority to default
           saveCategories(); // Save categories to localStorage
         }
       }
@@ -87,11 +135,18 @@ document.addEventListener("DOMContentLoaded", () => {
     category.appendChild(taskForm);
     category.appendChild(taskContainer);
   
+    // Append sorting and filtering buttons to the category
+    category.appendChild(sortDateBtn);
+    category.appendChild(sortPriorityBtn);
+    category.appendChild(showCompletedBtn);
+    category.appendChild(showIncompleteBtn);
+    category.appendChild(showAllBtn);
+  
     // Add category to the category list
     categoryList.appendChild(category);
   
     // Load tasks into the task list for this category
-    tasks.forEach((task) => addTaskToCategory(task.text, task.dueDate, taskUl));
+    tasks.forEach((task) => addTaskToCategory(task.text, task.dueDate, task.priority, taskUl));
   
     // Enable task dragging for this category's task list
     enableTaskDragging(taskUl);
@@ -108,10 +163,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   // Function to add a task to the specific category
-  function addTaskToCategory(taskText, taskDate, taskUl) {
+  function addTaskToCategory(taskText, taskDate, taskPriority, taskUl) {
     const li = document.createElement("li");
     li.setAttribute("data-task-text", taskText);
     li.setAttribute("data-due-date", taskDate);
+    li.setAttribute("data-priority", taskPriority);
     li.setAttribute("draggable", "true");
   
     // Create a drag handle with six dots in a 2x3 grid
@@ -173,22 +229,15 @@ document.addEventListener("DOMContentLoaded", () => {
     dueDateSpan.textContent = taskDate;
     dueDateSpan.setAttribute("contenteditable", "true");
   
-    dueDateSpan.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        const newDueDate = dueDateSpan.textContent.trim();
-        if (newDueDate) {
-          li.setAttribute("data-due-date", newDueDate);
-          dueDateSpan.textContent = newDueDate;
-          saveCategories();
-        }
-      }
-    });
+    const prioritySpan = document.createElement("span");
+    prioritySpan.classList.add("priority");
+    prioritySpan.textContent = `Priority: ${taskPriority}`;
   
     li.appendChild(completeBtn);
     li.appendChild(deleteBtn);
     li.appendChild(taskTextElement);
     li.appendChild(dueDateSpan);
+    li.appendChild(prioritySpan);
   
     taskUl.appendChild(li);
   
@@ -203,6 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const tasks = Array.from(categoryDiv.querySelectorAll(".task-list li")).map((taskLi) => ({
         text: taskLi.querySelector("span").textContent,
         dueDate: taskLi.querySelector(".due-date").textContent,
+        priority: taskLi.querySelector(".priority").textContent.replace("Priority: ", ""),
       }));
       return { name: categoryName, tasks };
     });
@@ -247,14 +297,65 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   
-  // Event listener for category form submission
+  // Sorting function for tasks by date
+  function sortTasksByDate(category) {
+    const taskList = category.querySelector(".task-list");
+    const tasks = Array.from(taskList.children);
+    tasks.sort((a, b) => {
+      const dateA = new Date(a.querySelector(".due-date").textContent);
+      const dateB = new Date(b.querySelector(".due-date").textContent);
+      return dateA - dateB;
+    });
+  
+    tasks.forEach((task) => {
+      taskList.appendChild(task); // Re-append in the sorted order
+    });
+    saveCategories();
+  }
+  
+  // Sorting function for tasks by priority
+  function sortTasksByPriority(category) {
+    const taskList = category.querySelector(".task-list");
+    const tasks = Array.from(taskList.children);
+    tasks.sort((a, b) => {
+      const priorityA = a.querySelector(".priority").textContent.replace("Priority: ", "");
+      const priorityB = b.querySelector(".priority").textContent.replace("Priority: ", "");
+      const priorityOrder = { "Critical": 1, "Normal": 2, "Low": 3 };
+      return priorityOrder[priorityA] - priorityOrder[priorityB];
+    });
+  
+    tasks.forEach((task) => {
+      taskList.appendChild(task); // Re-append in the sorted order
+    });
+    saveCategories();
+  }
+  
+  // Filter tasks based on completion status
+  // Filter tasks based on completion status
+function filterTasks(category, status) {
+  const taskList = category.querySelector(".task-list");
+  const tasks = Array.from(taskList.children);
+
+  tasks.forEach((task) => {
+    const isCompleted = task.classList.contains("completed");
+    if (status === "completed" && !isCompleted) {
+      task.style.visibility = "hidden"; // Hides completed tasks
+    } else if (status === "incomplete" && isCompleted) {
+      task.style.visibility = "hidden"; // Hides incomplete tasks
+    } else {
+      task.style.visibility = "visible"; // Show all tasks
+    }
+  });
+}
+
+  
   categoryForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const categoryName = categoryInput.value.trim();
-    if (categoryName === "") return; // Don't allow empty categories
+    if (categoryName === "") return;
   
     categories.push({ name: categoryName, tasks: [] });
-    saveCategories(); // Save to localStorage
+    saveCategories();
   
     addCategory(categoryName);
     categoryInput.value = ""; // Clear input after adding
@@ -264,6 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
   categories.forEach((categoryData) => {
     addCategory(categoryData.name, categoryData.tasks);
   });
+  
   
   
 
