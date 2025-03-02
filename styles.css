@@ -14,32 +14,28 @@ input, textarea, select, button {
     text-shadow: none;
     font: inherit;
     padding: 10px;
-    
     margin: 10px;
     appearance: none; /* Remove default input appearance in some browsers (e.g., iOS) */
     cursor: pointer;
     color: white;
+}
 
-  }
+button:hover {
+    background-color: darkgray;
+}
 
-  button:hover{
-    background-color:darkgray;
-  }
-  
-  /* For text inputs, textareas, and select elements */
-  input[type="text"], input[type="password"], input[type="email"], textarea, select {
+/* For text inputs, textareas, and select elements */
+input[type="text"], input[type="password"], input[type="email"], textarea, select {
     background-color: transparent; /* Make background transparent */
     color: inherit; /* Inherit text color */
     font-size: inherit; /* Inherit font size */
     line-height: inherit; /* Inherit line height */
-  }
-  
-  /* Input focus (if you want to customize focus) */
-  input:focus, textarea:focus, select:focus {
+}
+
+/* Input focus (if you want to customize focus) */
+input:focus, textarea:focus, select:focus {
     outline: none; /* Optional: If you want to remove focus outline */
-  }
-  
-  
+}
 
 ul {
     list-style: none;
@@ -48,25 +44,41 @@ ul {
 
 li {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: left;  /* Align the items to the left */
     padding: 8px;
-    /* border-bottom: 1px solid #ccc; */
+    margin-bottom: 5px;
+    cursor: grab;
 }
 
+li[contenteditable="true"] {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 1em;
+    text-align: left;
+    padding: 0;
+    min-height: 20px;
+}
+
+li[contenteditable="true"]:empty:before {
+    content: "Click to edit task";
+    color: gray;
+}
+
+/* Completed task styling */
 .completed {
     text-decoration: line-through;
     color: gray;
-    
 }
 
-/* Target the button only if it's inside a 'completed' li */
 li.completed .complete-btn {
     background-color: blue;
-    color: white; /* Optional: change the text color to ensure visibility */
+    color: white;
 }
 
-
+/* Hide and show filters for task display */
 .hideFilter {
     display: none;
 }
@@ -75,14 +87,31 @@ li.completed .complete-btn {
     display: block;
 }
 
+/* Task buttons (complete and delete) styling */
+button {
+    margin-right: 10px; /* Space buttons apart */
+}
+
+.complete-btn,
+.delete-btn {
+    margin-left: 10px;
+}
+
+.due-date {
+    font-size: 0.9em;
+    color: gray;
+    margin-left: 10px;
+}
+
+/* General task list item style */
 li {
     /* border: 1px solid #ccc; */
     padding: 10px;
     margin-bottom: 5px;
     cursor: grab;
     display: flex;
-    justify-content: right;
-    text-align: right;
+    justify-content: left;
+    text-align: left;
 }
 
 li.dragging {
@@ -92,17 +121,20 @@ li.dragging {
     outline-offset: 4px; /* Slightly offset the outline for better visibility */
 }
 
-
-
-.due-date {
-    font-size: 0.9em;
-    color: gray;
-    margin-left: 10px;
-}
-
-
+/* Task buttons styling */
 button.active {
     background-color: #4CAF50; /* Green color for active filter */
     color: white;
     border: 1px solid #4CAF50;
+}
+
+/* Dragging effect */
+button.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+button:hover {
+    background-color: darkgray;
 }
