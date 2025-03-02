@@ -51,7 +51,7 @@ li {
     justify-content: space-between;
     align-items: center;
     padding: 8px;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
 }
 
 .completed {
@@ -76,7 +76,7 @@ li.completed .complete-btn {
 }
 
 li {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     padding: 10px;
     margin-bottom: 5px;
     cursor: grab;
