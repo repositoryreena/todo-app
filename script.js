@@ -61,6 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
           }
       });
 
+      taskTextElement.addEventListener("blur", () => {
+          if (taskTextElement.textContent.trim() === "") {
+              li.remove();
+              saveTasks();
+          }
+      });
+
       const dueDateSpan = document.createElement("span");
       dueDateSpan.classList.add("due-date");
       dueDateSpan.textContent = dateText;
@@ -79,10 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       dueDateSpan.addEventListener("blur", () => {
-          const newDueDate = dueDateSpan.textContent.trim();
-          if (newDueDate) {
-              li.setAttribute("data-due-date", newDueDate);
-              dueDateSpan.textContent = newDueDate;
+          if (dueDateSpan.textContent.trim() === "") {
+              li.remove();
               saveTasks();
           }
       });
