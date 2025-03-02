@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const completedButton = document.getElementById("completed");
   const incompletedButton = document.getElementById("incompleted");
 
+
+
 // Select elements from DOM
 const categoryForm = document.getElementById("category-form");
 const categoryInput = document.getElementById("category-input");
@@ -266,9 +268,10 @@ function filterTasks(category, filterType) {
 }
 
 // Enable drag and drop functionality
+// Enable drag and drop functionality
 function enableTaskDragging(taskUl) {
   const tasks = Array.from(taskUl.children);
-  
+
   tasks.forEach(task => {
     task.addEventListener("dragstart", (event) => {
       event.dataTransfer.setData("text", task.innerHTML);
@@ -287,12 +290,17 @@ function enableTaskDragging(taskUl) {
       
       // Swap positions in the DOM
       const draggedTaskElement = taskUl.children[draggedTaskIndex];
-      taskUl.insertBefore(draggedTaskElement, targetTask);
+      
+      // Insert the dragged task before or after the target task based on where it was dropped
+      if (draggedTaskElement !== targetTask) {
+        taskUl.insertBefore(draggedTaskElement, targetTask);
+      }
       
       saveCategories(); // Save categories to localStorage after reordering
     });
   });
 }
+
 
 // Load saved categories on page load
 loadCategories();
