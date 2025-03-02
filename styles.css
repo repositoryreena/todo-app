@@ -144,3 +144,43 @@ button.active {
 button:hover {
     background-color: darkgray;
 }
+
+/* Style the drag handle (six dots) */
+/* Style the drag handle (six dots) */
+.drag-handle {
+    display: grid;
+    grid-template-columns: repeat(2, 10px); /* 2 columns */
+    grid-template-rows: repeat(3, 10px); /* 3 rows */
+    gap: 3px; /* Space between dots */
+    cursor: move;
+    margin-right: 10px;
+    user-select: none;
+}
+
+/* Each dot */
+.dot {
+    width: 6px;  /* Make each dot smaller */
+    height: 6px;
+    border-radius: 50%;
+    background-color: gray;  /* Color of the dots */
+}
+
+/* Style for the task list item */
+li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px;
+    margin-bottom: 5px;
+    cursor: grab;
+}
+
+/* When the task is being dragged */
+li.dragging {
+    opacity: 0.5; /* Make the dragged item semi-transparent */
+}
+
+/* Optional: style the task's text and other buttons */
+li span, li button {
+    margin-left: 10px;
+}
