@@ -7,6 +7,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const completedButton = document.getElementById("completed");
   const incompletedButton = document.getElementById("incompleted");
 
+  // Get today's date in the format YYYY-MM-DD
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+  const dd = String(today.getDate()).padStart(2, "0");
+  const todayString = `${yyyy}-${mm}-${dd}`;
+
+  // Set the min attribute to today's date
+  dateInput.setAttribute("min", todayString);
+
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
   form.addEventListener("submit", (event) => {
