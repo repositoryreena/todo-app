@@ -216,14 +216,12 @@ li span, li button {
   button {
     padding: 10px;
     cursor: pointer;
-    background-color: #4CAF50;
+    /* background-color: #4CAF50; */
     color: white;
-    border: none;
+    border: 1px solid gray;
   }
   
-  button:hover {
-    background-color: darkgreen;
-  }
+  
   
   /* Category list container */
   #category-list {
@@ -253,3 +251,6 @@ li span, li button {
     outline: none;
   }
   
+  .category > *:first-child {
+    background-color: #2f2f2f;
+  }
