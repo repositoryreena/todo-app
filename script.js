@@ -87,14 +87,27 @@ document.addEventListener("DOMContentLoaded", () => {
         li.appendChild(dueDateSpan);
 
         // Add the complete button
-        const completeBtn = document.createElement("button");
-        completeBtn.classList.add("complete-btn");
-        completeBtn.textContent = "✔";
-        completeBtn.setAttribute("aria-label", "Mark task as completed");
-        completeBtn.addEventListener("click", () => {
-            li.classList.toggle("completed");
-            saveTasks();
-        });
+const completeBtn = document.createElement("button");
+completeBtn.classList.add("complete-btn");
+completeBtn.textContent = "✔";
+completeBtn.setAttribute("aria-label", "Mark task as completed");
+completeBtn.addEventListener("click", () => {
+    // Toggle the 'completed' class on the li (task item)
+    li.classList.toggle("completed");
+
+    // Only add the 'blue' class to the button when the task is completed
+    if (li.classList.contains("completed")) {
+        completeBtn.classList.add("blue");
+    } else {
+        completeBtn.classList.remove("blue");
+    }
+
+    // Optionally save tasks after completing
+    saveTasks();
+});
+
+
+
 
         // Add the delete button
         const deleteBtn = document.createElement("button");

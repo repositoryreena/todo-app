@@ -1,7 +1,45 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    color: white;
+    background-color: #191919;
 }
+
+/* General input reset */
+input, textarea, select, button {
+    background: none;
+    border: 1px solid gray;
+    outline: none;
+    box-shadow: none;
+    text-shadow: none;
+    font: inherit;
+    padding: 10px;
+    
+    margin: 10px;
+    appearance: none; /* Remove default input appearance in some browsers (e.g., iOS) */
+    cursor: pointer;
+    color: white;
+
+  }
+
+  button:hover{
+    background-color:darkgray;
+  }
+  
+  /* For text inputs, textareas, and select elements */
+  input[type="text"], input[type="password"], input[type="email"], textarea, select {
+    background-color: transparent; /* Make background transparent */
+    color: inherit; /* Inherit text color */
+    font-size: inherit; /* Inherit font size */
+    line-height: inherit; /* Inherit line height */
+  }
+  
+  /* Input focus (if you want to customize focus) */
+  input:focus, textarea:focus, select:focus {
+    outline: none; /* Optional: If you want to remove focus outline */
+  }
+  
+  
 
 ul {
     list-style: none;
@@ -19,7 +57,15 @@ li {
 .completed {
     text-decoration: line-through;
     color: gray;
+    
 }
+
+/* Target the button only if it's inside a 'completed' li */
+li.completed .complete-btn {
+    background-color: blue;
+    color: white; /* Optional: change the text color to ensure visibility */
+}
+
 
 .hideFilter {
     display: none;
