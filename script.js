@@ -17,6 +17,12 @@ const categoryList = document.getElementById("category-list");
 // Initialize categories array
 let categories = JSON.parse(localStorage.getItem("categories")) || [];
 
+// Delete a category from both the DOM and the categories array.  It removes the category from the list and updates localStorage.  Save the categories after removing the category.
+// This function deletes a category from both the DOM and the 'categories' array. 
+  // It first gets the category name from the category's header, cleans it, and filters out the category from the 'categories' array. 
+  // It then removes the category element from the DOM and saves the updated categories list to localStorage.
+
+
 // Function to delete a category
 function deleteCategory(category) {
   const categoryName = category.querySelector("h3").textContent.trim();
@@ -31,7 +37,15 @@ function deleteCategory(category) {
   saveCategories(); // Save categories to localStorage after removing a category
 
   console.log("Category deleted:", cleanedCategoryName);
+
+
 }
+
+// Save the current state of all categories including their tasks to localStorage.  It extracts data from the DOM and stores it in a structured format.
+// This function collects the current categories and their tasks from the DOM, formats them into an array, and stores them in localStorage. 
+  // Each category's tasks, including their text, due date, priority, and completion status, are saved. 
+  // This ensures the data persists even after a page reload.
+
 
 // Function to save categories to localStorage
 function saveCategories() {
@@ -55,12 +69,23 @@ function saveCategories() {
   console.log("Categories saved to localStorage.");
 }
 
+// Load saved categories from localStorage and render them on the page by calling addCategory.
+// This function loads the categories stored in localStorage and renders them on the page. 
+  // It iterates over the categories array and uses the 'addCategory' function to display each one, along with its tasks.
+
+
 // Function to load categories from localStorage and render them
 function loadCategories() {
   categories.forEach((categoryData) => {
     addCategory(categoryData.name, categoryData.tasks);
   });
 }
+
+// Create a new category in the DOM.  Includes a header, delete button, and additional buttons for sorting and filtering tasks within the category.
+// This function creates a new category and its associated tasks. It builds the category's HTML structure, including the category's name, delete button, and task list. 
+  // It also adds buttons to sort tasks by date and priority, as well as filters for showing completed/incomplete tasks. 
+  // After creating the category, it appends it to the page and adds any pre-existing tasks to it.
+
 
 // Function to add a category to the DOM
 function addCategory(categoryName, tasks = []) {
@@ -170,7 +195,14 @@ function addCategory(categoryName, tasks = []) {
   enableTaskDragging(taskUl);
 
   console.log("Category added:", categoryName);
+
+
 }
+
+// Add a task to a specific category. Each task has a complete button, a delete button, and displays the task's text, due date, and priority.
+// This function creates and adds a new task to a category. It generates the task's HTML structure, including the task's text, due date, priority, and buttons to complete or delete the task. 
+  // The task is appended to the task list (ul) of the specified category.
+
 
 // Function to add a task to a category
 function addTaskToCategory(taskText, taskDate, taskPriority, taskUl) {
@@ -216,6 +248,11 @@ function addTaskToCategory(taskText, taskDate, taskPriority, taskUl) {
   taskUl.appendChild(li);
 }
 
+// Sort tasks within a category by their due date.
+// This function sorts the tasks within a given category by their due dates in ascending order. 
+  // It retrieves the tasks, sorts them using JavaScript's Date object, and re-appends the tasks in the sorted order.
+
+
 // Sorting function for tasks by date
 function sortTasksByDate(category) {
   const taskUl = category.querySelector(".task-list");
@@ -230,6 +267,11 @@ function sortTasksByDate(category) {
   tasks.forEach(task => taskUl.appendChild(task)); // Reorder tasks in the DOM
   saveCategories(); // Save updated order to localStorage
 }
+
+// Sort tasks within a category by priority.
+// This function sorts the tasks within a category by their priority level. The priorities are sorted in a predefined order: Critical, Normal, Low. 
+  // The tasks are sorted based on this priority order and re-appended to the DOM accordingly.
+
 
 // Sorting function for tasks by priority
 function sortTasksByPriority(category) {
@@ -246,6 +288,11 @@ function sortTasksByPriority(category) {
   tasks.forEach(task => taskUl.appendChild(task)); // Reorder tasks in the DOM
   saveCategories(); // Save updated order to localStorage
 }
+
+// Filter tasks by their completion status completed, incomplete, or all.
+// This function filters the tasks in a category based on their completion status. 
+  // It checks the filterType ('completed', 'incomplete', 'all') and hides or shows tasks accordingly by adjusting their CSS display property.
+
 
 // Filtering tasks (Show Completed, Incomplete, All)
 function filterTasks(category, filterType) {
@@ -267,39 +314,50 @@ function filterTasks(category, filterType) {
   });
 }
 
-// Enable drag and drop functionality
+// Enable drag and drop functionality for tasks. Users can reorder tasks by dragging them around within a category. 
+// This solution uses event delegation by attaching event listeners (dragstart, dragover, drop) to the parent container (taskUl) 
+// instead of each individual task. This ensures that the event listeners are applied to both existing and any future dynamically 
+// added tasks, eliminating the need to reapply listeners every time the list is updated. By listening on the parent element, 
+// the events are captured and processed based on the target element (the specific task), ensuring efficient handling of drag-and-drop 
+// functionality without redundant event listener attachment.
+
+
+
 // Enable drag and drop functionality
 function enableTaskDragging(taskUl) {
-  const tasks = Array.from(taskUl.children);
-
-  tasks.forEach(task => {
-    task.addEventListener("dragstart", (event) => {
+  taskUl.addEventListener("dragstart", (event) => {
+    const task = event.target;
+    if (task && task.tagName === "LI") { // Ensure it's a task
       event.dataTransfer.setData("text", task.innerHTML);
       event.dataTransfer.setData("task-index", Array.from(taskUl.children).indexOf(task));
-    });
+    }
+  });
 
-    task.addEventListener("dragover", (event) => {
-      event.preventDefault(); // Allow the drop
-    });
+  taskUl.addEventListener("dragover", (event) => {
+    event.preventDefault(); // Allow the drop
+  });
 
-    task.addEventListener("drop", (event) => {
-      event.preventDefault();
+  taskUl.addEventListener("drop", (event) => {
+    event.preventDefault();
 
-      const draggedTaskIndex = event.dataTransfer.getData("task-index");
-      const targetTask = task;
-      
-      // Swap positions in the DOM
+    const draggedTaskIndex = event.dataTransfer.getData("task-index");
+    const targetTask = event.target;
+    
+    if (targetTask && targetTask.tagName === "LI") { // Ensure it's a task
       const draggedTaskElement = taskUl.children[draggedTaskIndex];
-      
-      // Insert the dragged task before or after the target task based on where it was dropped
+
+      // Insert the dragged task before or after the target task
       if (draggedTaskElement !== targetTask) {
         taskUl.insertBefore(draggedTaskElement, targetTask);
       }
-      
+
       saveCategories(); // Save categories to localStorage after reordering
-    });
+    }
   });
 }
+
+
+
 
 
 // Load saved categories on page load
