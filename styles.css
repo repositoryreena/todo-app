@@ -234,7 +234,7 @@ li span, li button {
   
   /* Individual category styling */
   .category {
-    background-color: gray;
+    /* background-color: gray; */
     color: white;
     padding: 10px 20px;
     margin: 10px;
