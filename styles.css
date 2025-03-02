@@ -67,6 +67,12 @@ li[contenteditable="true"]:empty:before {
     color: gray;
 }
 
+* {
+    outline: none !important;
+}
+
+
+
 /* Completed task styling */
 .completed {
     text-decoration: line-through;
