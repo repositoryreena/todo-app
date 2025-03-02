@@ -146,15 +146,23 @@ button:hover {
 }
 
 /* Style the drag handle (six dots) */
-/* Style the drag handle (six dots) */
 .drag-handle {
     display: grid;
-    grid-template-columns: repeat(2, 10px); /* 2 columns */
-    grid-template-rows: repeat(3, 10px); /* 3 rows */
-    gap: 3px; /* Space between dots */
+    grid-template-columns: repeat(2, 10px); /* 2 columns for the dots */
+    grid-template-rows: repeat(3, 10px); /* 3 rows for the dots */
+    gap: 3px; /* Space between the dots */
     cursor: move;
-    margin-right: 10px;
     user-select: none;
+    padding: 5px; /* Apply padding evenly to the left and right (adjust as needed) */
+    margin-right: 10px; /* Optional: Space between drag handle and task content */
+    justify-items: center; /* Center dots horizontally */
+    align-items: center; /* Center dots vertically */
+}
+
+/* When the drag handle is hovered */
+.drag-handle:hover {
+    background-color: gray;
+    border-radius: 5px;
 }
 
 /* Each dot */
@@ -162,7 +170,7 @@ button:hover {
     width: 6px;  /* Make each dot smaller */
     height: 6px;
     border-radius: 50%;
-    background-color: gray;  /* Color of the dots */
+    background-color: lightgray;  /* Color of the dots */
 }
 
 /* Style for the task list item */
