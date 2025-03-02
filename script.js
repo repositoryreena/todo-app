@@ -58,7 +58,7 @@ function saveCategories() {
       text: taskLi.querySelector("span").textContent.trim(),
       dueDate: taskLi.querySelector(".due-date").textContent.trim(),
       priority: taskLi.querySelector(".priority").textContent.replace("Priority: ", ""),
-      completed: taskLi.classList.contains("completed"),
+      completed: taskLi.classList.contains("completed"),  // Capture completion status here
     }));
 
     return { name: cleanedCategoryName, tasks };
@@ -68,6 +68,7 @@ function saveCategories() {
   localStorage.setItem("categories", JSON.stringify(categoryData));
   console.log("Categories saved to localStorage.");
 }
+
 
 // Load saved categories from localStorage and render them on the page by calling addCategory.
 // This function loads the categories stored in localStorage and renders them on the page. 
@@ -80,6 +81,7 @@ function loadCategories() {
     addCategory(categoryData.name, categoryData.tasks);
   });
 }
+
 
 // Create a new category in the DOM.  Includes a header, delete button, and additional buttons for sorting and filtering tasks within the category.
 // This function creates a new category and its associated tasks. It builds the category's HTML structure, including the category's name, delete button, and task list. 
@@ -190,63 +192,68 @@ function addCategory(categoryName, tasks = []) {
 
   categoryList.appendChild(category);
 
-  tasks.forEach((task) => addTaskToCategory(task.text, task.dueDate, task.priority, taskUl));
+  // Add tasks and correctly apply the completed status
+  tasks.forEach((task) => addTaskToCategory(task.text, task.dueDate, task.priority, taskUl, task.completed));
 
   enableTaskDragging(taskUl);
 
   console.log("Category added:", categoryName);
-
-
 }
+
 
 // Add a task to a specific category. Each task has a complete button, a delete button, and displays the task's text, due date, and priority.
 // This function creates and adds a new task to a category. It generates the task's HTML structure, including the task's text, due date, priority, and buttons to complete or delete the task. 
   // The task is appended to the task list (ul) of the specified category.
 
 
-// Function to add a task to a category
-function addTaskToCategory(taskText, taskDate, taskPriority, taskUl) {
-  const li = document.createElement("li");
-  li.setAttribute("data-task-text", taskText);
-  li.setAttribute("data-due-date", taskDate);
-  li.setAttribute("data-priority", taskPriority);
-  li.setAttribute("draggable", "true");
-
-  const completeBtn = document.createElement("button");
-  completeBtn.classList.add("complete-btn");
-  completeBtn.textContent = "✔";
-  completeBtn.addEventListener("click", () => {
-    li.classList.toggle("completed");
-    completeBtn.classList.toggle("blue", li.classList.contains("completed"));
-    saveCategories(); // Save categories to localStorage after marking as completed
-  });
-
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "❌";
-  deleteBtn.addEventListener("click", () => {
-    li.remove();
-    saveCategories(); // Save categories to localStorage after removing the task
-  });
-
-  const taskTextElement = document.createElement("span");
-  taskTextElement.textContent = taskText;
-
-  const dueDateSpan = document.createElement("span");
-  dueDateSpan.classList.add("due-date");
-  dueDateSpan.textContent = taskDate;
-
-  const prioritySpan = document.createElement("span");
-  prioritySpan.classList.add("priority");
-  prioritySpan.textContent = `Priority: ${taskPriority}`;
-
-  li.appendChild(completeBtn);
-  li.appendChild(deleteBtn);
-  li.appendChild(taskTextElement);
-  li.appendChild(dueDateSpan);
-  li.appendChild(prioritySpan);
-
-  taskUl.appendChild(li);
-}
+  function addTaskToCategory(taskText, taskDate, taskPriority, taskUl, isCompleted = false) {
+    const li = document.createElement("li");
+    li.setAttribute("data-task-text", taskText);
+    li.setAttribute("data-due-date", taskDate);
+    li.setAttribute("data-priority", taskPriority);
+    li.setAttribute("draggable", "true");
+  
+    // Add the 'completed' class if the task is marked as completed
+    if (isCompleted) {
+      li.classList.add("completed");
+    }
+  
+    const completeBtn = document.createElement("button");
+    completeBtn.classList.add("complete-btn");
+    completeBtn.textContent = "✔";
+    completeBtn.addEventListener("click", () => {
+      li.classList.toggle("completed");
+      completeBtn.classList.toggle("blue", li.classList.contains("completed"));
+      saveCategories(); // Save categories to localStorage after marking as completed
+    });
+  
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "❌";
+    deleteBtn.addEventListener("click", () => {
+      li.remove();
+      saveCategories(); // Save categories to localStorage after removing the task
+    });
+  
+    const taskTextElement = document.createElement("span");
+    taskTextElement.textContent = taskText;
+  
+    const dueDateSpan = document.createElement("span");
+    dueDateSpan.classList.add("due-date");
+    dueDateSpan.textContent = taskDate;
+  
+    const prioritySpan = document.createElement("span");
+    prioritySpan.classList.add("priority");
+    prioritySpan.textContent = `Priority: ${taskPriority}`;
+  
+    li.appendChild(completeBtn);
+    li.appendChild(deleteBtn);
+    li.appendChild(taskTextElement);
+    li.appendChild(dueDateSpan);
+    li.appendChild(prioritySpan);
+  
+    taskUl.appendChild(li);
+  }
+  
 
 // Sort tasks within a category by their due date.
 // This function sorts the tasks within a given category by their due dates in ascending order. 
