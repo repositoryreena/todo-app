@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("todo-form");
   const input = document.getElementById("task-input");
-  const dateInput = document.getElementById("date-input");
+  // const dateInput = document.getElementById("date-input");
+
   const taskList = document.getElementById("task-list");
 
   const completedButton = document.getElementById("completed");
@@ -13,6 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
 const categoryForm = document.getElementById("category-form");
 const categoryInput = document.getElementById("category-input");
 const categoryList = document.getElementById("category-list");
+
+
 
 // Initialize categories array
 let categories = JSON.parse(localStorage.getItem("categories")) || [];
@@ -152,6 +155,17 @@ function addCategory(categoryName, tasks = []) {
   taskInput.placeholder = "Enter a task";
   const taskDateInput = document.createElement("input");
   taskDateInput.type = "date";
+  
+  // Get today's date in the local timezone (YYYY-MM-DD format)
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // Month is 0-based, so add 1
+  const day = String(today.getDate()).padStart(2, "0"); // Pad single digit days with a leading 0
+  const formattedDate = `${year}-${month}-${day}`;
+  
+  taskDateInput.min = formattedDate;
+  
+
 
   const prioritySelect = document.createElement("select");
   const priorities = ["Critical", "Normal", "Low"];
