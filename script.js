@@ -119,37 +119,48 @@ function saveCategoryToLocalStorage(category) {
 
 
 
-  function setupDragAndDrop(taskElement) {
-    taskElement.addEventListener("dragstart", (e) => {
-        draggedItem = e.target;
-        draggedItem.classList.add("dragging");
-    });
+function setupDragAndDrop(taskElement) {
+  let draggedItem = null;
 
-    taskElement.addEventListener("dragend", () => {
-        draggedItem.classList.remove("dragging");
-        draggedItem = null;
-    });
+  taskElement.addEventListener("dragstart", (e) => {
+    draggedItem = e.target;
+    draggedItem.classList.add("dragging");
+  });
 
-    taskElement.addEventListener("dragover", (e) => {
-        e.preventDefault();
-    });
+  taskElement.addEventListener("dragend", () => {
+    draggedItem.classList.remove("dragging");
+    draggedItem = null;
+  });
 
-    taskElement.addEventListener("drop", (e) => {
-        e.preventDefault();
-        if (draggedItem !== taskElement) {
-            const allItems = Array.from(taskList.children);
-            const draggedIndex = allItems.indexOf(draggedItem);
-            const targetIndex = allItems.indexOf(taskElement);
-
-            if (draggedIndex < targetIndex) {
-                taskElement.after(draggedItem);
-            } else {
-                taskElement.before(draggedItem);
-            }
-            saveTasks();  // Reorder tasks in local storage
-        }
-    });
+  taskElement.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    const draggingElement = document.querySelector(".dragging");
+    const afterElement = getDragAfterElement(taskList, e.clientY);
+    if (afterElement == null) {
+      taskList.appendChild(draggingElement);
+    } else {
+      taskList.insertBefore(draggingElement, afterElement);
+    }
+  });
 }
+
+// Get the element to place the dragged item after
+function getDragAfterElement(container, y) {
+  const draggableElements = [...container.querySelectorAll("li:not(.dragging)")];
+  return draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) {
+        return { offset, element: child };
+      } else {
+        return closest;
+      }
+    },
+    { offset: Number.NEGATIVE_INFINITY }
+  ).element;
+}
+
 
 
   function deleteTask(taskElement) {
@@ -265,63 +276,73 @@ addCategoryBtn.addEventListener("click", addCategoryToDropdown);
     li.setAttribute("data-priority", priority);
     li.setAttribute("data-category", category);
     li.setAttribute("draggable", "true");
-
+  
+    // Create the six-dot drag handle (span with 6 dots)
+    const dragHandle = document.createElement("span");
+    dragHandle.classList.add("drag-handle");
+    dragHandle.innerHTML = "&#x22EE;&#x22EE;&#x22EE;&#x22EE;&#x22EE;&#x22EE;";  // Unicode for 6 vertical dots
+  
     // Create task elements
     const taskTextElement = document.createElement("span");
     taskTextElement.setAttribute("contenteditable", "true");
     taskTextElement.textContent = text;
-
+  
     const dueDateSpan = document.createElement("span");
     dueDateSpan.classList.add("due-date");
     dueDateSpan.textContent = dueDate;  // Display the due date
-
+  
     const prioritySpan = document.createElement("span");
     prioritySpan.classList.add("priority");
     prioritySpan.textContent = priority;  // Display the priority
-
+  
     const categorySpan = document.createElement("span");
     categorySpan.classList.add("category");
     categorySpan.textContent = category;  // Display the category
-
+  
     // Add complete button
     const completeBtn = document.createElement("button");
     completeBtn.classList.add("complete-btn");
     completeBtn.textContent = "✔";
     completeBtn.setAttribute("aria-label", "Mark task as completed");
     completeBtn.addEventListener("click", () => {
-        li.classList.toggle("completed");
-        completeBtn.classList.toggle("blue", li.classList.contains("completed"));
-        saveTasks();
+      li.classList.toggle("completed");
+      completeBtn.classList.toggle("blue", li.classList.contains("completed"));
+      saveTasks();
     });
-
+  
     // Add delete button
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "❌";
     deleteBtn.setAttribute("aria-label", "Delete task");
     deleteBtn.addEventListener("click", () => {
-        li.remove();
-        saveTasks();
+      li.remove();
+      saveTasks();
     });
-
+  
     // Append all elements to the task item
+    li.appendChild(dragHandle);  // Add the drag handle
     li.appendChild(completeBtn);
     li.appendChild(deleteBtn);
     li.appendChild(taskTextElement);
     li.appendChild(dueDateSpan);
     li.appendChild(prioritySpan);
     li.appendChild(categorySpan);
-
+  
     // Mark as completed if needed
     if (completed) {
-        li.classList.add("completed");
+      li.classList.add("completed");
     }
-
+  
     // Append the task to the task list
     taskList.appendChild(li);
-
+  
     // Save tasks to localStorage after adding a new task
     saveTasks();
-}
+  
+    // Add drag events
+    setupDragAndDrop(li);
+  }
+  
 
 
 
@@ -399,30 +420,32 @@ addCategoryBtn.addEventListener("click", addCategoryToDropdown);
   function saveTasks() {
     const tasks = [];
     document.querySelectorAll("#task-list li").forEach((li) => {
-        tasks.push({
-            text: li.getAttribute("data-task-text"),
-            completed: li.classList.contains("completed"),
-            dueDate: li.getAttribute("data-due-date"),
-            priority: li.getAttribute("data-priority"),
-            category: li.getAttribute("data-category"),
-        });
+      tasks.push({
+        text: li.getAttribute("data-task-text"),
+        completed: li.classList.contains("completed"),
+        dueDate: li.getAttribute("data-due-date"),
+        priority: li.getAttribute("data-priority"),
+        category: li.getAttribute("data-category"),
+      });
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
-}
+  }
+  
 
 
 
-function loadTasks() {
-  const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-  // Clear any existing tasks in the list before reloading
-  taskList.innerHTML = '';
-
-  storedTasks.forEach((task) => {
+  function loadTasks() {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  
+    // Clear any existing tasks in the list before reloading
+    taskList.innerHTML = '';
+  
+    storedTasks.forEach((task) => {
       // Pass all saved task data to addTask()
       addTask(task.text, task.dueDate, task.priority, task.category, task.completed);
-  });
-}
+    });
+  }
+  
 
 
 
