@@ -8,18 +8,45 @@
 </head>
 <body>
     <h1>To-Do List</h1>
+    
+    <!-- Task Creation Form -->
     <form id="todo-form">
         <input type="text" id="task-input" placeholder="Enter a task" required>
         <input type="date" id="date-input">
+        
+        <!-- Category Dropdown -->
+        <select id="category-input">
+            <option value="" disabled selected>Select Category</option>
+        </select>
+        
+        <!-- Priority Dropdown for Task Creation -->
+        <select id="priority-input">
+            <option value="" disabled selected>Select Priority</option>
+            <option value="Critical">Critical</option>
+            <option value="Normal">Normal</option>
+            <option value="Low">Low</option>
+        </select>
+
         <button type="submit">Add Task</button>
-        
-        
     </form>
+    
+    <br> <!-- New line between task creation and category creation -->
+
+    <!-- Category Creation Section -->
+    <input type="text" id="new-category-input" placeholder="Create new category">
+    <button type="button" id="add-category-btn">Add Category</button>
+
+    <br><br>
     <button id="completed">Completed</button>
     <button id="incompleted">Incomplete</button>
     <button id="show-all">Show All</button>
+    
+    <!-- Order Buttons -->
+    <button id="order-date">Order by Date</button>
+    <button id="order-priority">Order by Priority</button>
 
     <ul id="task-list"></ul>
+
     <script src="script.js"></script>
     <script src="tests.js"></script>
 </body>
