@@ -53,15 +53,15 @@ const categorySelect = document.getElementById("category-input");
   // FUNCTIONS
 
   // Show all tasks function
-function showAllTasks() {
-  const allTasks = document.querySelectorAll("#task-list li");
-  allTasks.forEach((task) => {
-      task.style.display = "flex";  // Show all tasks
-  });
-}
+// function showAllTasks() {
+//   const allTasks = document.querySelectorAll("#task-list li");
+//   allTasks.forEach((task) => {
+//       task.style.display = "flex";  // Show all tasks
+//   });
+// }
 
-// Event listener for "Show All Tasks" button
-document.getElementById("show-all-tasks").addEventListener("click", showAllTasks);
+// // Event listener for "Show All Tasks" button
+// document.getElementById("show-all-tasks").addEventListener("click", showAllTasks);
 
 
   document.getElementById("category-input").addEventListener("change", filterTasksByCategory);
