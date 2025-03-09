@@ -128,10 +128,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const showAllBtn = document.createElement("button");
-    showAllBtn.textContent = "Show All";
-    showAllBtn.addEventListener("click", () => {
-      filterTasks(category, "all");
-    });
+showAllBtn.textContent = "Show All";
+showAllBtn.addEventListener("click", () => {
+  filterTasks(category, "all"); // Calls the updated filterTasks function
+});
+
 
     categoryHeader.appendChild(deleteCategoryBtn);
     category.appendChild(categoryHeader);
@@ -325,25 +326,47 @@ document.addEventListener("DOMContentLoaded", () => {
   function filterTasks(category, filterType) {
     const taskUl = category.querySelector(".task-list");
     const tasks = Array.from(taskUl.children);
-
+  
+    // Show all tasks and sort them
+    if (filterType === "all") {
+      tasks.sort((a, b) => {
+        // First, compare if the task is incomplete or completed (incomplete tasks on top)
+        const incompleteA = a.classList.contains("completed") ? 1 : 0;
+        const incompleteB = b.classList.contains("completed") ? 1 : 0;
+  
+        if (incompleteA !== incompleteB) {
+          return incompleteA - incompleteB; // Incomplete tasks come first
+        }
+  
+        // Then, compare tasks by priority (Critical -> Normal -> Low)
+        const priorityA = a.querySelector(".priority").textContent.replace("Priority: ", "");
+        const priorityB = b.querySelector(".priority").textContent.replace("Priority: ", "");
+        const priorityOrder = ["Critical", "Normal", "Low"];
+        
+        return priorityOrder.indexOf(priorityA) - priorityOrder.indexOf(priorityB);
+      });
+    }
+  
     tasks.forEach((task) => {
+      // Show or hide based on filter type
       switch (filterType) {
         case "completed":
-          task.style.display = task.classList.contains("completed")
-            ? "block"
-            : "none";
+          task.style.display = task.classList.contains("completed") ? "block" : "none";
           break;
         case "incomplete":
-          task.style.display = task.classList.contains("completed")
-            ? "none"
-            : "block";
+          task.style.display = task.classList.contains("completed") ? "none" : "block";
           break;
         case "all":
           task.style.display = "block";
           break;
       }
     });
+  
+    // Reorder the tasks in the DOM based on the sorted order
+    tasks.forEach((task) => taskUl.appendChild(task)); // Reorder tasks in the DOM
+    saveCategories(); // Save the updated task list to localStorage
   }
+  
 
   // Enable drag and drop functionality for tasks. Users can reorder tasks by dragging them around within a category.
   // This solution uses event delegation by attaching event listeners (dragstart, dragover, drop) to the parent container (taskUl)
