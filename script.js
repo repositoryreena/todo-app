@@ -354,10 +354,39 @@ addCategoryBtn.addEventListener("click", addCategoryToDropdown);
 
   // Function to show all tasks
   function showAllTasks() {
-    const lis = taskList.querySelectorAll("li");
-    lis.forEach((li) => {
-      li.style.display = "flex";
+    const tasksArray = Array.from(taskList.children);  // Get all task list items
+    
+    // Reset any filtering (Show All resets all tasks, no filtering)
+    tasksArray.forEach((task) => {
+      task.style.display = "flex";  // Ensure all tasks are shown
     });
+  
+    // Sort tasks first by incomplete (false) before complete (true), then by priority
+    tasksArray.sort((a, b) => {
+      const aCompleted = a.classList.contains("completed");
+      const bCompleted = b.classList.contains("completed");
+  
+      // Sort by incomplete tasks first (false) before completed tasks (true)
+      if (aCompleted === bCompleted) {
+        // If completion status is the same, sort by priority
+        const priorityLevels = {
+          "Critical": 1,
+          "Normal": 2,
+          "Low": 3
+        };
+  
+        const aPriority = a.getAttribute("data-priority");
+        const bPriority = b.getAttribute("data-priority");
+  
+        return priorityLevels[aPriority] - priorityLevels[bPriority];  // Sort by priority
+      }
+  
+      // Otherwise, sort incomplete (false) before complete (true)
+      return aCompleted - bCompleted;
+    });
+  
+    // Append the sorted tasks back to the task list
+    tasksArray.forEach(task => taskList.appendChild(task));  
   }
 
   // Event listeners for the "Completed" and "Incomplete" buttons
