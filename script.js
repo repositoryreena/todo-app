@@ -14,6 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const dd = String(today.getDate()).padStart(2, "0");
   const todayString = `${yyyy}-${mm}-${dd}`;
 
+  const addCategoryBtn = document.getElementById("add-category-btn");
+const newCategoryInput = document.getElementById("new-category-input");
+const categorySelect = document.getElementById("category-input");
+
+
   // Set the min attribute to today's date
   dateInput.setAttribute("min", todayString);
 
@@ -22,13 +27,97 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const taskText = input.value.trim();
-    if (taskText === "") return;
-    addTask(taskText);
+    const dueDate = dateInput.value;  // Get the due date
+    const priority = document.getElementById("priority-input").value;  // Get the selected priority
+    const category = document.getElementById("category-input").value;  // Get the selected category
+
+    if (taskText === "") return; // Don't add empty tasks
+
+    // Add the task with all the details
+    addTask(taskText, dueDate, priority, category);
+
     saveTasks();
-    input.value = "";
-  });
+    input.value = "";  // Clear the input fields after adding the task
+});
+
+
+    // Load categories from localStorage and populate the dropdown
+    // Load tasks and categories from localStorage
+    loadTasks();
+    loadCategoriesFromLocalStorage();
+
+    // Trigger the filter logic to ensure tasks are displayed based on selected category
+    filterTasksByCategory();
+
 
   // FUNCTIONS
+
+  // Show all tasks function
+function showAllTasks() {
+  const allTasks = document.querySelectorAll("#task-list li");
+  allTasks.forEach((task) => {
+      task.style.display = "flex";  // Show all tasks
+  });
+}
+
+// Event listener for "Show All Tasks" button
+document.getElementById("show-all-tasks").addEventListener("click", showAllTasks);
+
+
+  document.getElementById("category-input").addEventListener("change", filterTasksByCategory);
+
+function filterTasksByCategory() {
+    const selectedCategory = document.getElementById("category-input").value;
+    const tasks = taskList.querySelectorAll("li");
+
+    tasks.forEach(task => {
+        const taskCategory = task.getAttribute("data-category");
+
+        if (selectedCategory === "" || taskCategory === selectedCategory) {
+            task.style.display = "flex";  // Show task
+        } else {
+            task.style.display = "none";  // Hide task
+        }
+    });
+}
+
+
+function loadCategoriesFromLocalStorage() {
+  const categories = JSON.parse(localStorage.getItem("categories")) || [];
+  categorySelect.innerHTML = '';  // Clear the dropdown
+
+  // Add the default "Select Category" option
+  const defaultOption = document.createElement("option");
+  defaultOption.value = '';
+  defaultOption.textContent = 'Select Category';
+  defaultOption.disabled = true;
+  defaultOption.selected = true;
+  categorySelect.appendChild(defaultOption);
+
+  // Add each saved category to the dropdown
+  categories.forEach(category => {
+      const option = document.createElement("option");
+      option.value = category;
+      option.textContent = category;
+      categorySelect.appendChild(option);
+  });
+}
+
+
+
+
+function saveCategoryToLocalStorage(category) {
+  // Get the existing categories from localStorage
+  let categories = JSON.parse(localStorage.getItem("categories")) || [];
+
+  // Add the new category to the list
+  categories.push(category);
+
+  // Save the updated categories list back to localStorage
+  localStorage.setItem("categories", JSON.stringify(categories));
+}
+
+
 
   function setupDragAndDrop(taskElement) {
     taskElement.addEventListener("dragstart", (e) => {
@@ -130,45 +219,71 @@ completeButton.addEventListener("click", () => toggleComplete(taskElement));
 document.getElementById("category-input").addEventListener("change", filterByCategory);
 
 
-  function addCategoryToDropdown(category) {
-    const categoryDropdown = document.getElementById("category-input");
-    const option = document.createElement("option");
-    option.value = category;
-    option.textContent = category;
-    categoryDropdown.appendChild(option);
+function addCategoryToDropdown() {
+  const newCategory = newCategoryInput.value.trim();
+
+  // Ensure the category is not empty and not already in the dropdown
+  if (newCategory && !categoryExists(newCategory)) {
+      // Create a new option element for the category
+      const option = document.createElement("option");
+      option.value = newCategory;
+      option.textContent = newCategory;
+
+      // Append new category option to the dropdown
+      categorySelect.appendChild(option);
+
+      // Save the new category to localStorage
+      saveCategoryToLocalStorage(newCategory);
+
+      // Optionally, reset the input field
+      newCategoryInput.value = "";
+  } else {
+      // Optional: You can add some validation message here if needed
+      alert("Please enter a valid category or the category already exists.");
+  }
 }
 
 
 
-  // Function to add a new task
-  function addTask(text) {
-    const categoryInput = document.getElementById("category-input");
-    const categoryText = categoryInput.value;
-    const priorityInput = document.getElementById("priority-input");
-    const priorityText = priorityInput.value;
-    const dateText = dateInput.value;
+function categoryExists(category) {
+  const options = categorySelect.querySelectorAll("option");
+  return Array.from(options).some(option => option.value === category);
+}
 
+
+
+addCategoryBtn.addEventListener("click", addCategoryToDropdown);
+
+
+
+
+  // Function to add a new task
+  function addTask(text, dueDate = "", priority = "", category = "", completed = false) {
     const li = document.createElement("li");
     li.setAttribute("data-task-text", text);
-    li.setAttribute("data-category", categoryText);
-    li.setAttribute("data-priority", priorityText);
-    li.setAttribute("data-due-date", dateText);
+    li.setAttribute("data-due-date", dueDate);
+    li.setAttribute("data-priority", priority);
+    li.setAttribute("data-category", category);
     li.setAttribute("draggable", "true");
 
-    // Create a drag handle with six dots in a 2x3 grid
-    const dragHandle = document.createElement("div");
-    dragHandle.classList.add("drag-handle");
-    dragHandle.innerHTML = `
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-    `;
-    li.appendChild(dragHandle);
+    // Create task elements
+    const taskTextElement = document.createElement("span");
+    taskTextElement.setAttribute("contenteditable", "true");
+    taskTextElement.textContent = text;
 
-    // Create the "complete" button
+    const dueDateSpan = document.createElement("span");
+    dueDateSpan.classList.add("due-date");
+    dueDateSpan.textContent = dueDate;  // Display the due date
+
+    const prioritySpan = document.createElement("span");
+    prioritySpan.classList.add("priority");
+    prioritySpan.textContent = priority;  // Display the priority
+
+    const categorySpan = document.createElement("span");
+    categorySpan.classList.add("category");
+    categorySpan.textContent = category;  // Display the category
+
+    // Add complete button
     const completeBtn = document.createElement("button");
     completeBtn.classList.add("complete-btn");
     completeBtn.textContent = "✔";
@@ -176,112 +291,40 @@ document.getElementById("category-input").addEventListener("change", filterByCat
     completeBtn.addEventListener("click", () => {
         li.classList.toggle("completed");
         completeBtn.classList.toggle("blue", li.classList.contains("completed"));
-        saveTasks();  // Save to local storage after marking as completed
+        saveTasks();
     });
 
-    // Create the "delete" button
+    // Add delete button
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "❌";
     deleteBtn.setAttribute("aria-label", "Delete task");
     deleteBtn.addEventListener("click", () => {
         li.remove();
-        saveTasks();  // Save to local storage after deletion
+        saveTasks();
     });
 
-    // Task Text: editable span for task text
-    const taskTextElement = document.createElement("span");
-    taskTextElement.setAttribute("contenteditable", "true");
-    taskTextElement.textContent = text;
-    taskTextElement.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            const newTaskText = taskTextElement.textContent.trim();
-            if (newTaskText) {
-                li.setAttribute("data-task-text", newTaskText);
-                saveTasks();  // Save updated task text to local storage
-            } else {
-                li.remove();  // Remove the task if text is empty
-            }
-        }
-    });
-
-    taskTextElement.addEventListener("blur", () => {
-        const newText = taskTextElement.textContent.trim();
-        if (newText !== text) {
-            li.setAttribute("data-task-text", newText);
-            saveTasks();  // Save updated task text to local storage
-        }
-    });
-
-    // Due Date: editable span for task due date
-    const dueDateSpan = document.createElement("span");
-    dueDateSpan.classList.add("due-date");
-    dueDateSpan.textContent = dateText;
-    dueDateSpan.setAttribute("contenteditable", "true");
-
-    dueDateSpan.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            const newDueDate = dueDateSpan.textContent.trim();
-            if (newDueDate) {
-                li.setAttribute("data-due-date", newDueDate);
-                dueDateSpan.textContent = newDueDate;
-                saveTasks();  // Save updated due date to local storage
-            }
-        }
-    });
-
-    // Add Category to the task (not needed for the layout change, but it's part of the task data)
-    const categorySpan = document.createElement("span");
-    categorySpan.classList.add("category");
-    categorySpan.textContent = categoryText;
-
-    // Priority: span to show task priority on the right of the due date
-    const prioritySpan = document.createElement("span");
-    prioritySpan.classList.add("priority");
-    prioritySpan.textContent = priorityText;
-
-    // Append the task components
+    // Append all elements to the task item
     li.appendChild(completeBtn);
     li.appendChild(deleteBtn);
     li.appendChild(taskTextElement);
     li.appendChild(dueDateSpan);
-    li.appendChild(prioritySpan);  // Add the priority span after the due date
+    li.appendChild(prioritySpan);
+    li.appendChild(categorySpan);
+
+    // Mark as completed if needed
+    if (completed) {
+        li.classList.add("completed");
+    }
 
     // Append the task to the task list
     taskList.appendChild(li);
 
-    // Setup drag-and-drop for the task
-    li.addEventListener("dragstart", (e) => {
-        draggedItem = e.target;
-        draggedItem.classList.add("dragging");
-    });
-
-    li.addEventListener("dragend", () => {
-        draggedItem.classList.remove("dragging");
-        draggedItem = null;
-    });
-
-    li.addEventListener("dragover", (e) => {
-        e.preventDefault();
-    });
-
-    li.addEventListener("drop", (e) => {
-        e.preventDefault();
-        if (draggedItem !== li) {
-            const allItems = Array.from(taskList.children);
-            const draggedIndex = allItems.indexOf(draggedItem);
-            const targetIndex = allItems.indexOf(li);
-
-            if (draggedIndex < targetIndex) {
-                li.after(draggedItem);
-            } else {
-                li.before(draggedItem);
-            }
-            saveTasks();  // Reorder tasks in local storage
-        }
-    });
+    // Save tasks to localStorage after adding a new task
+    saveTasks();
 }
+
+
+
 
 
 
@@ -329,33 +372,30 @@ document.getElementById("category-input").addEventListener("change", filterByCat
     document.querySelectorAll("#task-list li").forEach((li) => {
         tasks.push({
             text: li.getAttribute("data-task-text"),
-            category: li.getAttribute("data-category"),
-            priority: li.getAttribute("data-priority"),
             completed: li.classList.contains("completed"),
             dueDate: li.getAttribute("data-due-date"),
+            priority: li.getAttribute("data-priority"),
+            category: li.getAttribute("data-category"),
         });
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 
+
 function loadTasks() {
   const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  // Clear any existing tasks in the list before reloading
+  taskList.innerHTML = '';
+
   storedTasks.forEach((task) => {
-      addTask(task.text);
-      if (task.completed) {
-          taskList.lastChild.classList.add("completed");
-      }
-      const dueDateSpan = taskList.lastChild.querySelector(".due-date");
-      if (dueDateSpan) {
-          dueDateSpan.textContent = task.dueDate;
-      }
-      const prioritySpan = taskList.lastChild.querySelector(".priority");
-      if (prioritySpan) {
-          prioritySpan.textContent = task.priority;
-      }
+      // Pass all saved task data to addTask()
+      addTask(task.text, task.dueDate, task.priority, task.category, task.completed);
   });
 }
+
+
 
 
   loadTasks();
