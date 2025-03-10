@@ -1,58 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #controls {
+      margin-bottom: 20px;
+    }
+    #task-controls {
+      margin-top: 20px;
+    }
+    select, input {
+      margin-right: 10px;
+    }
+  </style>
 </head>
 <body>
-    <h1>To-Do List</h1>
-    
-    <!-- Task Creation Form -->
-    <form id="todo-form">
-        <input type="text" id="task-input" placeholder="Enter a task" required>
-        <input type="date" id="date-input">
-        
-        <!-- Category Dropdown -->
-        <select id="category-input">
-            <option value="" disabled selected>Select Category</option>
-        </select>
-        
-        <!-- Priority Dropdown for Task Creation -->
-        <select id="priority-input">
-            <option value="" disabled selected>Select Priority</option>
-            <option value="Critical">Critical</option>
-            <option value="Normal">Normal</option>
-            <option value="Low">Low</option>
-        </select>
 
-        <button type="submit">Add Task</button>
-    </form>
-    
-    <br> <!-- New line between task creation and category creation -->
+  <!-- Controls Section -->
+  <div id="controls">
+    <button id="add-task-btn">ADD TASK</button>
+    <button id="add-category-btn">ADD CATEGORY</button>
 
-    <!-- Category Creation Section -->
-    <input type="text" id="new-category-input" placeholder="Create new category">
-    <button type="button" id="add-category-btn">Add Category</button>
+    <select id="show-dropdown">
+        <option value="" disabled selected>SHOW</option>
+      <option value="all">ALL</option>
+      <option value="incomplete">INCOMPLETE</option>
+      <!-- Categories will be added dynamically later -->
+    </select>
 
-    <br><br>
-    <button id="completed">Completed</button>
-    <button id="incompleted">Incomplete</button>
-    <button id="show-all">Show All</button>
-    
-    <!-- Order Buttons -->
-    <button id="order-date">Order by Date</button>
-    <button id="order-priority">Order by Priority</button>
+    <select id="order-dropdown">
+        <option value="" disabled selected>ORDER BY</option>
+      <option value="date">DATE</option>
+      <option value="priority">PRIORITY</option>
+    </select>
+  </div>
 
-    <br><br>
+  <!-- Task/Categories Controls Section (Dynamic) -->
+  <div id="task-controls">
+    <!-- Input fields for adding tasks or categories will go here -->
+  </div>
 
-    <!-- <button id="show-all-tasks">Show All Tasks</button> -->
+  <!-- Task List -->
+  <ul id="task-list">
+    <!-- List of tasks will be shown here -->
+  </ul>
 
-
-    <ul id="task-list"></ul>
-
-    <script src="script.js"></script>
-    <script src="tests.js"></script>
 </body>
 </html>
