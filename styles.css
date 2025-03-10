@@ -23,6 +23,16 @@ button {
     transition: background-color 0.3s ease;
 }
 
+input {
+    border-radius: 30px;  /* Rounded corners */
+    padding: 15px 30px;
+    font-size: 20px;  /* Make the font size bigger */
+    font-family: 'Courier New', Courier, monospace;  /* Ensure button uses Courier New */
+    cursor: pointer;
+    margin: 15px;
+    transition: background-color 0.3s ease;
+}
+
 button:hover {
     background-color: #66b1ad;  /* Slightly darker teal */
 }
@@ -122,4 +132,42 @@ label {
 /* Style task buttons */
 #task-list li button {
     font-size: 20px; /* Larger buttons */
+}
+
+/* Style for the task list items */
+.task-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Style for the circle with checkmark */
+.checkmark-container {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px; /* Space between circle and task text */
+    cursor: pointer;
+}
+
+.checkmark {
+    font-size: 18px;
+    color: white;
+    display: none; /* Initially hide the checkmark */
+}
+
+.checkmark.checked {
+    display: inline-block; /* Show checkmark when task is completed */
+    background-color: green;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+/* Optional: style for the other spans (text, priority, etc.) */
+span {
+    margin-right: 10px;
 }

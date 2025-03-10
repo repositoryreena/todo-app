@@ -1,454 +1,233 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("todo-form");
-  const input = document.getElementById("task-input");
-  const dateInput = document.getElementById("date-input");
-  const taskList = document.getElementById("task-list");
+  const addTaskButton = document.getElementById('add-task-btn');
+  const addCategoryButton = document.getElementById('add-category-btn');
+  const showDropdown = document.getElementById('show-dropdown');
+  const orderByDropdown = document.getElementById('order-dropdown');
+  const taskList = document.getElementById('task-list');
+  const taskForm = document.getElementById('task-form');
+  const categoryForm = document.getElementById('category-form');
+  const taskInput = document.getElementById('task-input');
+  const dateInput = document.getElementById('date-input');
+  const categoryInput = document.getElementById('category-input');
+  const priorityInput = document.getElementById('priority-input');
+  const newCategoryInput = document.getElementById('new-category-input');
 
-  const completedButton = document.getElementById("completed");
-  const incompletedButton = document.getElementById("incompleted");
+  // Set up initial state from localStorage
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  let categories = JSON.parse(localStorage.getItem('categories')) || [];
 
-  // Get today's date in the format YYYY-MM-DD
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
-  const dd = String(today.getDate()).padStart(2, "0");
-  const todayString = `${yyyy}-${mm}-${dd}`;
+  // Add event listeners
+  addTaskButton.addEventListener('click', () => toggleTaskForm(true));
+  addCategoryButton.addEventListener('click', () => toggleCategoryForm(true));
 
-  const addCategoryBtn = document.getElementById("add-category-btn");
-  const newCategoryInput = document.getElementById("new-category-input");
-  const categorySelect = document.getElementById("category-input");
+  document.getElementById('task-ok-btn').addEventListener('click', addTask);
+  document.getElementById('category-ok-btn').addEventListener('click', addCategory);
 
-  // Set the min attribute to today's date
-  dateInput.setAttribute("min", todayString);
+  showDropdown.addEventListener('change', filterTasksByCategory);
+  orderByDropdown.addEventListener('change', sortTasks);
 
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  // Functions
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const taskText = input.value.trim();
-    const dueDate = dateInput.value; // Get the due date
-    const priority = document.getElementById("priority-input").value; // Get the selected priority
-    const category = document.getElementById("category-input").value; // Get the selected category
-
-    if (taskText === "") return; // Don't add empty tasks
-
-    // Add the task with all the details
-    addTask(taskText, dueDate, priority, category);
-
-    saveTasks();
-    input.value = ""; // Clear the input fields after adding the task
-  });
-
-  // Load categories from localStorage and populate the dropdown
-  // Load tasks and categories from localStorage
-  loadTasks();
-  loadCategoriesFromLocalStorage();
-
-  // Trigger the filter logic to ensure tasks are displayed based on selected category
-  filterTasksByCategory();
-
-  // FUNCTIONS
-
-  // Adds an event listener to the category input element to filter tasks based on the selected category.
-// filterTasksByCategory filters and displays tasks based on the selected category from the dropdown.
-// loadCategoriesFromLocalStorage loads saved categories from localStorage and populates the category dropdown.
-// saveCategoryToLocalStorage saves a new category to localStorage.
-// setupDragAndDrop enables drag-and-drop functionality for a task element.
-// getDragAfterElement determines the element to place the dragged item after based on the mouse position.
-// deleteTask removes a task element and saves the updated task list to localStorage.
-// Adds a delete button to a task element, which removes the task when clicked.
-// Adds an event listener to sort tasks by their due date in ascending order when clicked.
-// Adds an event listener to sort tasks by their priority level when clicked.
-// toggleComplete toggles the completion state of a task and saves the updated list to localStorage.
-// Adds a complete button to a task element, which marks the task as completed when clicked.
-// filterByCategory filters tasks based on the selected category from the dropdown.
-// Adds an event listener to the category input to filter tasks by category when the selection changes.
-// addCategoryToDropdown adds a new category to the dropdown and saves it to localStorage.
-// categoryExists checks if a category already exists in the dropdown.
-// addCategoryBtn adds a new category to the dropdown when the add category button is clicked.
-// addTask creates and adds a new task with the specified details, appends it to the task list, and saves it to localStorage.
-// showCompletedTasks filters and displays only the completed tasks.
-// showIncompleteTasks filters and displays only the incomplete tasks.
-// showAllTasks resets any filters and shows all tasks, sorted by completion status and priority.
-// completedButton filters and shows only completed tasks when clicked.
-// incompletedButton filters and shows only incomplete tasks when clicked.
-// saveTasks saves the current list of tasks to localStorage.
-// loadTasks loads tasks from localStorage and re-adds them to the task list.
-
-
-  document
-    .getElementById("category-input")
-    .addEventListener("change", filterTasksByCategory);
-
-  function filterTasksByCategory() {
-    const selectedCategory = document.getElementById("category-input").value;
-    const tasks = taskList.querySelectorAll("li");
-
-    tasks.forEach((task) => {
-      const taskCategory = task.getAttribute("data-category");
-
-      if (selectedCategory === "" || taskCategory === selectedCategory) {
-        task.style.display = "flex"; // Show task
-      } else {
-        task.style.display = "none"; // Hide task
-      }
-    });
+  // Toggle task form visibility
+  function toggleTaskForm(show) {
+      taskForm.style.display = show ? 'block' : 'none';
+      if (!show) resetTaskForm();
   }
 
-  function loadCategoriesFromLocalStorage() {
-    const categories = JSON.parse(localStorage.getItem("categories")) || [];
-    categorySelect.innerHTML = ""; // Clear the dropdown
-
-    // Add the default "Select Category" option
-    const defaultOption = document.createElement("option");
-    defaultOption.value = "";
-    defaultOption.textContent = "Select Category";
-    defaultOption.disabled = true;
-    defaultOption.selected = true;
-    categorySelect.appendChild(defaultOption);
-
-    // Add each saved category to the dropdown
-    categories.forEach((category) => {
-      const option = document.createElement("option");
-      option.value = category;
-      option.textContent = category;
-      categorySelect.appendChild(option);
-    });
+  // Toggle category form visibility
+  function toggleCategoryForm(show) {
+      categoryForm.style.display = show ? 'block' : 'none';
+      if (!show) resetCategoryForm();
   }
 
-  function saveCategoryToLocalStorage(category) {
-    // Get the existing categories from localStorage
-    let categories = JSON.parse(localStorage.getItem("categories")) || [];
-
-    // Add the new category to the list
-    categories.push(category);
-
-    // Save the updated categories list back to localStorage
-    localStorage.setItem("categories", JSON.stringify(categories));
+  // Reset the task form
+  function resetTaskForm() {
+      taskInput.value = '';
+      dateInput.value = '';
+      priorityInput.value = 'Normal';
+      categoryInput.value = '';
   }
 
-  function setupDragAndDrop(taskElement) {
-    let draggedItem = null;
-
-    taskElement.addEventListener("dragstart", (e) => {
-      draggedItem = e.target;
-      draggedItem.classList.add("dragging");
-    });
-
-    taskElement.addEventListener("dragend", () => {
-      draggedItem.classList.remove("dragging");
-      draggedItem = null;
-    });
-
-    taskElement.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      const draggingElement = document.querySelector(".dragging");
-      const afterElement = getDragAfterElement(taskList, e.clientY);
-      if (afterElement == null) {
-        taskList.appendChild(draggingElement);
-      } else {
-        taskList.insertBefore(draggingElement, afterElement);
-      }
-    });
+  // Reset the category form
+  function resetCategoryForm() {
+      newCategoryInput.value = '';
   }
 
-  // Get the element to place the dragged item after
-  function getDragAfterElement(container, y) {
-    const draggableElements = [
-      ...container.querySelectorAll("li:not(.dragging)"),
-    ];
-    return draggableElements.reduce(
-      (closest, child) => {
-        const box = child.getBoundingClientRect();
-        const offset = y - box.top - box.height / 2;
-        if (offset < 0 && offset > closest.offset) {
-          return { offset, element: child };
-        } else {
-          return closest;
-        }
-      },
-      { offset: Number.NEGATIVE_INFINITY }
-    ).element;
-  }
+  // Add a new task
+  function addTask() {
+      const taskText = taskInput.value.trim();
+      const dueDate = dateInput.value;
+      const priority = priorityInput.value;
+      const category = categoryInput.value;
 
-  function deleteTask(taskElement) {
-    taskElement.remove();
-    saveTasks(); // Save to local storage after deletion
-  }
+      if (taskText === '') return;
 
-  const deleteButton = document.createElement("button");
-  deleteButton.textContent = "❌";
-  deleteButton.addEventListener("click", () => deleteTask(taskElement));
-
-  document.getElementById("order-date").addEventListener("click", () => {
-    const tasksArray = Array.from(taskList.children);
-    tasksArray.sort((a, b) => {
-      const dateA = a.getAttribute("data-due-date");
-      const dateB = b.getAttribute("data-due-date");
-      return new Date(dateA) - new Date(dateB); // Sort ascending
-    });
-    tasksArray.forEach((task) => taskList.appendChild(task)); // Re-append sorted tasks
-  });
-
-  document.getElementById("order-priority").addEventListener("click", () => {
-    const tasksArray = Array.from(taskList.children);
-    tasksArray.sort((a, b) => {
-      const priorityA = a.getAttribute("data-priority");
-      const priorityB = b.getAttribute("data-priority");
-
-      const priorityLevels = {
-        Critical: 1,
-        Normal: 2,
-        Low: 3,
+      const newTask = {
+          text: taskText,
+          dueDate,
+          priority,
+          category,
+          completed: false
       };
 
-      return priorityLevels[priorityA] - priorityLevels[priorityB]; // Sort by priority level
-    });
+      tasks.push(newTask);
+      saveData();
+      renderTasks();
+      toggleTaskForm(false);
+  }
 
-    tasksArray.forEach((task) => taskList.appendChild(task)); // Re-append sorted tasks
+  // Add a new category
+  function addCategory() {
+      const category = newCategoryInput.value.trim();
+      if (category && !categories.includes(category)) {
+          categories.push(category);
+          saveData();
+          renderCategories();
+          toggleCategoryForm(false);
+      }
+  }
+
+  // Filter tasks by category or show all
+  function filterTasksByCategory() {
+      const selectedCategory = showDropdown.value;
+      const filteredTasks = tasks.filter(task => {
+          return selectedCategory === 'ALL' ||
+              task.category === selectedCategory ||
+              (selectedCategory === 'INCOMPLETE' && !task.completed);
+      });
+      renderTasks(filteredTasks);
+  }
+
+  // Sort tasks by date or priority
+  function sortTasks() {
+      const sortBy = orderByDropdown.value;
+      let sortedTasks;
+      if (sortBy === 'DATE') {
+          sortedTasks = [...tasks].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+      } else if (sortBy === 'PRIORITY') {
+          const priorityLevels = { 'Critical': 1, 'Normal': 2, 'Low': 3 };
+          sortedTasks = [...tasks].sort((a, b) => priorityLevels[a.priority] - priorityLevels[b.priority]);
+      }
+      renderTasks(sortedTasks);
+  }
+
+  // Render tasks in the list
+  // Render tasks in the list
+// Render tasks in the list
+function renderTasks(taskListData = tasks) {
+  taskList.innerHTML = '';
+  taskListData.forEach((task, index) => {
+      const li = document.createElement('li');
+      li.classList.add('task-item'); // Adding class for styling
+
+      li.innerHTML = `
+          <span class="checkmark-container" data-index="${index}">
+              <span class="checkmark ${task.completed ? 'checked' : ''}">&#10003;</span>
+          </span>
+          <span>${task.text}</span>
+          <span>${task.dueDate}</span>
+          <span>${task.priority}</span>
+          <span>${task.category}</span>
+          <button class="delete-btn" data-index="${index}">❌</button>
+      `;
+      taskList.appendChild(li);
   });
 
-  function toggleComplete(taskElement) {
-    taskElement.classList.toggle("completed");
-    saveTasks(); // Save to local storage after toggle
-  }
-
-  const completeButton = document.createElement("button");
-  completeButton.textContent = "✔";
-  completeButton.addEventListener("click", () => toggleComplete(taskElement));
-
-  function filterByCategory() {
-    const categoryDropdown = document.getElementById("category-input");
-    const selectedCategory = categoryDropdown.value;
-    const tasks = document.querySelectorAll("#task-list li");
-
-    tasks.forEach((task) => {
-      if (
-        selectedCategory === "" ||
-        task.getAttribute("data-category") === selectedCategory
-      ) {
-        task.style.display = "flex";
-      } else {
-        task.style.display = "none";
-      }
-    });
-  }
-
-  document
-    .getElementById("category-input")
-    .addEventListener("change", filterByCategory);
-
-  function addCategoryToDropdown() {
-    const newCategory = newCategoryInput.value.trim();
-
-    // Ensure the category is not empty and not already in the dropdown
-    if (newCategory && !categoryExists(newCategory)) {
-      // Create a new option element for the category
-      const option = document.createElement("option");
-      option.value = newCategory;
-      option.textContent = newCategory;
-
-      // Append new category option to the dropdown
-      categorySelect.appendChild(option);
-
-      // Save the new category to localStorage
-      saveCategoryToLocalStorage(newCategory);
-
-      // Optionally, reset the input field
-      newCategoryInput.value = "";
-    } else {
-      // Optional: You can add some validation message here if needed
-      alert("Please enter a valid category or the category already exists.");
-    }
-  }
-
-  function categoryExists(category) {
-    const options = categorySelect.querySelectorAll("option");
-    return Array.from(options).some((option) => option.value === category);
-  }
-
-  addCategoryBtn.addEventListener("click", addCategoryToDropdown);
-
-  // Function to add a new task
-  function addTask(
-    text,
-    dueDate = "",
-    priority = "",
-    category = "",
-    completed = false
-  ) {
-    const li = document.createElement("li");
-    li.setAttribute("data-task-text", text);
-    li.setAttribute("data-due-date", dueDate);
-    li.setAttribute("data-priority", priority);
-    li.setAttribute("data-category", category);
-    li.setAttribute("draggable", "true");
-
-    // Create the six-dot drag handle (span with 6 dots)
-    const dragHandle = document.createElement("span");
-    dragHandle.classList.add("drag-handle");
-    dragHandle.innerHTML = "&#x22EE;&#x22EE;&#x22EE;&#x22EE;&#x22EE;&#x22EE;"; // Unicode for 6 vertical dots
-
-    // Create task elements
-    const taskTextElement = document.createElement("span");
-    taskTextElement.setAttribute("contenteditable", "true");
-    taskTextElement.textContent = text;
-
-    const dueDateSpan = document.createElement("span");
-    dueDateSpan.classList.add("due-date");
-    dueDateSpan.textContent = dueDate; // Display the due date
-
-    const prioritySpan = document.createElement("span");
-    prioritySpan.classList.add("priority");
-    prioritySpan.textContent = priority; // Display the priority
-
-    const categorySpan = document.createElement("span");
-    categorySpan.classList.add("category");
-    categorySpan.textContent = category; // Display the category
-
-    // Add complete button
-    const completeBtn = document.createElement("button");
-    completeBtn.classList.add("complete-btn");
-    completeBtn.textContent = "✔";
-    completeBtn.setAttribute("aria-label", "Mark task as completed");
-    completeBtn.addEventListener("click", () => {
-      li.classList.toggle("completed");
-      completeBtn.classList.toggle("blue", li.classList.contains("completed"));
-      saveTasks();
-    });
-
-    // Add delete button
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "❌";
-    deleteBtn.setAttribute("aria-label", "Delete task");
-    deleteBtn.addEventListener("click", () => {
-      li.remove();
-      saveTasks();
-    });
-
-    // Append all elements to the task item
-    li.appendChild(dragHandle); // Add the drag handle
-    li.appendChild(completeBtn);
-    li.appendChild(deleteBtn);
-    li.appendChild(taskTextElement);
-    li.appendChild(dueDateSpan);
-    li.appendChild(prioritySpan);
-    li.appendChild(categorySpan);
-
-    // Mark as completed if needed
-    if (completed) {
-      li.classList.add("completed");
-    }
-
-    // Append the task to the task list
-    taskList.appendChild(li);
-
-    // Save tasks to localStorage after adding a new task
-    saveTasks();
-
-    // Add drag events
-    setupDragAndDrop(li);
-  }
-
-  // Function to filter completed tasks
-  function showCompletedTasks() {
-    const lis = taskList.querySelectorAll("li");
-    lis.forEach((li) => {
-      if (li.classList.contains("completed")) {
-        li.style.display = "flex";
-      } else {
-        li.style.display = "none";
-      }
-    });
-  }
-
-  // Function to filter incomplete tasks
-  function showIncompleteTasks() {
-    const lis = taskList.querySelectorAll("li");
-    lis.forEach((li) => {
-      if (!li.classList.contains("completed")) {
-        li.style.display = "flex";
-      } else {
-        li.style.display = "none";
-      }
-    });
-  }
-
-  // Function to show all tasks
-  function showAllTasks() {
-    const tasksArray = Array.from(taskList.children); // Get all task list items
-
-    // Reset any filtering (Show All resets all tasks, no filtering)
-    tasksArray.forEach((task) => {
-      task.style.display = "flex"; // Ensure all tasks are shown
-    });
-
-    // Sort tasks first by incomplete (false) before complete (true), then by priority
-    tasksArray.sort((a, b) => {
-      const aCompleted = a.classList.contains("completed");
-      const bCompleted = b.classList.contains("completed");
-
-      // Sort by incomplete tasks first (false) before completed tasks (true)
-      if (aCompleted === bCompleted) {
-        // If completion status is the same, sort by priority
-        const priorityLevels = {
-          Critical: 1,
-          Normal: 2,
-          Low: 3,
-        };
-
-        const aPriority = a.getAttribute("data-priority");
-        const bPriority = b.getAttribute("data-priority");
-
-        return priorityLevels[aPriority] - priorityLevels[bPriority]; // Sort by priority
-      }
-
-      // Otherwise, sort incomplete (false) before complete (true)
-      return aCompleted - bCompleted;
-    });
-
-    // Append the sorted tasks back to the task list
-    tasksArray.forEach((task) => taskList.appendChild(task));
-  }
-
-  // Event listeners for the "Completed" and "Incomplete" buttons
-  completedButton.addEventListener("click", showCompletedTasks);
-  incompletedButton.addEventListener("click", showIncompleteTasks);
-
-  // Event listener for showing all tasks
-  document.getElementById("show-all").addEventListener("click", showAllTasks);
-
-  function saveTasks() {
-    const tasks = [];
-    document.querySelectorAll("#task-list li").forEach((li) => {
-      tasks.push({
-        text: li.getAttribute("data-task-text"),
-        completed: li.classList.contains("completed"),
-        dueDate: li.getAttribute("data-due-date"),
-        priority: li.getAttribute("data-priority"),
-        category: li.getAttribute("data-category"),
+  // Add event listener for the checkmark circles
+  const checkmarkContainers = document.querySelectorAll('.checkmark-container');
+  checkmarkContainers.forEach(container => {
+      container.addEventListener('click', (e) => {
+          const index = e.target.getAttribute('data-index');
+          toggleComplete(index);
       });
-    });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+  });
+
+  // Add event listener for the delete buttons
+  const deleteButtons = document.querySelectorAll('.delete-btn');
+  deleteButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+          const index = e.target.getAttribute('data-index');
+          deleteTask(index);
+      });
+  });
+}
+
+
+
+  // Toggle task completion
+  function toggleComplete(index) {
+    tasks[index].completed = !tasks[index].completed;
+    saveData();
+    renderTasks();  // Re-render tasks to show the updated checkmark status
+}
+
+  // Delete task
+  // Delete task
+function deleteTask(index) {
+  tasks.splice(index, 1);  // Remove the task from the array
+  saveData();  // Save the updated task list
+  renderTasks();  // Re-render the tasks list
+}
+
+
+  // Save tasks and categories to localStorage
+  function saveData() {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      localStorage.setItem('categories', JSON.stringify(categories));
   }
 
-  function loadTasks() {
-    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  // Render categories in the "SHOW" dropdown
+  // Render categories in the "SHOW" dropdown and task form dropdown
+// Render categories in the "SHOW" dropdown and task form dropdown
+function renderCategories() {
+  // Clear existing options to avoid duplicates
+  showDropdown.innerHTML = '';
 
-    // Clear any existing tasks in the list before reloading
-    taskList.innerHTML = "";
+  // Add the placeholder option (SHOW)
+  const showOption = document.createElement('option');
+  showOption.value = '';
+  showOption.disabled = true;
+  showOption.selected = true;
+  showOption.textContent = 'SHOW'; // Or use 'Select a Category'
+  showDropdown.appendChild(showOption);
 
-    storedTasks.forEach((task) => {
-      // Pass all saved task data to addTask()
-      addTask(
-        task.text,
-        task.dueDate,
-        task.priority,
-        task.category,
-        task.completed
-      );
-    });
-  }
+  // Add the 'ALL' and 'INCOMPLETE' options
+  const allOption = document.createElement('option');
+  allOption.value = 'ALL';
+  allOption.textContent = 'All';
+  showDropdown.appendChild(allOption);
 
-  loadTasks();
+  const incompleteOption = document.createElement('option');
+  incompleteOption.value = 'INCOMPLETE';
+  incompleteOption.textContent = 'Incomplete';
+  showDropdown.appendChild(incompleteOption);
+
+  // Add the categories to the dropdown dynamically
+  categories.forEach(category => {
+      const option = document.createElement('option');
+      option.value = category;
+      option.textContent = category;
+      showDropdown.appendChild(option);
+  });
+
+  // Populate the category input dropdown in the task form
+  categoryInput.innerHTML = '';  // Clear existing options in the category dropdown
+  const defaultOption = document.createElement('option');
+  defaultOption.value = '';
+  defaultOption.textContent = 'Select a category';
+  categoryInput.appendChild(defaultOption);
+
+  categories.forEach(category => {
+      const option = document.createElement('option');
+      option.value = category;
+      option.textContent = category;
+      categoryInput.appendChild(option);
+  });
+}
+
+
+
+  // Initialize UI
+  renderCategories();
+  renderTasks();
 });
