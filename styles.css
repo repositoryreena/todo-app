@@ -218,41 +218,70 @@ body.rainbow-gradient {
 
 /* Priority bubbles - colored based on priority */
 /* Priority bubbles */
+/* Bubbles for priority */
+/* Bubbles for priority */
 .bubble.priority {
-    display: inline-block;
     padding: 8px 16px;
-    margin: 5px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: bold;
-    color: white;
+    color: black; /* Black text for readability */
+    text-shadow: none; /* Remove any shadow to make the text clear */
 }
 
-/* High priority (Critical) - red */
-.bubble.priority.high {
-    background-color: red;
-}
-
-/* Medium priority (Normal) - yellow */
-.bubble.priority.medium {
-    background-color: yellow;
-}
-
-/* Low priority - green */
+/* For low priority (green) */
 .bubble.priority.low {
-    background-color: green;
+    background-color: #60B83F; /* Green background */
 }
 
-/* Category bubbles */
+/* For normal priority (yellow) */
+.bubble.priority.medium {
+    background-color: #F2D35F; /* Yellow background */
+    color: black;  /* Ensure black text on yellow background */
+}
+
+/* For critical priority (red) */
+.bubble.priority.high {
+    background-color: #F15B5B; /* Red background */
+    color: black; /* Ensure black text */
+}
+
+/* Bubbles for category */
 .bubble.category {
-    display: inline-block;
     padding: 8px 16px;
-    margin: 5px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: bold;
-    color: white;
+    color: black; /* Black text for readability */
+    text-shadow: none; /* Remove shadow to make the text clear */
+    background-color: transparent; /* Ensure no transparency */
 }
+
+/* Specific color for categories based on index */
+.bubble.category:nth-child(6n+1) {
+    background-color: #ffb3ba; /* Pastel pink */
+}
+
+.bubble.category:nth-child(6n+2) {
+    background-color: #ffdfba; /* Pastel orange */
+}
+
+.bubble.category:nth-child(6n+3) {
+    background-color: #ffffba; /* Pastel yellow */
+}
+
+.bubble.category:nth-child(6n+4) {
+    background-color: #baffc9; /* Pastel green */
+}
+
+.bubble.category:nth-child(6n+5) {
+    background-color: #bae1ff; /* Pastel blue */
+}
+
+.bubble.category:nth-child(6n+6) {
+    background-color: #d6a7ff; /* Pastel purple */
+}
+
 
 
 body.task-checked {
