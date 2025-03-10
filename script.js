@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+  
+  
+
   const addTaskButton = document.getElementById('add-task-btn');
   const addCategoryButton = document.getElementById('add-category-btn');
   const showDropdown = document.getElementById('show-dropdown');
@@ -11,6 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const categoryInput = document.getElementById('category-input');
   const priorityInput = document.getElementById('priority-input');
   const newCategoryInput = document.getElementById('new-category-input');
+
+  // Set the min attribute of the date picker to today's date
+  const today = new Date().toISOString().split('T')[0];  // Get today's date in YYYY-MM-DD format
+  dateInput.setAttribute('min', today);
 
   // Set up initial state from localStorage
   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
