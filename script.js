@@ -160,17 +160,31 @@ function renderTasks(taskListData = tasks) {
 
 
   // Toggle task completion
-  function toggleComplete(index) {
-    index = parseInt(index); // Ensure the index is a number
-    if (isNaN(index) || !tasks[index]) {
-        console.error("Invalid task index:", index);
-        return;
-    }
+  // Toggle task completion
+// Toggle task completion
+// Toggle task completion
+// Toggle task completion
+// Toggle task completion
+function toggleComplete(index) {
+  tasks[index].completed = !tasks[index].completed;
+  saveData();
+  renderTasks();  // Re-render tasks to show the updated checkmark status
 
-    tasks[index].completed = !tasks[index].completed;
-    saveData();
-    renderTasks();  // Re-render tasks to show the updated checkmark status
+  // Add the rainbow gradient class to the body when a task is checked
+  if (tasks[index].completed) {
+      document.body.classList.add('rainbow-gradient');
+      
+      // Remove the class after 2 seconds (2000 milliseconds)
+      setTimeout(() => {
+          document.body.classList.remove('rainbow-gradient');
+      }, 2000);  // Adjust the time as needed
+  }
 }
+
+
+
+
+
 
   // Delete task
   // Delete task

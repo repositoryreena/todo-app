@@ -149,6 +149,21 @@ span {
 
 /* Style for the circle with checkmark */
 /* Style for the circle with checkmark */
+/* When the task is completed, apply the rainbow gradient to the task item */
+.task-item.completed {
+    background: linear-gradient(135deg, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff, #d6a7ff); /* Rainbow gradient */
+    transition: background 0.3s ease;  /* Smooth transition for the background */
+}
+
+/* For the checkmark itself when it's checked */
+.task-item.completed .checkmark.checked {
+    color: green;  /* Green checkmark color */
+    font-size: 24px;  /* Larger checkmark */
+    transition: color 0.3s ease, font-size 0.3s ease;  /* Smooth transition for color and size */
+}
+
+
+/* Styling for the checkmark circle */
 .checkmark-container {
     width: 30px; /* Width of the circle */
     height: 30px; /* Height of the circle */
@@ -172,7 +187,20 @@ span {
 /* When the task is completed, show the checkmark */
 .checkmark.checked {
     display: inline-block; /* Show the checkmark when checked */
-    color: green;
+    color: green; /* Green color for completed task */
     border-radius: 50%;
-    
+
 }
+
+/* Apply rainbow gradient to the whole body when a task is completed */
+/* Apply rainbow gradient to the whole body when a task is completed */
+
+/* background-size: 100% 100%: This ensures the gradient spans the entire body and doesn't repeat. It covers the entire page area in one single stretch. */
+/* Apply rainbow gradient to the whole body when a task is completed */
+body.rainbow-gradient {
+    background: linear-gradient(135deg, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff, #d6a7ff); /* Rainbow gradient */
+    background-size: 100% 100%; /* Make the gradient cover the whole screen */
+    background-attachment: fixed; /* Fix the gradient so it doesn't scroll with the page */
+    transition: background 0.3s ease; /* Smooth transition for the background */
+}
+
