@@ -204,3 +204,38 @@ body.rainbow-gradient {
     transition: background 0.3s ease; /* Smooth transition for the background */
 }
 
+/* Style for the bubble appearance of priority and category */
+.bubble {
+    display: inline-block;
+    padding: 5px 15px;
+    font-size: 16px;
+    border-radius: 50px;
+    color: #fff;  /* White text color */
+    margin-left: 10px;
+    text-transform: capitalize;
+}
+
+body.task-checked {
+    background: linear-gradient(90deg, 
+        #ffb3ba, 
+        #ffdfba, 
+        #ffffba, 
+        #baffc9, 
+        #bae1ff, 
+        #d6a7ff);
+    background-size: 300% 300%; /* Ensures the gradient stretches across */
+    animation: rainbow-background 3s ease-out forwards; /* Add animation for smooth transition */
+}
+
+/* Keyframes for the rainbow animation */
+@keyframes rainbow-background {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

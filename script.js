@@ -114,72 +114,105 @@ document.addEventListener("DOMContentLoaded", () => {
   // Render tasks in the list
   // Render tasks in the list
 // Render tasks in the list
+// Render tasks in the list
+// Render tasks in the list
+// Render tasks in the list
 function renderTasks(taskListData = tasks) {
-  taskList.innerHTML = ''; // Clear current list
-  if (taskListData.length === 0) {
-      taskList.innerHTML = '<li>No tasks available</li>';
-      return;
-  }
-
+  taskList.innerHTML = ''; // Clear the task list before rendering
   taskListData.forEach((task, index) => {
       const li = document.createElement('li');
       li.classList.add('task-item'); // Adding class for styling
+
+      // Set up priority and category colors based on dropdown values
+      const priorityColor = getPriorityColor(task.priority);
+      const categoryColor = getCategoryColor(task.category);
 
       li.innerHTML = `
           <span class="checkmark-container" data-index="${index}">
               <span class="checkmark ${task.completed ? 'checked' : ''}">&#10003;</span>
           </span>
           <span>${task.text}</span>
+          <span class="task-priority bubble" style="background-color: ${priorityColor}">${task.priority}</span>
+          <span class="task-category bubble" style="background-color: ${categoryColor}">${task.category}</span>
           <span>${task.dueDate}</span>
-          <span>${task.priority}</span>
-          <span>${task.category}</span>
           <button class="delete-btn" data-index="${index}">❌</button>
       `;
       taskList.appendChild(li);
-  });
 
-  // Add event listener for the checkmark containers
-  const checkmarkContainers = document.querySelectorAll('.checkmark-container');
-  checkmarkContainers.forEach(container => {
-      container.addEventListener('click', (e) => {
-          const index = e.target.closest('.checkmark-container').getAttribute('data-index'); // Use closest to get the correct index
-          toggleComplete(index);
+      // Add event listener for the checkmark containers
+      const checkmarkContainers = li.querySelectorAll('.checkmark-container');
+      checkmarkContainers.forEach(container => {
+          container.addEventListener('click', (e) => {
+              const index = e.currentTarget.getAttribute('data-index'); // Using currentTarget ensures we get the correct container's index
+              toggleComplete(index); // Pass the correct index to toggleComplete
+          });
       });
-  });
 
-  // Add event listener for the delete buttons
-  const deleteButtons = document.querySelectorAll('.delete-btn');
-  deleteButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
-          const index = e.target.getAttribute('data-index');
-          deleteTask(index);
+      // Add event listener for the delete buttons
+      const deleteButtons = li.querySelectorAll('.delete-btn');
+      deleteButtons.forEach(button => {
+          button.addEventListener('click', (e) => {
+              const index = e.currentTarget.getAttribute('data-index');
+              deleteTask(index); // Handle task deletion
+          });
       });
   });
 }
 
 
 
+// Helper function to get the background color for the priority
+function getPriorityColor(priority) {
+  const priorityColors = {
+      'Critical': '#ff6f61',  // Red for Critical
+      'Normal': '#ffcc00',    // Yellow for Normal
+      'Low': '#4caf50'        // Green for Low
+  };
+  return priorityColors[priority] || '#fff'; // Default to white if undefined
+}
+
+// Helper function to get the background color for the category
+function getCategoryColor(category) {
+  const categoryColors = {
+      'Work': '#ffb3ba',       // Light pink for Work
+      'Personal': '#ffdfba',   // Light orange for Personal
+      'Urgent': '#ffffba',     // Light yellow for Urgent
+      'Others': '#baffc9'      // Light green for Others
+  };
+  return categoryColors[category] || '#bae1ff'; // Default to light blue if undefined
+}
+
+
+
+
   // Toggle task completion
   // Toggle task completion
+// Toggle task completion
 // Toggle task completion
 // Toggle task completion
 // Toggle task completion
 // Toggle task completion
 function toggleComplete(index) {
-  tasks[index].completed = !tasks[index].completed;
-  saveData();
-  renderTasks();  // Re-render tasks to show the updated checkmark status
+  if (index !== null && tasks[index]) {
+      tasks[index].completed = !tasks[index].completed;
+      saveData();  // Save updated tasks to localStorage
 
-  // Add the rainbow gradient class to the body when a task is checked
-  if (tasks[index].completed) {
-      document.body.classList.add('rainbow-gradient');
-      
-      // Remove the class after 2 seconds (2000 milliseconds)
-      setTimeout(() => {
-          document.body.classList.remove('rainbow-gradient');
-      }, 2000);  // Adjust the time as needed
+      // Apply the rainbow gradient on task completion
+      if (tasks[index].completed) {
+          document.body.classList.add('task-checked'); // Add class to apply gradient
+          setTimeout(() => {
+              document.body.classList.remove('task-checked'); // Remove class after animation ends
+          }, 3000); // After 3 seconds, remove the gradient effect
+      }
+
+      renderTasks();  // Re-render the tasks list
+  } else {
+      console.error(`Task at index ${index} not found`);
   }
 }
+
+
+
 
 
 
