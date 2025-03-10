@@ -205,15 +205,55 @@ body.rainbow-gradient {
 }
 
 /* Style for the bubble appearance of priority and category */
+/* Styling for the bubbles around priority and category */
 .bubble {
     display: inline-block;
-    padding: 5px 15px;
-    font-size: 16px;
-    border-radius: 50px;
-    color: #fff;  /* White text color */
-    margin-left: 10px;
-    text-transform: capitalize;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
 }
+
+/* Priority bubbles - colored based on priority */
+/* Priority bubbles */
+.bubble.priority {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+/* High priority (Critical) - red */
+.bubble.priority.high {
+    background-color: red;
+}
+
+/* Medium priority (Normal) - yellow */
+.bubble.priority.medium {
+    background-color: yellow;
+}
+
+/* Low priority - green */
+.bubble.priority.low {
+    background-color: green;
+}
+
+/* Category bubbles */
+.bubble.category {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
 
 body.task-checked {
     background: linear-gradient(90deg, 

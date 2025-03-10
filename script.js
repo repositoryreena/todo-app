@@ -117,47 +117,74 @@ document.addEventListener("DOMContentLoaded", () => {
 // Render tasks in the list
 // Render tasks in the list
 // Render tasks in the list
+// Render tasks in the list
+// Render tasks in the list
+
+
+// Render tasks in the list
 function renderTasks(taskListData = tasks) {
-  taskList.innerHTML = ''; // Clear the task list before rendering
+  taskList.innerHTML = ''; // Clear current task list
   taskListData.forEach((task, index) => {
       const li = document.createElement('li');
       li.classList.add('task-item'); // Adding class for styling
 
-      // Set up priority and category colors based on dropdown values
-      const priorityColor = getPriorityColor(task.priority);
-      const categoryColor = getCategoryColor(task.category);
-
-      li.innerHTML = `
+      let taskHTML = `
           <span class="checkmark-container" data-index="${index}">
               <span class="checkmark ${task.completed ? 'checked' : ''}">&#10003;</span>
           </span>
           <span>${task.text}</span>
-          <span class="task-priority bubble" style="background-color: ${priorityColor}">${task.priority}</span>
-          <span class="task-category bubble" style="background-color: ${categoryColor}">${task.category}</span>
           <span>${task.dueDate}</span>
-          <button class="delete-btn" data-index="${index}">❌</button>
       `;
+
+      // Add the priority bubble if a priority exists
+      if (task.priority) {
+          let priorityClass = 'low';  // Default to low priority
+          if (task.priority === 'Critical') {
+              priorityClass = 'high'; // High priority is red
+          } else if (task.priority === 'Normal') {
+              priorityClass = 'medium'; // Medium priority is yellow
+          }
+
+          taskHTML += `<span class="bubble priority ${priorityClass}">${task.priority}</span>`;
+      }
+
+      // Add the category bubble if a category exists
+      if (task.category) {
+          const categoryIndex = categories.indexOf(task.category); // Find the category index
+          const categoryColor = getCategoryColor(categoryIndex); // Get color based on category index
+          taskHTML += `<span class="bubble category" style="background-color: ${categoryColor};">${task.category}</span>`;
+      }
+
+      taskHTML += `<button class="delete-btn" data-index="${index}">❌</button>`;
+
+      // Set the inner HTML for the task item
+      li.innerHTML = taskHTML;
+
+      // Add the task item to the list
       taskList.appendChild(li);
+  });
 
-      // Add event listener for the checkmark containers
-      const checkmarkContainers = li.querySelectorAll('.checkmark-container');
-      checkmarkContainers.forEach(container => {
-          container.addEventListener('click', (e) => {
-              const index = e.currentTarget.getAttribute('data-index'); // Using currentTarget ensures we get the correct container's index
-              toggleComplete(index); // Pass the correct index to toggleComplete
-          });
+  // Add event listener for the checkmark circles
+  const checkmarkContainers = document.querySelectorAll('.checkmark-container');
+  checkmarkContainers.forEach(container => {
+      container.addEventListener('click', (e) => {
+          const index = e.target.closest('.checkmark-container').getAttribute('data-index');
+          toggleComplete(index); // Correctly pass the index to toggleComplete
       });
+  });
 
-      // Add event listener for the delete buttons
-      const deleteButtons = li.querySelectorAll('.delete-btn');
-      deleteButtons.forEach(button => {
-          button.addEventListener('click', (e) => {
-              const index = e.currentTarget.getAttribute('data-index');
-              deleteTask(index); // Handle task deletion
-          });
+  // Add event listener for the delete buttons
+  const deleteButtons = document.querySelectorAll('.delete-btn');
+  deleteButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+          const index = e.target.getAttribute('data-index');
+          deleteTask(index);
       });
   });
 }
+
+
+
 
 
 
@@ -172,15 +199,15 @@ function getPriorityColor(priority) {
 }
 
 // Helper function to get the background color for the category
-function getCategoryColor(category) {
-  const categoryColors = {
-      'Work': '#ffb3ba',       // Light pink for Work
-      'Personal': '#ffdfba',   // Light orange for Personal
-      'Urgent': '#ffffba',     // Light yellow for Urgent
-      'Others': '#baffc9'      // Light green for Others
-  };
-  return categoryColors[category] || '#bae1ff'; // Default to light blue if undefined
+// Function to get category color based on index (cycled)
+function getCategoryColor(categoryIndex) {
+  const colors = [
+      '#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#d6a7ff', // pastel colors
+      '#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#d6a7ff'  // Repeat
+  ];
+  return colors[categoryIndex % colors.length]; // Cycle through the colors
 }
+
 
 
 
