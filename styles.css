@@ -42,24 +42,47 @@ select {
 }
 
 /* Styling for the dropdown options with pastel rainbow colors */
-select option:nth-child(1) {
+/* General dropdown styling */
+select {
+    border: none;
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 15px 20px;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+    margin: 15px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dynamic pastel rainbow colors for dropdown options */
+/* The nth-child(6n+1) selector is a CSS trick to create a repeating cycle for the colors. It applies the background color to every 6th item in the list, starting from the first. */
+
+select option:nth-child(6n+1) {
     background-color: #ffb3ba; /* Pastel pink */
 }
-select option:nth-child(2) {
+
+select option:nth-child(6n+2) {
     background-color: #ffdfba; /* Pastel orange */
 }
-select option:nth-child(3) {
+
+select option:nth-child(6n+3) {
     background-color: #ffffba; /* Pastel yellow */
 }
-select option:nth-child(4) {
+
+select option:nth-child(6n+4) {
     background-color: #baffc9; /* Pastel green */
 }
-select option:nth-child(5) {
+
+select option:nth-child(6n+5) {
     background-color: #bae1ff; /* Pastel blue */
 }
-select option:nth-child(6) {
+
+select option:nth-child(6n+6) {
     background-color: #d6a7ff; /* Pastel purple */
 }
+
 
 /* Additional styling for the container */
 .container {
