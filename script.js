@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Render tasks in the list
+// Render tasks in the list
 function renderTasks(taskListData = tasks) {
   taskList.innerHTML = ''; // Clear current task list
   taskListData.forEach((task, index) => {
@@ -169,26 +170,17 @@ function renderTasks(taskListData = tasks) {
 
       // Add the task item to the list
       taskList.appendChild(li);
-  });
 
-  // Add event listener for the checkmark circles
-  const checkmarkContainers = document.querySelectorAll('.checkmark-container');
-  checkmarkContainers.forEach(container => {
-      container.addEventListener('click', (e) => {
-          const index = e.target.closest('.checkmark-container').getAttribute('data-index');
-          toggleComplete(index); // Correctly pass the index to toggleComplete
-      });
-  });
+      // Add event listener for the checkmark circles
+      const checkmarkContainer = li.querySelector('.checkmark-container');
+      checkmarkContainer.addEventListener('click', () => toggleComplete(index));
 
-  // Add event listener for the delete buttons
-  const deleteButtons = document.querySelectorAll('.delete-btn');
-  deleteButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
-          const index = e.target.getAttribute('data-index');
-          deleteTask(index);
-      });
+      // Add event listener for the delete buttons
+      const deleteButton = li.querySelector('.delete-btn');
+      deleteButton.addEventListener('click', () => deleteTask(index));
   });
 }
+
 
 
 
@@ -207,6 +199,7 @@ function getPriorityColor(priority) {
 
 // Helper function to get the background color for the category
 // Function to get category color based on index (cycled)
+// Helper function to get the background color for the category
 function getCategoryColor(categoryIndex) {
   const colors = [
       '#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#d6a7ff', // pastel colors
@@ -214,6 +207,7 @@ function getCategoryColor(categoryIndex) {
   ];
   return colors[categoryIndex % colors.length]; // Cycle through the colors
 }
+
 
 
 
@@ -271,6 +265,7 @@ function deleteTask(index) {
   // Render categories in the "SHOW" dropdown
   // Render categories in the "SHOW" dropdown and task form dropdown
 // Render categories in the "SHOW" dropdown and task form dropdown
+// Render categories in the "SHOW" dropdown
 function renderCategories() {
   // Clear existing options to avoid duplicates
   showDropdown.innerHTML = '';
@@ -283,39 +278,37 @@ function renderCategories() {
   showOption.textContent = 'SHOW'; // Or use 'Select a Category'
   showDropdown.appendChild(showOption);
 
-  // Add the 'ALL' and 'INCOMPLETE' options
-  const allOption = document.createElement('option');
-  allOption.value = 'ALL';
-  allOption.textContent = 'All';
-  showDropdown.appendChild(allOption);
+  // Add the 'ALL' and 'INCOMPLETE' options (no color)
+  showDropdown.appendChild(createOption('ALL', 'All'));
+  showDropdown.appendChild(createOption('INCOMPLETE', 'Incomplete'));
 
-  const incompleteOption = document.createElement('option');
-  incompleteOption.value = 'INCOMPLETE';
-  incompleteOption.textContent = 'Incomplete';
-  showDropdown.appendChild(incompleteOption);
-
-  // Add the categories to the dropdown dynamically
-  categories.forEach(category => {
-      const option = document.createElement('option');
-      option.value = category;
-      option.textContent = category;
+  // Add the categories to the dropdown dynamically with matching color
+  categories.forEach((category, index) => {
+      const categoryColor = getCategoryColor(index);
+      const option = createOption(category, category);
+      option.style.backgroundColor = categoryColor;  // Apply color to dropdown option
       showDropdown.appendChild(option);
   });
 
-  // Populate the category input dropdown in the task form
+  // Populate the category input dropdown in the task form with matching color
   categoryInput.innerHTML = '';  // Clear existing options in the category dropdown
-  const defaultOption = document.createElement('option');
-  defaultOption.value = '';
-  defaultOption.textContent = 'Select a category';
-  categoryInput.appendChild(defaultOption);
-
-  categories.forEach(category => {
-      const option = document.createElement('option');
-      option.value = category;
-      option.textContent = category;
+  categoryInput.appendChild(createOption('', 'Select a category'));  // Default option
+  categories.forEach((category, index) => {
+      const categoryColor = getCategoryColor(index);
+      const option = createOption(category, category);
+      option.style.backgroundColor = categoryColor;  // Apply color to dropdown option
       categoryInput.appendChild(option);
   });
 }
+
+// Helper function to create dropdown options
+function createOption(value, text) {
+  const option = document.createElement('option');
+  option.value = value;
+  option.textContent = text;
+  return option;
+}
+
 
 
 
