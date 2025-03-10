@@ -1,195 +1,102 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: darkgray;
-    background-color: #191919;
-}
-
-/* General input reset */
-input, textarea, select, button {
-    background: none;
-    border: 1px solid gray;
-    outline: none;
-    box-shadow: none;
-    text-shadow: none;
-    font: inherit;
-    padding: 10px;
-    margin: 10px;
-    appearance: none; /* Remove default input appearance in some browsers (e.g., iOS) */
-    cursor: pointer;
-    color: white;
-}
-
-button:hover {
-    background-color: darkgray;
-}
-
-/* For text inputs, textareas, and select elements */
-input[type="text"], input[type="password"], input[type="email"], textarea, select {
-    background-color: transparent; /* Make background transparent */
-    color: inherit; /* Inherit text color */
-    font-size: inherit; /* Inherit font size */
-    line-height: inherit; /* Inherit line height */
-}
-
-/* Input focus (if you want to customize focus) */
-input:focus, textarea:focus, select:focus {
-    outline: none; /* Optional: If you want to remove focus outline */
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
+    font-family: 'Courier New', Courier, monospace; /* Set the font to Courier New */
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: left;  /* Align the items to the left */
-    padding: 8px;
-    margin-bottom: 5px;
-    cursor: grab;
+    font-size: 18px;  /* Increase font size for better readability */
 }
 
-li[contenteditable="true"] {
-    outline: none;
-    border: none;
-    background-color: transparent;
-    color: white;
-    font-size: 1em;
-    text-align: left;
-    padding: 0;
-    min-height: 20px;
-}
-
-li[contenteditable="true"]:empty:before {
-    content: "Click to edit task";
-    color: gray;
-}
-
-* {
-    outline: none !important;
-}
-
-
-
-/* Completed task styling */
-.completed {
-    text-decoration: line-through;
-    color: gray;
-}
-
-li.completed .complete-btn {
-    background-color: blue;
-    color: white;
-}
-
-/* Hide and show filters for task display */
-.hideFilter {
-    display: none;
-}
-
-.showFilter {
-    display: block;
-}
-
-/* Task buttons (complete and delete) styling */
+/* General button styling */
 button {
-    margin-right: 10px; /* Space buttons apart */
-}
-
-.complete-btn,
-.delete-btn {
-    margin-left: 10px;
-}
-
-.due-date {
-    font-size: 0.9em;
-    color: gray;
-    margin-left: 10px;
-}
-
-/* General task list item style */
-li {
-    /* border: 1px solid #ccc; */
-    padding: 10px;
-    margin-bottom: 5px;
-    cursor: grab;
-    display: flex;
-    justify-content: left;
-    text-align: left;
-}
-
-li.dragging {
-    opacity: 1; /* Make the dragged item semi-transparent */
-    cursor: grabbing; /* Change the cursor style while dragging */
-    outline: 2px dashed #007bff; /* Add a dashed outline */
-    outline-offset: 4px; /* Slightly offset the outline for better visibility */
-}
-
-/* Task buttons styling */
-button.active {
-    background-color: #4CAF50; /* Green color for active filter */
+    background-color: #76c7c0;  /* Pastel teal */
+    border: none;
+    border-radius: 30px;  /* Rounded corners */
+    padding: 15px 30px;  /* Increase padding for larger buttons */
     color: white;
-    border: 1px solid #4CAF50;
-}
-
-/* Dragging effect */
-button.active {
-    background-color: #4CAF50;
-    color: white;
-    border: 1px solid #4CAF50;
+    font-size: 20px;  /* Make the font size bigger */
+    font-family: 'Courier New', Courier, monospace;  /* Ensure button uses Courier New */
+    cursor: pointer;
+    margin: 15px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: darkgray;
+    background-color: #66b1ad;  /* Slightly darker teal */
 }
 
-/* Style the drag handle (six dots) */
-.drag-handle {
-    display: grid;
-    grid-template-columns: repeat(2, 10px); /* 2 columns for the dots */
-    grid-template-rows: repeat(3, 10px); /* 3 rows for the dots */
-    gap: 3px; /* Space between the dots */
-    cursor: move;
-    user-select: none;
-    padding: 5px; /* Apply padding evenly to the left and right (adjust as needed) */
-    margin-right: 10px; /* Optional: Space between drag handle and task content */
-    justify-items: center; /* Center dots horizontally */
-    align-items: center; /* Center dots vertically */
+/* General dropdown styling */
+select {
+    border: none;
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 15px 20px;  /* Increase padding for larger dropdowns */
+    font-size: 20px;  /* Make the font size bigger */
+    font-family: 'Courier New', Courier, monospace;  /* Ensure dropdown uses Courier New */
+    color: #333;
+    margin: 15px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* When the drag handle is hovered */
-.drag-handle:hover {
-    /* background-color: gray; */
-    border-radius: 5px;
+/* Styling for the dropdown options with pastel rainbow colors */
+select option:nth-child(1) {
+    background-color: #ffb3ba; /* Pastel pink */
+}
+select option:nth-child(2) {
+    background-color: #ffdfba; /* Pastel orange */
+}
+select option:nth-child(3) {
+    background-color: #ffffba; /* Pastel yellow */
+}
+select option:nth-child(4) {
+    background-color: #baffc9; /* Pastel green */
+}
+select option:nth-child(5) {
+    background-color: #bae1ff; /* Pastel blue */
+}
+select option:nth-child(6) {
+    background-color: #d6a7ff; /* Pastel purple */
 }
 
-/* Each dot */
-.dot {
-    width: 6px;  /* Make each dot smaller */
-    height: 6px;
-    border-radius: 50%;
-    background-color: lightgray;  /* Color of the dots */
-}
-
-/* Style for the task list item */
-li {
+/* Additional styling for the container */
+.container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding: 8px;
-    margin-bottom: 5px;
-    cursor: grab;
+    margin-top: 20px;
 }
 
-/* When the task is being dragged */
-li.dragging {
-    opacity: 0.5; /* Make the dragged item semi-transparent */
+/* Additional styling for the dropdown labels */
+label {
+    font-size: 22px;  /* Make the labels larger for better readability */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    margin-top: 25px;
 }
 
-/* Optional: style the task's text and other buttons */
-li span, li button {
-    margin-left: 10px;
+/* Increase text size of task list items */
+#task-list li {
+    font-size: 20px; /* Increase size of task text */
+    padding: 15px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Style task text */
+#task-list li span {
+    font-size: 20px; /* Larger font for task text */
+}
+
+/* Style task buttons */
+#task-list li button {
+    font-size: 20px; /* Larger buttons */
+}
