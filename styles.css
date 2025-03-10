@@ -141,33 +141,38 @@ label {
     margin-bottom: 10px;
 }
 
-/* Style for the circle with checkmark */
-.checkmark-container {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: lightgray;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 10px; /* Space between circle and task text */
-    cursor: pointer;
-}
-
-.checkmark {
-    font-size: 18px;
-    color: white;
-    display: none; /* Initially hide the checkmark */
-}
-
-.checkmark.checked {
-    display: inline-block; /* Show checkmark when task is completed */
-    background-color: green;
-    border-radius: 50%;
-    padding: 5px;
-}
 
 /* Optional: style for the other spans (text, priority, etc.) */
 span {
     margin-right: 10px;
+}
+
+/* Style for the circle with checkmark */
+/* Style for the circle with checkmark */
+.checkmark-container {
+    width: 30px; /* Width of the circle */
+    height: 30px; /* Height of the circle */
+    border-radius: 50%; /* Make it circular */
+    background-color: lightgray; /* Gray background for the circle */
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center the checkmark horizontally */
+    align-items: center; /* Center the checkmark vertically */
+    margin-right: 10px; /* Space between circle and task text */
+    cursor: pointer;
+}
+
+/* Styling for the checkmark */
+.checkmark {
+    font-size: 18px; /* Size of the checkmark (adjusted to fit the circle) */
+    color: white; /* Color of the checkmark */
+    display: none; /* Initially hidden */
+    margin: 0; /* Remove any margin or extra space */
+}
+
+/* When the task is completed, show the checkmark */
+.checkmark.checked {
+    display: inline-block; /* Show the checkmark when checked */
+    color: green;
+    border-radius: 50%;
+    
 }

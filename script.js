@@ -115,7 +115,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Render tasks in the list
 // Render tasks in the list
 function renderTasks(taskListData = tasks) {
-  taskList.innerHTML = '';
+  taskList.innerHTML = ''; // Clear current list
+  if (taskListData.length === 0) {
+      taskList.innerHTML = '<li>No tasks available</li>';
+      return;
+  }
+
   taskListData.forEach((task, index) => {
       const li = document.createElement('li');
       li.classList.add('task-item'); // Adding class for styling
@@ -133,11 +138,11 @@ function renderTasks(taskListData = tasks) {
       taskList.appendChild(li);
   });
 
-  // Add event listener for the checkmark circles
+  // Add event listener for the checkmark containers
   const checkmarkContainers = document.querySelectorAll('.checkmark-container');
   checkmarkContainers.forEach(container => {
       container.addEventListener('click', (e) => {
-          const index = e.target.getAttribute('data-index');
+          const index = e.target.closest('.checkmark-container').getAttribute('data-index'); // Use closest to get the correct index
           toggleComplete(index);
       });
   });
@@ -156,6 +161,12 @@ function renderTasks(taskListData = tasks) {
 
   // Toggle task completion
   function toggleComplete(index) {
+    index = parseInt(index); // Ensure the index is a number
+    if (isNaN(index) || !tasks[index]) {
+        console.error("Invalid task index:", index);
+        return;
+    }
+
     tasks[index].completed = !tasks[index].completed;
     saveData();
     renderTasks();  // Re-render tasks to show the updated checkmark status
