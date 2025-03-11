@@ -1,834 +1,763 @@
 body {
-  font-family: "Courier New", Courier, monospace; /* Set the font to Courier New */
-  background-color: #f0f0f0;
-  color: #333;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 18px; /* Increase font size for better readability */
-}
-
-/* General button styling */
-button {
-  background-color: #76c7c0; /* Pastel teal */
-  border: none;
-  border-radius: 30px; /* Rounded corners */
-  padding: 15px 30px; /* Increase padding for larger buttons */
-  color: white;
-  font-size: 20px; /* Make the font size bigger */
-  font-family: "Courier New", Courier, monospace; /* Ensure button uses Courier New */
-  cursor: pointer;
-  margin: 15px;
-  transition: background-color 0.3s ease;
-}
-
-input {
-  border-radius: 30px; /* Rounded corners */
-  padding: 15px 30px;
-  font-size: 20px; /* Make the font size bigger */
-  font-family: "Courier New", Courier, monospace; /* Ensure button uses Courier New */
-  cursor: pointer;
-  margin: 15px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #66b1ad; /* Slightly darker teal */
-}
-
-/* General dropdown styling */
-select {
-  border: none;
-  background-color: #ffffff;
-  border-radius: 30px;
-  padding: 15px 20px; /* Increase padding for larger dropdowns */
-  font-size: 20px; /* Make the font size bigger */
-  font-family: "Courier New", Courier, monospace; /* Ensure dropdown uses Courier New */
-  color: #333;
-  margin: 15px;
-  cursor: pointer;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Styling for the dropdown options with pastel rainbow colors */
-/* General dropdown styling */
-select {
-  border: none;
-  background-color: #ffffff;
-  border-radius: 30px;
-  padding: 15px 20px;
-  font-size: 20px;
-  font-family: "Courier New", Courier, monospace;
-  color: #333;
-  margin: 15px;
-  cursor: pointer;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Dynamic pastel rainbow colors for dropdown options */
-/* The nth-child(6n+1) selector is a CSS trick to create a repeating cycle for the colors. It applies the background color to every 6th item in the list, starting from the first. */
-
-select option:nth-child(6n + 1) {
-  background-color: #ffb3ba; /* Pastel pink */
-}
-
-select option:nth-child(6n + 2) {
-  background-color: #ffdfba; /* Pastel orange */
-}
-
-select option:nth-child(6n + 3) {
-  background-color: #ffffba; /* Pastel yellow */
-}
-
-select option:nth-child(6n + 4) {
-  background-color: #baffc9; /* Pastel green */
-}
-
-select option:nth-child(6n + 5) {
-  background-color: #bae1ff; /* Pastel blue */
-}
-
-select option:nth-child(6n + 6) {
-  background-color: #d6a7ff; /* Pastel purple */
-}
-
-/* Additional styling for the container */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-
-/* Additional styling for the dropdown labels */
-label {
-  font-size: 22px; /* Make the labels larger for better readability */
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-  margin-top: 25px;
-}
-
-/* Increase text size of task list items */
-#task-list li {
-  font-size: 20px; /* Increase size of task text */
-  padding: 15px;
-  margin: 10px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Style task text */
-#task-list li span {
-  font-size: 20px; /* Larger font for task text */
-}
-
-/* Style task buttons */
-#task-list li button {
-  font-size: 20px; /* Larger buttons */
-}
-
-/* Style for the task list items */
-.task-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-/* Optional: style for the other spans (text, priority, etc.) */
-span {
-  margin-right: 10px;
-}
-
-/* Style for the circle with checkmark */
-/* When the task is completed, apply the rainbow gradient to the task item */
-.task-item.completed {
-  background: linear-gradient(
-    135deg,
-    #ffb3ba,
-    #ffdfba,
-    #ffffba,
-    #baffc9,
-    #bae1ff,
-    #d6a7ff
-  ); /* Rainbow gradient */
-  transition: background 0.3s ease; /* Smooth transition for the background */
-}
-
-/* For the checkmark itself when it's checked */
-.task-item.completed .checkmark.checked {
-  color: green; /* Green checkmark color */
-  font-size: 24px; /* Larger checkmark */
-  transition:
-    color 0.3s ease,
-    font-size 0.3s ease; /* Smooth transition for color and size */
-}
-
-/* Styling for the checkmark */
-.checkmark {
-  font-size: 18px; /* Size of the checkmark (adjusted to fit the circle) */
-  color: white; /* Color of the checkmark */
-  display: none; /* Initially hidden */
-  margin: 0; /* Remove any margin or extra space */
-}
-
-/* When the task is completed, show the checkmark */
-.checkmark.checked {
-  display: inline-block; /* Show the checkmark when checked */
-  color: green; /* Green color for completed task */
-  border-radius: 50%;
-}
-
-/* Apply rainbow gradient to the whole body when a task is completed */
-
-/* background-size: 100% 100%: This ensures the gradient spans the entire body and doesn't repeat. It covers the entire page area in one single stretch. */
-/* Apply rainbow gradient to the whole body when a task is completed */
-body.rainbow-gradient {
-  background: linear-gradient(
-    135deg,
-    #ffb3ba,
-    #ffdfba,
-    #ffffba,
-    #baffc9,
-    #bae1ff,
-    #d6a7ff
-  ); /* Rainbow gradient */
-  background-size: 100% 100%; /* Make the gradient cover the whole screen */
-  background-attachment: fixed; /* Fix the gradient so it doesn't scroll with the page */
-  transition: background 0.3s ease; /* Smooth transition for the background */
-}
-
-/* Style for the bubble appearance of priority and category */
-/* Styling for the bubbles around priority and category */
-.bubble {
-  display: inline-block;
-  padding: 8px 16px;
-  margin: 5px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  color: white;
-}
-
-/* Priority bubbles - colored based on priority */
-/* Priority bubbles */
-/* Bubbles for priority */
-.bubble.priority {
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  color: black; /* Black text for readability */
-  text-shadow: none; /* Remove any shadow to make the text clear */
-}
-
-/* For low priority (green) */
-.bubble.priority.low {
-  background-color: #60b83f; /* Green background */
-}
-
-/* For normal priority (yellow) */
-.bubble.priority.medium {
-  background-color: #f2d35f; /* Yellow background */
-  color: black; /* Ensure black text on yellow background */
-}
-
-/* For critical priority (red) */
-.bubble.priority.high {
-  background-color: #f15b5b; /* Red background */
-  color: black; /* Ensure black text */
-}
-
-/* Bubbles for category */
-.bubble.category {
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  color: black; /* Black text for readability */
-  text-shadow: none; /* Remove shadow to make the text clear */
-  background-color: transparent; /* Ensure no transparency */
-}
-
-/* Specific color for categories based on index */
-.bubble.category:nth-child(6n + 1) {
-  background-color: #ffb3ba; /* Pastel pink */
-}
-
-.bubble.category:nth-child(6n + 2) {
-  background-color: #ffdfba; /* Pastel orange */
-}
-
-.bubble.category:nth-child(6n + 3) {
-  background-color: #ffffba; /* Pastel yellow */
-}
-
-.bubble.category:nth-child(6n + 4) {
-  background-color: #baffc9; /* Pastel green */
-}
-
-.bubble.category:nth-child(6n + 5) {
-  background-color: #bae1ff; /* Pastel blue */
-}
-
-.bubble.category:nth-child(6n + 6) {
-  background-color: #d6a7ff; /* Pastel purple */
-}
-
-body.task-checked {
-  background: linear-gradient(
-    90deg,
-    #ffb3ba,
-    #ffdfba,
-    #ffffba,
-    #baffc9,
-    #bae1ff,
-    #d6a7ff
-  );
-  background-size: 300% 300%; /* Ensures the gradient stretches across */
-  animation: rainbow-background 3s ease-out forwards; /* Add animation for smooth transition */
-}
-
-/* Keyframes for the rainbow animation */
-@keyframes rainbow-background {
-  0% {
-    background-position: 0% 50%;
+    font-family: "Courier New", Courier, monospace; /* Set the font to Courier New */
+    background-color: #E0F7FF;
+    color: #333;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px; /* Increase font size for better readability */
   }
-  50% {
-    background-position: 100% 50%;
+  
+  /* General button styling */
+  button {
+    background-color: #76c7c0; /* Pastel teal */
+    border: none;
+    border-radius: 30px; /* Rounded corners */
+    padding: 15px 30px; /* Increase padding for larger buttons */
+    color: white;
+    font-size: 20px; /* Make the font size bigger */
+    font-family: "Courier New", Courier, monospace; /* Ensure button uses Courier New */
+    cursor: pointer;
+    margin: 15px;
+    transition: background-color 0.3s ease;
   }
-  100% {
-    background-position: 0% 50%;
+  
+  input {
+    border-radius: 30px; /* Rounded corners */
+    padding: 15px 30px;
+    font-size: 20px; /* Make the font size bigger */
+    font-family: "Courier New", Courier, monospace; /* Ensure button uses Courier New */
+    cursor: pointer;
+    margin: 15px;
+    transition: background-color 0.3s ease;
   }
-}
-
-/* Styling for the priority dropdown */
-select#priority-input {
-  background-color: #fff;
-  color: #333;
-  font-size: 20px;
-  border-radius: 30px;
-  padding: 15px 30px;
-  cursor: pointer;
-  margin: 15px;
-  font-family: "Courier New", Courier, monospace;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Style for the header row */
-.task-header {
-  font-weight: bold;
-  background-color: #f7f7f7; /* Light background for header */
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between; /* Align columns */
-  border-bottom: 2px solid #ddd; /* Add a bottom border to separate header */
-}
-
-.task-header span {
-  width: 20%; /* Equal column width */
-  text-align: center; /* Center-align text */
-}
-
-/* Style for the header row */
-.task-header {
-  font-weight: bold;
-  background-color: #f7f7f7; /* Light background for header */
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between; /* Align columns */
-  border-bottom: 2px solid #ddd; /* Add a bottom border to separate header */
-}
-
-.task-header span {
-  width: 20%; /* Equal column width */
-  text-align: center; /* Center-align text */
-}
-
-/* Style for the task items */
-.task-item {
-  display: flex;
-  justify-content: space-between; /* Align columns */
-  padding: 10px 20px;
-  border-bottom: 1px solid #ddd; /* Add bottom border for task items */
-}
-
-.task-item span {
-  width: 20%; /* Equal column width */
-  text-align: center; /* Center-align text under each column */
-}
-
-/* Adjust the checkmark and delete button so they are aligned */
-.delete-btn {
-  text-align: center;
-  width: 10%;
-}
-
-/* Optional: Style the checkmark and delete button */
-
-.delete-btn {
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-}
-
-/* Style for the header row */
-.task-header {
-  font-weight: bold;
-  background-color: #f7f7f7; /* Light background for header */
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between; /* Align columns */
-  border-bottom: 2px solid #ddd; /* Add a bottom border to separate header */
-}
-
-.task-header span {
-  width: 16%; /* Adjusting for 5 columns now */
-  text-align: center; /* Center-align text */
-}
-
-/* Style for the task items */
-.task-item {
-  display: flex;
-  justify-content: space-between; /* Align columns */
-  padding: 10px 20px;
-  border-bottom: 1px solid #ddd; /* Add bottom border for task items */
-}
-
-.task-item span {
-  width: 16%; /* Adjusting for 5 columns */
-  text-align: center; /* Center-align text under each column */
-}
-
-/* Style the checkmark container */
-
-.checkmark-container .checkmark {
-  font-size: 18px;
-  color: #4caf50; /* Green color for checkmark */
-  display: none; /* Initially hidden */
-}
-
-.checkmark-container .checkmark.checked {
-  display: block; /* Show when checked */
-}
-
-/* Style for the delete button */
-.delete-btn {
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 18px;
-  color: #f44336; /* Red color for delete button */
-}
-
-/* Adjust the delete button container */
-.delete-btn-container {
-  width: 30px;
-  text-align: center;
-}
-
-/* Optional: Style the checkmark and delete button */
-.delete-btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Ensure the task container stays aligned properly */
-.task-item span,
-.delete-btn-container {
-  text-align: center;
-}
-
-/* Style for the header row */
-.task-header {
-  font-weight: bold;
-  background-color: #f7f7f7; /* Light background for header */
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between; /* Align columns */
-  border-bottom: 2px solid #ddd; /* Add a bottom border to separate header */
-}
-
-.task-header span {
-  width: 16%; /* Adjusting for 6 columns now */
-  text-align: center; /* Center-align text */
-}
-
-/* Style for the task items */
-.task-item {
-  display: flex;
-  justify-content: space-between; /* Align columns */
-  padding: 10px 20px;
-  border-bottom: 1px solid #ddd; /* Add bottom border for task items */
-}
-
-.task-item span {
-  width: 16%; /* Adjusting for 6 columns */
-  text-align: center; /* Center-align text under each column */
-}
-
-/* Style the checkmark container */
-
-.checkmark-container .checkmark {
-  font-size: 18px;
-  color: #4caf50; /* Green color for checkmark */
-  display: none; /* Initially hidden */
-}
-
-.checkmark-container .checkmark.checked {
-  display: block; /* Show when checked */
-}
-
-/* Style for the delete button */
-.delete-btn {
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 18px;
-  color: #f44336; /* Red color for delete button */
-}
-
-/* Adjust the delete button container */
-.delete-btn-container {
-  width: 30px;
-  text-align: center;
-}
-
-/* Optional: Style the checkmark and delete button */
-.delete-btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Ensure the task container stays aligned properly */
-.task-item span,
-.delete-btn-container {
-  text-align: center;
-}
-
-/* Style the checkmark container */
-
-/* Checkmark styling when it's checked */
-.checkmark-container .checkmark {
-  font-size: 16px; /* Adjust font size to fit better in the circle */
-  color: #4caf50; /* Green color for the checkmark */
-  display: none; /* Hidden by default */
-}
-
-/* When the task is completed, show the checkmark */
-.checkmark-container .checkmark.checked {
-  display: block; /* Show the checkmark when checked */
-}
-
-/* Ensure the checkmark container circle displays the checkmark correctly */
-
-/* Ensure checkmark is visible when checked */
-.checkmark-container .checkmark {
-  font-size: 16px; /* Adjust font size to fit better in the circle */
-  color: #4caf50; /* Green color for the checkmark */
-  display: none; /* Initially hidden */
-}
-
-/* When the task is completed, show the checkmark */
-.checkmark-container .checkmark.checked {
-  display: inline-block; /* Show the checkmark when checked */
-  color: #4caf50; /* Green color for checkmark */
-}
-
-.checkmark {
-  font-size: 20px;
-  z-index: 2; /* Make sure the checkmark is on top of the inner circle */
-  color: #4caf50; /* Green color for the checkmark */
-}
-
-/* Adjust the task item spans to allow text wrapping within each column */
-.task-item span {
-  word-wrap: break-word; /* Ensure words break and wrap within the column */
-  white-space: normal; /* Allow the text to wrap naturally */
-  overflow-wrap: break-word; /* Modern way to ensure word wrapping */
-  width: auto; /* Allow column width to adjust based on content */
-  text-align: center; /* Center align text within each column */
-}
-
-/* Adjust the columns (task item spans) for proper wrapping */
-.task-header span,
-.task-item span {
-  word-wrap: break-word; /* Allow words to break and wrap inside each column */
-  white-space: normal; /* Allow normal text wrapping */
-  overflow-wrap: break-word; /* Break long words */
-  width: 16%; /* Or adjust this percentage to suit your layout */
-  text-align: center; /* Center align text in each column */
-}
-
-/* Optional: Add a max-width for task name to limit the width of long names */
-.task-item .task-name {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
-  width: 100%; /* Let it fill up the available space */
-  max-width: 200px; /* You can adjust the max-width as needed */
-}
-
-/* Ensure the task item list doesn't overflow and no horizontal scrollbar */
-#task-list {
-  width: 100%; /* Ensure the task list uses the full width */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch; /* Stretch the task items across the container */
-}
-
-/* Make sure the task item container (columns) doesn’t overflow */
-.task-item {
-  display: flex;
-  justify-content: space-between; /* Distribute columns evenly */
-  padding: 10px 20px;
-  border-bottom: 1px solid #ddd;
-  width: 100%; /* Ensure task items take up full width */
-  box-sizing: border-box; /* Include padding and border in width calculation */
-  flex-wrap: wrap; /* Allow task items to wrap if necessary */
-}
-
-/* Ensure that the task item spans allow wrapping */
-.task-item span {
-  word-wrap: break-word; /* Allow words to break and wrap */
-  white-space: normal; /* Allow text to wrap naturally */
-  overflow-wrap: break-word; /* Ensure long words break correctly */
-  width: 16%; /* Adjust percentage or use auto for flexible width */
-  text-align: center; /* Center-align text */
-  box-sizing: border-box; /* Prevent overflow */
-  min-width: 100px; /* Optional: Set a min-width for each column */
-}
-
-/* Ensure the checkmark container doesn’t overflow and allows wrapping */
-
-/* Ensure no horizontal overflow when text overflows within the task name */
-.task-item .task-name {
-  word-wrap: break-word; /* Allow text to break */
-  overflow-wrap: break-word;
-  white-space: normal; /* Allow the text to wrap */
-  width: 100%; /* Allow the task name to fill available space */
-  max-width: calc(100% - 60px); /* Adjust to prevent overflow with checkmark */
-}
-
-/* Ensure the task item list doesn't overflow and no horizontal scrollbar */
-#task-list {
-  width: 100%; /* Ensure the task list uses the full width */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch; /* Stretch the task items across the container */
-}
-
-/* Make sure the task item container (columns) doesn’t overflow */
-.task-item {
-  display: flex;
-  justify-content: space-between; /* Distribute columns evenly */
-  padding: 10px 20px;
-  border-bottom: 1px solid #ddd;
-  width: 100%; /* Ensure task items take up full width */
-  box-sizing: border-box; /* Include padding and border in width calculation */
-  flex-wrap: wrap; /* Allow task items to wrap if necessary */
-}
-
-/* Ensure that the task item spans allow wrapping */
-.task-item span {
-  word-wrap: break-word; /* Allow words to break and wrap */
-  white-space: normal; /* Allow text to wrap naturally */
-  overflow-wrap: break-word; /* Ensure long words break correctly */
-  flex-basis: 16%; /* Allow flexibility with width of each column */
-  flex-grow: 1; /* Allow columns to grow and adjust based on content */
-  min-width: 100px; /* Prevent columns from becoming too small */
-  max-width: 25%; /* Prevent columns from stretching too wide */
-  text-align: center; /* Center-align text */
-  box-sizing: border-box; /* Prevent overflow */
-}
-
-/* Ensure the checkmark container doesn’t overflow and allows wrapping */
-
-/* Ensure no horizontal overflow when text overflows within the task name */
-.task-item .task-name {
-  word-wrap: break-word; /* Allow text to break */
-  overflow-wrap: break-word;
-  white-space: normal; /* Allow the text to wrap */
-  flex-grow: 1; /* Allow this column to expand if necessary */
-  max-width: calc(100% - 60px); /* Adjust to prevent overflow with checkmark */
-  padding: 0 5px;
-}
-
-/* Prevent horizontal scrollbar */
-html,
-body {
-  overflow-x: hidden; /* Prevents horizontal overflow */
-  width: 100%; /* Ensures that the width is 100% of the viewport */
-  margin: 0; /* Resets default margins */
-  padding: 0; /* Resets default padding */
-  box-sizing: border-box; /* Prevents overflow due to padding/border */
-}
-
-/* Reduce width of each column slightly */
-.task-header span,
-.task-item span {
-  width: 14%; /* Reduce column width slightly */
-  text-align: center; /* Center-align text under each column */
-}
-
-/* Optional: Reduce padding/margin */
-.task-item {
-  padding: 8px 16px; /* Reduce padding */
-}
-
-/* Ensure the checkmark container fits properly */
-
-* {
-  box-sizing: border-box; /* Include padding and borders within element width */
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  padding: 10px;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap; /* Allow items to wrap if necessary */
-}
-
-.task-header span,
-.task-item span {
-  width: 14%; /* Adjust width to make them narrower */
-  max-width: 180px; /* Limit the maximum width of each column */
-  min-width: 100px; /* Ensure columns don't get too small */
-  text-align: center;
-  padding: 5px;
-}
-
-/* Optionally, make the font smaller and ensure no horizontal overflow */
-.task-item {
-  font-size: 14px;
-  padding: 10px 15px;
-  max-width: 100%; /* Ensure no item overflows the container */
-}
-
-@media (max-width: 768px) {
+  
+  button:hover {
+    background-color: #66b1ad; /* Slightly darker teal */
+  }
+  
+  /* General dropdown styling */
+  select {
+    border: none;
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 15px 20px; /* Increase padding for larger dropdowns */
+    font-size: 20px; /* Make the font size bigger */
+    font-family: "Courier New", Courier, monospace; /* Ensure dropdown uses Courier New */
+    color: #333;
+    margin: 15px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for the dropdown options with pastel rainbow colors */
+  /* General dropdown styling */
+  select {
+    border: none;
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 15px 20px;
+    font-size: 20px;
+    font-family: "Courier New", Courier, monospace;
+    color: #333;
+    margin: 15px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Dynamic pastel rainbow colors for dropdown options */
+  /* The nth-child(6n+1) selector is a CSS trick to create a repeating cycle for the colors. It applies the background color to every 6th item in the list, starting from the first. */
+  
+  select option:nth-child(6n + 1) {
+    background-color: #ffb3ba; /* Pastel pink */
+  }
+  
+  select option:nth-child(6n + 2) {
+    background-color: #ffdfba; /* Pastel orange */
+  }
+  
+  select option:nth-child(6n + 3) {
+    background-color: #ffffba; /* Pastel yellow */
+  }
+  
+  select option:nth-child(6n + 4) {
+    background-color: #baffc9; /* Pastel green */
+  }
+  
+  select option:nth-child(6n + 5) {
+    background-color: #bae1ff; /* Pastel blue */
+  }
+  
+  select option:nth-child(6n + 6) {
+    background-color: #d6a7ff; /* Pastel purple */
+  }
+  
+  /* Additional styling for the container */
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Additional styling for the dropdown labels */
+  label {
+    font-size: 22px; /* Make the labels larger for better readability */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    margin-top: 25px;
+  }
+  
+  /* Increase text size of task list items */
+  #task-list li {
+    font-size: 20px; /* Increase size of task text */
+    padding: 15px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style task text */
+  #task-list li span {
+    font-size: 20px; /* Larger font for task text */
+  }
+  
+  /* Style task buttons */
+  #task-list li button {
+    font-size: 20px; /* Larger buttons */
+  }
+  
+  /* Style for the task list items */
+  .task-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Optional: style for the other spans (text, priority, etc.) */
+  span {
+    margin-right: 10px;
+  }
+  
+  /* Style for the circle with checkmark */
+  /* When the task is completed, apply the rainbow gradient to the task item */
+  .task-item.completed {
+    background: linear-gradient(
+      135deg,
+      #ffb3ba,
+      #ffdfba,
+      #ffffba,
+      #baffc9,
+      #bae1ff,
+      #d6a7ff
+    ); /* Rainbow gradient */
+    transition: background 0.3s ease; /* Smooth transition for the background */
+  }
+  
+  /* For the checkmark itself when it's checked */
+  .task-item.completed .checkmark.checked {
+    color: green; /* Green checkmark color */
+    font-size: 24px; /* Larger checkmark */
+    transition:
+      color 0.3s ease,
+      font-size 0.3s ease; /* Smooth transition for color and size */
+  }
+  
+  /* Styling for the checkmark */
+  .checkmark {
+    font-size: 18px; /* Size of the checkmark (adjusted to fit the circle) */
+    color: white; /* Color of the checkmark */
+    display: none; /* Initially hidden */
+    margin: 0; /* Remove any margin or extra space */
+  }
+  
+  /* When the task is completed, show the checkmark */
+  .checkmark.checked {
+    display: inline-block; /* Show the checkmark when checked */
+    color: green; /* Green color for completed task */
+    border-radius: 50%;
+  }
+  
+  /* Apply rainbow gradient to the whole body when a task is completed */
+  
+  /* background-size: 100% 100%: This ensures the gradient spans the entire body and doesn't repeat. It covers the entire page area in one single stretch. */
+  /* Apply rainbow gradient to the whole body when a task is completed */
+  body.rainbow-gradient {
+    background: linear-gradient(
+      135deg,
+      #ffb3ba,
+      #ffdfba,
+      #ffffba,
+      #baffc9,
+      #bae1ff,
+      #d6a7ff
+    ); /* Rainbow gradient */
+    background-size: 100% 100%; /* Make the gradient cover the whole screen */
+    background-attachment: fixed; /* Fix the gradient so it doesn't scroll with the page */
+    transition: background 0.3s ease; /* Smooth transition for the background */
+  }
+  
+  /* Style for the bubble appearance of priority and category */
+  /* Styling for the bubbles around priority and category */
+  .bubble {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  /* Priority bubbles - colored based on priority */
+  /* Priority bubbles */
+  /* Bubbles for priority */
+  .bubble.priority {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: black; /* Black text for readability */
+    text-shadow: none; /* Remove any shadow to make the text clear */
+  }
+  
+  /* For low priority (green) */
+  .bubble.priority.low {
+    background-color: #60b83f; /* Green background */
+  }
+  
+  /* For normal priority (yellow) */
+  .bubble.priority.medium {
+    background-color: #f2d35f; /* Yellow background */
+    color: black; /* Ensure black text on yellow background */
+  }
+  
+  /* For critical priority (red) */
+  .bubble.priority.high {
+    background-color: #f15b5b; /* Red background */
+    color: black; /* Ensure black text */
+  }
+  
+  /* Bubbles for category */
+  .bubble.category {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: black; /* Black text for readability */
+    text-shadow: none; /* Remove shadow to make the text clear */
+    background-color: transparent; /* Ensure no transparency */
+  }
+  
+  /* Specific color for categories based on index */
+  .bubble.category:nth-child(6n + 1) {
+    background-color: #ffb3ba; /* Pastel pink */
+  }
+  
+  .bubble.category:nth-child(6n + 2) {
+    background-color: #ffdfba; /* Pastel orange */
+  }
+  
+  .bubble.category:nth-child(6n + 3) {
+    background-color: #ffffba; /* Pastel yellow */
+  }
+  
+  .bubble.category:nth-child(6n + 4) {
+    background-color: #baffc9; /* Pastel green */
+  }
+  
+  .bubble.category:nth-child(6n + 5) {
+    background-color: #bae1ff; /* Pastel blue */
+  }
+  
+  .bubble.category:nth-child(6n + 6) {
+    background-color: #d6a7ff; /* Pastel purple */
+  }
+  
+  body.task-checked {
+    background: linear-gradient(
+      90deg,
+      #ffb3ba,
+      #ffdfba,
+      #ffffba,
+      #baffc9,
+      #bae1ff,
+      #d6a7ff
+    );
+    background-size: 300% 300%; /* Ensures the gradient stretches across */
+    animation: rainbow-background 3s ease-out forwards; /* Add animation for smooth transition */
+  }
+  
+  /* Keyframes for the rainbow animation */
+  @keyframes rainbow-background {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Styling for the priority dropdown */
+  select#priority-input {
+    background-color: #fff;
+    color: #333;
+    font-size: 20px;
+    border-radius: 30px;
+    padding: 15px 30px;
+    cursor: pointer;
+    margin: 15px;
+    font-family: "Courier New", Courier, monospace;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for the header row */
+  .task-header {
+    font-weight: bold;
+    background-color: #f7f7f7; /* Light background for header */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Align columns */
+    border-bottom: 2px solid #ddd; /* Add a bottom border to separate header */
+  }
+  
+  .task-header span {
+    width: 20%; /* Equal column width */
+    text-align: center; /* Center-align text */
+  }
+  
+  /* Style for the header row */
+  .task-header {
+    font-weight: bold;
+    background-color: #f7f7f7; /* Light background for header */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Align columns */
+    border-bottom: 2px solid #ddd; /* Add a bottom border to separate header */
+  }
+  
+  .task-header span {
+    width: 20%; /* Equal column width */
+    text-align: center; /* Center-align text */
+  }
+  
+  /* Style for the task items */
+  .task-item {
+    display: flex;
+    justify-content: space-between; /* Align columns */
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd; /* Add bottom border for task items */
+  }
+  
+  .task-item span {
+    width: 20%; /* Equal column width */
+    text-align: center; /* Center-align text under each column */
+  }
+  
+  /* Adjust the checkmark and delete button so they are aligned */
+  .delete-btn {
+    text-align: center;
+    width: 10%;
+  }
+  
+  /* Optional: Style the checkmark and delete button */
+  
+  .delete-btn {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  /* Style for the header row */
+  .task-header {
+    font-weight: bold;
+    background-color: #f7f7f7; /* Light background for header */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Align columns */
+    border-bottom: 2px solid #ddd; /* Add a bottom border to separate header */
+  }
+  
+  .task-header span {
+    width: 16%; /* Adjusting for 5 columns now */
+    text-align: center; /* Center-align text */
+  }
+  
+  /* Style for the task items */
+  .task-item {
+    display: flex;
+    justify-content: space-between; /* Align columns */
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd; /* Add bottom border for task items */
+  }
+  
+  .task-item span {
+    width: 16%; /* Adjusting for 5 columns */
+    text-align: center; /* Center-align text under each column */
+  }
+  
+  /* Style the checkmark container */
+  
+  .checkmark-container .checkmark {
+    font-size: 18px;
+    color: #4caf50; /* Green color for checkmark */
+    display: none; /* Initially hidden */
+  }
+  
+  .checkmark-container .checkmark.checked {
+    display: block; /* Show when checked */
+  }
+  
+  /* Style for the delete button */
+  .delete-btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #f44336; /* Red color for delete button */
+  }
+  
+  /* Adjust the delete button container */
+  .delete-btn-container {
+    width: 30px;
+    text-align: center;
+  }
+  
+  /* Optional: Style the checkmark and delete button */
+  .delete-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Ensure the task container stays aligned properly */
+  .task-item span,
+  .delete-btn-container {
+    text-align: center;
+  }
+  
+  /* Style for the header row */
+  .task-header {
+    font-weight: bold;
+    background-color: #f7f7f7; /* Light background for header */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Align columns */
+    border-bottom: 2px solid #ddd; /* Add a bottom border to separate header */
+  }
+  
+  .task-header span {
+    width: 16%; /* Adjusting for 6 columns now */
+    text-align: center; /* Center-align text */
+  }
+  
+  /* Style for the task items */
+  .task-item {
+    display: flex;
+    justify-content: space-between; /* Align columns */
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd; /* Add bottom border for task items */
+  }
+  
+  .task-item span {
+    width: 16%; /* Adjusting for 6 columns */
+    text-align: center; /* Center-align text under each column */
+  }
+  
+  /* Style the checkmark container */
+  
+  .checkmark-container .checkmark {
+    font-size: 18px;
+    color: #4caf50; /* Green color for checkmark */
+    display: none; /* Initially hidden */
+  }
+  
+  .checkmark-container .checkmark.checked {
+    display: block; /* Show when checked */
+  }
+  
+  /* Style for the delete button */
+  .delete-btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #f44336; /* Red color for delete button */
+  }
+  
+  /* Adjust the delete button container */
+  .delete-btn-container {
+    width: 30px;
+    text-align: center;
+  }
+  
+  /* Optional: Style the checkmark and delete button */
+  .delete-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Ensure the task container stays aligned properly */
+  .task-item span,
+  .delete-btn-container {
+    text-align: center;
+  }
+  
+  /* Style the checkmark container */
+  
+  /* Checkmark styling when it's checked */
+  .checkmark-container .checkmark {
+    font-size: 16px; /* Adjust font size to fit better in the circle */
+    color: #4caf50; /* Green color for the checkmark */
+    display: none; /* Hidden by default */
+  }
+  
+  /* When the task is completed, show the checkmark */
+  .checkmark-container .checkmark.checked {
+    display: block; /* Show the checkmark when checked */
+  }
+  
+  /* Ensure the checkmark container circle displays the checkmark correctly */
+  
+  /* Ensure checkmark is visible when checked */
+  .checkmark-container .checkmark {
+    font-size: 16px; /* Adjust font size to fit better in the circle */
+    color: #4caf50; /* Green color for the checkmark */
+    display: none; /* Initially hidden */
+  }
+  
+  /* When the task is completed, show the checkmark */
+  .checkmark-container .checkmark.checked {
+    display: inline-block; /* Show the checkmark when checked */
+    color: #4caf50; /* Green color for checkmark */
+  }
+  
+  .checkmark {
+    font-size: 20px;
+    z-index: 2; /* Make sure the checkmark is on top of the inner circle */
+    color: #4caf50; /* Green color for the checkmark */
+  }
+  
+  /* Adjust the task item spans to allow text wrapping within each column */
+  .task-item span {
+    word-wrap: break-word; /* Ensure words break and wrap within the column */
+    white-space: normal; /* Allow the text to wrap naturally */
+    overflow-wrap: break-word; /* Modern way to ensure word wrapping */
+    width: auto; /* Allow column width to adjust based on content */
+    text-align: center; /* Center align text within each column */
+  }
+  
+  /* Adjust the columns (task item spans) for proper wrapping */
   .task-header span,
   .task-item span {
-    width: 100%; /* Stack columns on smaller screens */
+    word-wrap: break-word; /* Allow words to break and wrap inside each column */
+    white-space: normal; /* Allow normal text wrapping */
+    overflow-wrap: break-word; /* Break long words */
+    width: 16%; /* Or adjust this percentage to suit your layout */
+    text-align: center; /* Center align text in each column */
   }
-
+  
+  /* Optional: Add a max-width for task name to limit the width of long names */
+  .task-item .task-name {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    width: 100%; /* Let it fill up the available space */
+    max-width: 200px; /* You can adjust the max-width as needed */
+  }
+  
+  /* Ensure the task item list doesn't overflow and no horizontal scrollbar */
+  #task-list {
+    width: 100%; /* Ensure the task list uses the full width */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Stretch the task items across the container */
+  }
+  
+  /* Make sure the task item container (columns) doesn’t overflow */
   .task-item {
-    font-size: 12px; /* Reduce font size for mobile */
+    display: flex;
+    justify-content: space-between; /* Distribute columns evenly */
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    width: 100%; /* Ensure task items take up full width */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    flex-wrap: wrap; /* Allow task items to wrap if necessary */
   }
-}
-
-/* Style for the checkmark container */
-
-/* Ensure the checkmark container is centered properly */
-.checkmark-container {
-  width: 30px; /* Fixed width for the checkmark circle */
-  height: 30px; /* Fixed height for the checkmark circle */
-  border-radius: 50%; /* Make it circular */
-  background-color: #fff; /* White background */
-  display: flex;
-  justify-content: center; /* Center the checkmark horizontally */
-  align-items: center; /* Center the checkmark vertically */
-  cursor: pointer; /* Pointer cursor for click */
-  margin-right: 10px;
-  position: relative; /* Ensure positioning for the checkmark */
-}
-
-/* Style for the inner circle */
-.inner-circle {
-  width: 24px; /* Adjust the size to be smaller inside the outer circle */
-  height: 24px; /* Adjust the size to be smaller inside the outer circle */
-  border-radius: 50%; /* Make it circular */
-  background-color: #d3d3d3; /* Light gray background */
-  position: absolute; /* Position it inside the checkmark container */
-  z-index: 1; /* Keep it behind the checkmark */
-}
-
-/* Checkmark styles */
-.checkmark {
-  font-size: 16px; /* Adjust font size to fit better inside the circle */
-  color: #4caf50; /* Green color for the checkmark */
-  position: absolute; /* Position it inside the circle */
-  z-index: 2; /* Ensure the checkmark is on top of the inner circle */
-  display: none; /* Initially hide the checkmark */
-}
-
-/* When the task is completed, show the checkmark */
-.checkmark.checked {
-  display: block; /* Show the checkmark when checked */
-  color: #4caf50; /* Green color for checkmark */
-}
-
-/* Pastel-colored bubbles for priority */
-.bubble.priority.low {
-  background-color: #a8d8d8; /* Pastel light teal for low priority */
-  color: #2d4a4a; /* Darker teal text for contrast */
-}
-
-.bubble.priority.medium {
-  background-color: #f1c6a4; /* Pastel peach for medium priority */
-  color: #5a3c1d; /* Darker brownish text */
-}
-
-.bubble.priority.high {
-  background-color: #f7c1b5; /* Pastel pink for high priority */
-  color: #a74b4c; /* Darker red for text */
-}
-
-/* Pastel-colored bubbles for categories */
-.bubble.category {
-  background-color: #d1a6ff; /* Pastel lavender for category bubbles */
-  color: #3e2a8c; /* Darker purple text */
-}
-
-/* Pastel colors for the category dropdown options */
-select option {
-  background-color: #d8c7f5; /* Light pastel purple for dropdown options */
-  color: #5e3c7e; /* Darker purple for text */
-}
-
-/* Pastel colors for the "SHOW" dropdown (categories) */
-#show-dropdown {
-  background-color: #e5d3f3; /* Very light pastel purple for the dropdown background */
-  color: #5e3c7e; /* Darker purple text */
-}
-
-#priority-input option[value="Critical"] {
-  background-color: #ffd6d6; /* Very light pastel red */
-}
-
-#priority-input option[value="Normal"] {
-  background-color: #ffffe0; /* Very light pastel yellow */
-}
-
-#priority-input option[value="Low"] {
-  background-color: #d9ffd9; /* Very light pastel green */
-}
-
-#show-dropdown option[value=""] {
-  background-color: #f0f0f0; /* Light gray pastel color */
-  color: #555; /* Darker text for contrast */
-}
-
-#order-dropdown option {
-  background-color: #f0f0f0; /* Light pastel gray */
-  color: #555; /* Darker text for contrast */
-}
-
-/* The checkmark styles */
-.checkmark {
+  
+  /* Ensure that the task item spans allow wrapping */
+  .task-item span {
+    word-wrap: break-word; /* Allow words to break and wrap */
+    white-space: normal; /* Allow text to wrap naturally */
+    overflow-wrap: break-word; /* Ensure long words break correctly */
+    width: 16%; /* Adjust percentage or use auto for flexible width */
+    text-align: center; /* Center-align text */
+    box-sizing: border-box; /* Prevent overflow */
+    min-width: 100px; /* Optional: Set a min-width for each column */
+  }
+  
+  /* Ensure the checkmark container doesn’t overflow and allows wrapping */
+  
+  /* Ensure no horizontal overflow when text overflows within the task name */
+  .task-item .task-name {
+    word-wrap: break-word; /* Allow text to break */
+    overflow-wrap: break-word;
+    white-space: normal; /* Allow the text to wrap */
+    width: 100%; /* Allow the task name to fill available space */
+    max-width: calc(100% - 60px); /* Adjust to prevent overflow with checkmark */
+  }
+  
+  /* Ensure the task item list doesn't overflow and no horizontal scrollbar */
+  #task-list {
+    width: 100%; /* Ensure the task list uses the full width */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Stretch the task items across the container */
+  }
+  
+  /* Make sure the task item container (columns) doesn’t overflow */
+  .task-item {
+    display: flex;
+    justify-content: space-between; /* Distribute columns evenly */
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    width: 100%; /* Ensure task items take up full width */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    flex-wrap: wrap; /* Allow task items to wrap if necessary */
+  }
+  
+  /* Ensure that the task item spans allow wrapping */
+  .task-item span {
+    word-wrap: break-word; /* Allow words to break and wrap */
+    white-space: normal; /* Allow text to wrap naturally */
+    overflow-wrap: break-word; /* Ensure long words break correctly */
+    flex-basis: 16%; /* Allow flexibility with width of each column */
+    flex-grow: 1; /* Allow columns to grow and adjust based on content */
+    min-width: 100px; /* Prevent columns from becoming too small */
+    max-width: 25%; /* Prevent columns from stretching too wide */
+    text-align: center; /* Center-align text */
+    box-sizing: border-box; /* Prevent overflow */
+  }
+  
+  /* Ensure the checkmark container doesn’t overflow and allows wrapping */
+  
+  /* Ensure no horizontal overflow when text overflows within the task name */
+  .task-item .task-name {
+    word-wrap: break-word; /* Allow text to break */
+    overflow-wrap: break-word;
+    white-space: normal; /* Allow the text to wrap */
+    flex-grow: 1; /* Allow this column to expand if necessary */
+    max-width: calc(100% - 60px); /* Adjust to prevent overflow with checkmark */
+    padding: 0 5px;
+  }
+  
+  /* Prevent horizontal scrollbar */
+  html,
+  body {
+    overflow-x: hidden; /* Prevents horizontal overflow */
+    width: 100%; /* Ensures that the width is 100% of the viewport */
+    margin: 0; /* Resets default margins */
+    padding: 0; /* Resets default padding */
+    box-sizing: border-box; /* Prevents overflow due to padding/border */
+  }
+  
+  /* Reduce width of each column slightly */
+  .task-header span,
+  .task-item span {
+    width: 14%; /* Reduce column width slightly */
+    text-align: center; /* Center-align text under each column */
+  }
+  
+  /* Optional: Reduce padding/margin */
+  .task-item {
+    padding: 8px 16px; /* Reduce padding */
+  }
+  
+  /* Ensure the checkmark container fits properly */
+  
+  * {
+    box-sizing: border-box; /* Include padding and borders within element width */
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    padding: 10px;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap if necessary */
+  }
+  
+  .task-header span,
+  .task-item span {
+    width: 14%; /* Adjust width to make them narrower */
+    max-width: 180px; /* Limit the maximum width of each column */
+    min-width: 100px; /* Ensure columns don't get too small */
+    text-align: center;
+    padding: 5px;
+  }
+  
+  /* Optionally, make the font smaller and ensure no horizontal overflow */
+  .task-item {
+    font-size: 14px;
+    padding: 10px 15px;
+    max-width: 100%; /* Ensure no item overflows the container */
+  }
+  
+  @media (max-width: 768px) {
+    .task-header span,
+    .task-item span {
+      width: 100%; /* Stack columns on smaller screens */
+    }
+  
+    .task-item {
+      font-size: 12px; /* Reduce font size for mobile */
+    }
+  }
+  
+  /* Style for the checkmark container */
+  
+  /* Ensure the checkmark container is centered properly */
+  .checkmark-container {
+    width: 30px; /* Fixed width for the checkmark circle */
+    height: 30px; /* Fixed height for the checkmark circle */
+    border-radius: 50%; /* Make it circular */
+    background-color: #fff; /* White background */
+    display: flex;
+    justify-content: center; /* Center the checkmark horizontally */
+    align-items: center; /* Center the checkmark vertically */
+    cursor: pointer; /* Pointer cursor for click */
+    margin-right: 10px;
+    position: relative; /* Ensure positioning for the checkmark */
+  }
+  
+  /* Style for the inner circle */
+  .inner-circle {
+    width: 24px; /* Adjust the size to be smaller inside the outer circle */
+    height: 24px; /* Adjust the size to be smaller inside the outer circle */
+    border-radius: 50%; /* Make it circular */
+    background-color: #d3d3d3; /* Light gray background */
+    position: absolute; /* Position it inside the checkmark container */
+    z-index: 1; /* Keep it behind the checkmark */
+  }
+  
+  /* Checkmark styles */
+  .checkmark {
     font-size: 16px; /* Adjust font size to fit better inside the circle */
     color: #4caf50; /* Green color for the checkmark */
     position: absolute; /* Position it inside the circle */
@@ -842,345 +771,416 @@ select option {
     color: #4caf50; /* Green color for checkmark */
   }
   
-  /* Unicorn flying animation */
-  @keyframes flyAcross {
-    0% {
-      left: -250px; /* Start off-screen to the left */
+  /* Pastel-colored bubbles for priority */
+  .bubble.priority.low {
+    background-color: #a8d8d8; /* Pastel light teal for low priority */
+    color: #2d4a4a; /* Darker teal text for contrast */
+  }
+  
+  .bubble.priority.medium {
+    background-color: #f1c6a4; /* Pastel peach for medium priority */
+    color: #5a3c1d; /* Darker brownish text */
+  }
+  
+  .bubble.priority.high {
+    background-color: #f7c1b5; /* Pastel pink for high priority */
+    color: #a74b4c; /* Darker red for text */
+  }
+  
+  /* Pastel-colored bubbles for categories */
+  .bubble.category {
+    background-color: #d1a6ff; /* Pastel lavender for category bubbles */
+    color: #3e2a8c; /* Darker purple text */
+  }
+  
+  /* Pastel colors for the category dropdown options */
+  select option {
+    background-color: #d8c7f5; /* Light pastel purple for dropdown options */
+    color: #5e3c7e; /* Darker purple for text */
+  }
+  
+  /* Pastel colors for the "SHOW" dropdown (categories) */
+  #show-dropdown {
+    background-color: #e5d3f3; /* Very light pastel purple for the dropdown background */
+    color: #5e3c7e; /* Darker purple text */
+  }
+  
+  #priority-input option[value="Critical"] {
+    background-color: #ffd6d6; /* Very light pastel red */
+  }
+  
+  #priority-input option[value="Normal"] {
+    background-color: #ffffe0; /* Very light pastel yellow */
+  }
+  
+  #priority-input option[value="Low"] {
+    background-color: #d9ffd9; /* Very light pastel green */
+  }
+  
+  #show-dropdown option[value=""] {
+    background-color: #f0f0f0; /* Light gray pastel color */
+    color: #555; /* Darker text for contrast */
+  }
+  
+  #order-dropdown option {
+    background-color: #f0f0f0; /* Light pastel gray */
+    color: #555; /* Darker text for contrast */
+  }
+  
+  /* The checkmark styles */
+  .checkmark {
+      font-size: 16px; /* Adjust font size to fit better inside the circle */
+      color: #4caf50; /* Green color for the checkmark */
+      position: absolute; /* Position it inside the circle */
+      z-index: 2; /* Ensure the checkmark is on top of the inner circle */
+      display: none; /* Initially hide the checkmark */
     }
-    100% {
-      left: 100%; /* Move to the right edge of the page */
+    
+    /* When the task is completed, show the checkmark */
+    .checkmark.checked {
+      display: block; /* Show the checkmark when checked */
+      color: #4caf50; /* Green color for checkmark */
     }
-  }
-  
-  /* Unicorn element */
-  .unicorn {
-    width: 250px;
-    height: 250px;
-    background-image: url('https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    bottom: 0;
-    left: -250px; /* Start off-screen */
-    animation: none; /* Initially no animation */
-  }
-  
-  /* When the checkmark is checked, trigger the unicorn flying animation */
-  .checkmark.checked + .unicorn {
-    animation: flyAcross 5s forwards; /* Apply the flying animation */
-  }
-  
-  /* Unicorn flying animation */
-@keyframes flyDiagonal {
-    0% {
-      left: -250px; /* Start off-screen to the left */
-      bottom: 0; /* Start at the bottom */
-      opacity: 1; /* Fully visible */
+    
+    /* Unicorn flying animation */
+    @keyframes flyAcross {
+      0% {
+        left: -250px; /* Start off-screen to the left */
+      }
+      100% {
+        left: 100%; /* Move to the right edge of the page */
+      }
     }
-    50% {
-      left: 50%; /* Move to the center horizontally */
-      bottom: 50%; /* Move up diagonally */
-      opacity: 1; /* Stay visible in the center */
-    }
-    100% {
-      left: 100%; /* End off-screen to the right */
-      bottom: 100%; /* End at the top */
-      opacity: 0; /* Fade out */
-    }
-  }
-  
-  /* Unicorn image settings */
-  .unicorn {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 250px; /* Unicorn size */
-    height: 250px;
-    background-image: url('https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: transparent;
-    z-index: 1000; /* Ensure it appears above other elements */
-  }
-  
-  /* General styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-  }
-  
-  #task-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .task-header,
-  .task-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    margin: 5px 0;
-    background-color: #fff;
-    border: 1px solid #ddd;
-  }
-  
-  .task-header {
-    font-weight: bold;
-    background-color: #f9f9f9;
-  }
-  
-  .task-item span {
-    flex: 1; /* Allow elements to grow */
-    text-align: center;
-  }
-  
-  /* Add some colors to the bubbles for priority and category */
-  .bubble {
-    padding: 5px;
-    border-radius: 12px;
-    font-size: 0.8em;
-    display: inline-block;
-  }
-  
-  .priority.low {
-    background-color: #4caf50; /* Green */
-  }
-  
-  .priority.medium {
-    background-color: #ffcc00; /* Yellow */
-  }
-  
-  .priority.high {
-    background-color: #ff6f61; /* Red */
-  }
-  
-  .category {
-    background-color: #f8c8dc; /* Pink-ish */
-  }
-  
-  .checkmark-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .delete-btn-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .delete-btn {
-    color: white;
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-  }
-  
-  /* Mobile responsive adjustments */
-  @media (max-width: 768px) {
-    .task-header,
-    .task-item {
-      align-items: stretch;    /* Make each item take up full width */
-    }
-  
-    .task-header span,
-    .task-item span {
-      width: 100%;             /* Make each span take full width */
-      text-align: left;        /* Align text to the left */
-      padding: 5px;
-    }
-  
-    .task-item {
-      font-size: 14px;        /* Adjust font size for smaller screens */
-    }
-  
-    .delete-btn-container {
-      margin-top: 10px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .task-header,
-    .task-item {
-      font-size: 12px;         /* Further reduce font size for very small screens */
-    }
-  
-    .task-item .bubble {
-      font-size: 0.7em;        /* Reduce size of the bubble text */
-    }
-  }
-  
-  /* Mobile-specific styles */
-@media (max-width: 768px) {
-    /* Remove the unicorn from the screen on mobile */
+    
+    /* Unicorn element */
     .unicorn {
-      display: none; /* Hide unicorn initially on mobile */
+      width: 250px;
+      height: 250px;
+      background-image: url('https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: absolute;
+      bottom: 0;
+      left: -250px; /* Start off-screen */
+      animation: none; /* Initially no animation */
     }
-  
-    /* Modify the flying animal animation for mobile */
-    .unicorn.flyDiagonal {
-      animation: flyDiagonalMobile 5s forwards; /* Use a mobile-specific animation */
+    
+    /* When the checkmark is checked, trigger the unicorn flying animation */
+    .checkmark.checked + .unicorn {
+      animation: flyAcross 5s forwards; /* Apply the flying animation */
     }
-  }
-  
-  /* Mobile flying animation */
-  @keyframes flyDiagonalMobile {
-    0% {
-      transform: translate(0, 0) scale(0.5); /* Start small and from the top */
+    
+    /* Unicorn flying animation */
+  @keyframes flyDiagonal {
+      0% {
+        left: -250px; /* Start off-screen to the left */
+        bottom: 0; /* Start at the bottom */
+        opacity: 1; /* Fully visible */
+      }
+      50% {
+        left: 50%; /* Move to the center horizontally */
+        bottom: 50%; /* Move up diagonally */
+        opacity: 1; /* Stay visible in the center */
+      }
+      100% {
+        left: 100%; /* End off-screen to the right */
+        bottom: 100%; /* End at the top */
+        opacity: 0; /* Fade out */
+      }
     }
-    100% {
-      transform: translate(300px, 400px) scale(1); /* Move closer to the bottom of the screen */
+    
+    /* Unicorn image settings */
+    .unicorn {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 250px; /* Unicorn size */
+      height: 250px;
+      background-image: url('https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      z-index: 1000; /* Ensure it appears above other elements */
     }
-  }
-  
-  /* Mobile-specific styles */
-@media (max-width: 768px) {
-    /* Hide the task header on mobile (the column names) */
+    
+    /* General styles */
+  body {
+      font-family: 'Courier New', Courier, monospace;
+    }
+    
+    #task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .task-header,
+    .task-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      margin: 5px 0;
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
+    
     .task-header {
-      display: none !important; /* Ensure it's removed even if other styles apply */
+      font-weight: bold;
+      background-color: #f9f9f9;
     }
-  
-    /* Hide the unicorn on mobile */
-    .unicorn {
-      display: none;
+    
+    .task-item span {
+      flex: 1; /* Allow elements to grow */
+      text-align: center;
     }
-  
-    /* Adjust the flying animal position for mobile */
-    .unicorn.flyDiagonal {
-      animation: flyDiagonalMobile 5s forwards;
+    
+    /* Add some colors to the bubbles for priority and category */
+    .bubble {
+      padding: 5px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      display: inline-block;
     }
-  
+    
+    .priority.low {
+      background-color: #4caf50; /* Green */
+    }
+    
+    .priority.medium {
+      background-color: #ffcc00; /* Yellow */
+    }
+    
+    .priority.high {
+      background-color: #ff6f61; /* Red */
+    }
+    
+    .category {
+      background-color: #f8c8dc; /* Pink-ish */
+    }
+    
+    .checkmark-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .delete-btn-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .delete-btn {
+      color: white;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+    }
+    
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+      .task-header,
+      .task-item {
+        align-items: stretch;    /* Make each item take up full width */
+      }
+    
+      .task-header span,
+      .task-item span {
+        width: 100%;             /* Make each span take full width */
+        text-align: left;        /* Align text to the left */
+        padding: 5px;
+      }
+    
+      .task-item {
+        font-size: 14px;        /* Adjust font size for smaller screens */
+      }
+    
+      .delete-btn-container {
+        margin-top: 10px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .task-header,
+      .task-item {
+        font-size: 12px;         /* Further reduce font size for very small screens */
+      }
+    
+      .task-item .bubble {
+        font-size: 0.7em;        /* Reduce size of the bubble text */
+      }
+    }
+    
+    /* Mobile-specific styles */
+  @media (max-width: 768px) {
+      /* Remove the unicorn from the screen on mobile */
+      .unicorn {
+        display: none; /* Hide unicorn initially on mobile */
+      }
+    
+      /* Modify the flying animal animation for mobile */
+      .unicorn.flyDiagonal {
+        animation: flyDiagonalMobile 5s forwards; /* Use a mobile-specific animation */
+      }
+    }
+    
     /* Mobile flying animation */
     @keyframes flyDiagonalMobile {
       0% {
-        transform: translate(0, 0) scale(0.5);
+        transform: translate(0, 0) scale(0.5); /* Start small and from the top */
       }
       100% {
-        transform: translate(300px, 400px) scale(1);
+        transform: translate(300px, 400px) scale(1); /* Move closer to the bottom of the screen */
       }
     }
-  }
-
-  /* Mobile responsive adjustments */
-@media (max-width: 768px) {
-    .task-header {
-      display: none !important; /* Hide task header on mobile */
+    
+    /* Mobile-specific styles */
+  @media (max-width: 768px) {
+      /* Hide the task header on mobile (the column names) */
+      .task-header {
+        display: none !important; /* Ensure it's removed even if other styles apply */
+      }
+    
+      /* Hide the unicorn on mobile */
+      .unicorn {
+        display: none;
+      }
+    
+      /* Adjust the flying animal position for mobile */
+      .unicorn.flyDiagonal {
+        animation: flyDiagonalMobile 5s forwards;
+      }
+    
+      /* Mobile flying animation */
+      @keyframes flyDiagonalMobile {
+        0% {
+          transform: translate(0, 0) scale(0.5);
+        }
+        100% {
+          transform: translate(300px, 400px) scale(1);
+        }
+      }
     }
   
-    /* Adjust task items for mobile */
-    .task-item {
-      display: flex;                   /* Use flexbox for horizontal layout */
-      flex-direction: row;             /* Ensure the items are in a row */
-      justify-content: space-between;  /* Space the elements out evenly */
-      align-items: center;             /* Vertically center the items */
-      font-size: 14px;                 /* Reduce font size for mobile */
-      padding: 5px 10px;               /* Add padding between items */
+    /* Mobile responsive adjustments */
+  @media (max-width: 768px) {
+      .task-header {
+        display: none !important; /* Hide task header on mobile */
+      }
+    
+      /* Adjust task items for mobile */
+      .task-item {
+        display: flex;                   /* Use flexbox for horizontal layout */
+        flex-direction: row;             /* Ensure the items are in a row */
+        justify-content: space-between;  /* Space the elements out evenly */
+        align-items: center;             /* Vertically center the items */
+        font-size: 14px;                 /* Reduce font size for mobile */
+        padding: 5px 10px;               /* Add padding between items */
+      }
+    
+      /* Adjust spacing for individual task spans */
+      .task-item span {
+        white-space: nowrap;             /* Prevent text from wrapping */
+        overflow: hidden;                /* Hide overflowed text */
+        text-overflow: ellipsis;         /* Add ellipsis for overflow text */
+        margin-right: 5px;               /* Reduce space between items */
+        font-size: 14px;                 /* Keep the font size consistent */
+      }
+    
+      /* Adjust the size of the bubbles and icons for mobile */
+      .task-item .bubble {
+        font-size: 0.8em;                /* Reduce bubble text size */
+        padding: 3px 6px;                /* Add some padding to make bubbles more compact */
+      }
+    
+      /* Adjust delete button spacing */
+      .delete-btn-container {
+        margin-top: 0;                   /* Remove any extra margin at the top of the delete button */
+        margin-left: 5px;                /* Add space to the left of the delete button */
+      }
+    
+      /* Adjust the priority bubble and category bubble sizes */
+      .task-item .priority, .task-item .category {
+        padding: 3px 6px;                /* Reduce padding on the priority and category bubbles */
+      }
     }
-  
-    /* Adjust spacing for individual task spans */
-    .task-item span {
-      white-space: nowrap;             /* Prevent text from wrapping */
-      overflow: hidden;                /* Hide overflowed text */
-      text-overflow: ellipsis;         /* Add ellipsis for overflow text */
-      margin-right: 5px;               /* Reduce space between items */
-      font-size: 14px;                 /* Keep the font size consistent */
+    
+    /* Adjustments for very small screens (max-width: 480px) */
+    @media (max-width: 480px) {
+      .task-item {
+        font-size: 12px;                /* Further reduce font size for very small screens */
+      }
+    
+      .task-item .bubble {
+        font-size: 0.7em;               /* Reduce the size of bubble text even further */
+      }
+    
+      /* Adjust spacing for delete button */
+      .delete-btn-container {
+        margin-left: 2px;               /* Reduce space for delete button on small screens */
+      }
     }
-  
-    /* Adjust the size of the bubbles and icons for mobile */
-    .task-item .bubble {
-      font-size: 0.8em;                /* Reduce bubble text size */
-      padding: 3px 6px;                /* Add some padding to make bubbles more compact */
+    
+    /* Mobile responsive adjustments */
+  @media (max-width: 768px) {
+      .task-header {
+        display: none !important; /* Hide task header on mobile */
+      }
+    
+      /* Adjust task items for mobile */
+      .task-item {
+        display: flex;                  /* Use flexbox for horizontal layout */
+        flex-direction: row;            /* Ensure the items are in a row */
+        justify-content: space-between; /* Space the elements out evenly */
+        align-items: center;            /* Vertically center the items */
+        font-size: 14px;                /* Reduce font size for mobile */
+        padding: 5px 10px;              /* Add padding between items */
+        flex-wrap: wrap;                /* Allow the task item to wrap */
+      }
+    
+      /* Allow text to wrap within each span */
+      .task-item span {
+        white-space: normal;            /* Allow text to wrap if it's too long */
+        overflow: hidden;               /* Hide overflow text */
+        text-overflow: ellipsis;        /* Add ellipsis for overflowed text */
+        margin-right: 5px;              /* Reduced space between items */
+        width: 20%;                     /* Set a maximum width for each span */
+        font-size: 14px;                /* Ensure text is consistent */
+      }
+    
+      /* Adjust the size of the bubbles and icons for mobile */
+      .task-item .bubble {
+        font-size: 0.8em;               /* Reduce bubble text size */
+        padding: 3px 6px;               /* Add some padding to make bubbles more compact */
+      }
+    
+      /* Adjust delete button spacing */
+      .delete-btn-container {
+        margin-top: 0;                  /* Remove extra margin at the top of the delete button */
+        margin-left: 5px;               /* Add space to the left of the delete button */
+      }
+    
+      /* Adjust the priority bubble and category bubble sizes */
+      .task-item .priority,
+      .task-item .category {
+        padding: 3px 6px;               /* Reduce padding on the priority and category bubbles */
+      }
     }
-  
-    /* Adjust delete button spacing */
-    .delete-btn-container {
-      margin-top: 0;                   /* Remove any extra margin at the top of the delete button */
-      margin-left: 5px;                /* Add space to the left of the delete button */
+    
+    /* Adjustments for very small screens (max-width: 480px) */
+    @media (max-width: 480px) {
+      .task-item {
+        font-size: 12px;                /* Further reduce font size for very small screens */
+      }
+    
+      .task-item .bubble {
+        font-size: 0.7em;               /* Reduce the size of bubble text even further */
+      }
+    
+      /* Adjust spacing for delete button */
+      .delete-btn-container {
+        margin-left: 2px;               /* Reduce space for delete button on small screens */
+      }
     }
-  
-    /* Adjust the priority bubble and category bubble sizes */
-    .task-item .priority, .task-item .category {
-      padding: 3px 6px;                /* Reduce padding on the priority and category bubbles */
-    }
-  }
-  
-  /* Adjustments for very small screens (max-width: 480px) */
-  @media (max-width: 480px) {
-    .task-item {
-      font-size: 12px;                /* Further reduce font size for very small screens */
-    }
-  
-    .task-item .bubble {
-      font-size: 0.7em;               /* Reduce the size of bubble text even further */
-    }
-  
-    /* Adjust spacing for delete button */
-    .delete-btn-container {
-      margin-left: 2px;               /* Reduce space for delete button on small screens */
-    }
-  }
-  
-  /* Mobile responsive adjustments */
-@media (max-width: 768px) {
-    .task-header {
-      display: none !important; /* Hide task header on mobile */
-    }
-  
-    /* Adjust task items for mobile */
-    .task-item {
-      display: flex;                  /* Use flexbox for horizontal layout */
-      flex-direction: row;            /* Ensure the items are in a row */
-      justify-content: space-between; /* Space the elements out evenly */
-      align-items: center;            /* Vertically center the items */
-      font-size: 14px;                /* Reduce font size for mobile */
-      padding: 5px 10px;              /* Add padding between items */
-      flex-wrap: wrap;                /* Allow the task item to wrap */
-    }
-  
-    /* Allow text to wrap within each span */
-    .task-item span {
-      white-space: normal;            /* Allow text to wrap if it's too long */
-      overflow: hidden;               /* Hide overflow text */
-      text-overflow: ellipsis;        /* Add ellipsis for overflowed text */
-      margin-right: 5px;              /* Reduced space between items */
-      width: 20%;                     /* Set a maximum width for each span */
-      font-size: 14px;                /* Ensure text is consistent */
-    }
-  
-    /* Adjust the size of the bubbles and icons for mobile */
-    .task-item .bubble {
-      font-size: 0.8em;               /* Reduce bubble text size */
-      padding: 3px 6px;               /* Add some padding to make bubbles more compact */
-    }
-  
-    /* Adjust delete button spacing */
-    .delete-btn-container {
-      margin-top: 0;                  /* Remove extra margin at the top of the delete button */
-      margin-left: 5px;               /* Add space to the left of the delete button */
-    }
-  
-    /* Adjust the priority bubble and category bubble sizes */
-    .task-item .priority,
-    .task-item .category {
-      padding: 3px 6px;               /* Reduce padding on the priority and category bubbles */
-    }
-  }
-  
-  /* Adjustments for very small screens (max-width: 480px) */
-  @media (max-width: 480px) {
-    .task-item {
-      font-size: 12px;                /* Further reduce font size for very small screens */
-    }
-  
-    .task-item .bubble {
-      font-size: 0.7em;               /* Reduce the size of bubble text even further */
-    }
-  
-    /* Adjust spacing for delete button */
-    .delete-btn-container {
-      margin-left: 2px;               /* Reduce space for delete button on small screens */
-    }
-  }
+    
   
