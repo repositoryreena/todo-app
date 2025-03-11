@@ -826,3 +826,81 @@ select option {
   background-color: #f0f0f0; /* Light pastel gray */
   color: #555; /* Darker text for contrast */
 }
+
+/* The checkmark styles */
+.checkmark {
+    font-size: 16px; /* Adjust font size to fit better inside the circle */
+    color: #4caf50; /* Green color for the checkmark */
+    position: absolute; /* Position it inside the circle */
+    z-index: 2; /* Ensure the checkmark is on top of the inner circle */
+    display: none; /* Initially hide the checkmark */
+  }
+  
+  /* When the task is completed, show the checkmark */
+  .checkmark.checked {
+    display: block; /* Show the checkmark when checked */
+    color: #4caf50; /* Green color for checkmark */
+  }
+  
+  /* Unicorn flying animation */
+  @keyframes flyAcross {
+    0% {
+      left: -250px; /* Start off-screen to the left */
+    }
+    100% {
+      left: 100%; /* Move to the right edge of the page */
+    }
+  }
+  
+  /* Unicorn element */
+  .unicorn {
+    width: 250px;
+    height: 250px;
+    background-image: url('https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    bottom: 0;
+    left: -250px; /* Start off-screen */
+    animation: none; /* Initially no animation */
+  }
+  
+  /* When the checkmark is checked, trigger the unicorn flying animation */
+  .checkmark.checked + .unicorn {
+    animation: flyAcross 5s forwards; /* Apply the flying animation */
+  }
+  
+  /* Unicorn flying animation */
+@keyframes flyDiagonal {
+    0% {
+      left: -250px; /* Start off-screen to the left */
+      bottom: 0; /* Start at the bottom */
+      opacity: 1; /* Fully visible */
+    }
+    50% {
+      left: 50%; /* Move to the center horizontally */
+      bottom: 50%; /* Move up diagonally */
+      opacity: 1; /* Stay visible in the center */
+    }
+    100% {
+      left: 100%; /* End off-screen to the right */
+      bottom: 100%; /* End at the top */
+      opacity: 0; /* Fade out */
+    }
+  }
+  
+  /* Unicorn image settings */
+  .unicorn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 250px; /* Unicorn size */
+    height: 250px;
+    background-image: url('https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    z-index: 1000; /* Ensure it appears above other elements */
+  }
+  

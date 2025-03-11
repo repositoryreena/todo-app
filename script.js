@@ -242,20 +242,38 @@ dateInput.setAttribute("min", localDate);
     if (index !== null && tasks[index]) {
       tasks[index].completed = !tasks[index].completed; // Toggle the completion status
       saveData(); // Save updated tasks to localStorage
-
-      // Apply the rainbow gradient on task completion
+  
+      // Find the task list item that has the task at the specific index
+      const taskItem = taskList.children[index + 1]; // Skip the header
+      const checkmarkCircle = taskItem.querySelector(".inner-circle");
+  
+      // If task is marked as completed
       if (tasks[index].completed) {
-        document.body.classList.add("task-checked"); // Add class to apply gradient
+        checkmarkCircle.classList.add("checked");
+  
+        // Show unicorn and make it fly across the page
+        const unicorn = document.querySelector(".unicorn");
+        unicorn.style.animation = "none"; // Reset animation
+        unicorn.offsetHeight; // Trigger reflow to restart the animation
+        unicorn.style.animation = "flyDiagonal 5s forwards"; // Apply the diagonal flying animation
+  
+        // Add the rainbow gradient to the body
+        document.body.classList.add("task-checked");
+  
+        // Remove the rainbow gradient after animation ends
         setTimeout(() => {
-          document.body.classList.remove("task-checked"); // Remove class after animation ends
-        }, 3000); // After 3 seconds, remove the gradient effect
+          document.body.classList.remove("task-checked");
+        }, 5000); // Match the unicorn animation duration (5s)
+      } else {
+        checkmarkCircle.classList.remove("checked");
       }
-
+  
       renderTasks(); // Re-render the tasks list to reflect changes
-    } else {
-      console.error(`Task at index ${index} not found`); // Error if task not found
     }
   }
+  
+  
+  
 
   // Delete task
   function deleteTask(index) {
