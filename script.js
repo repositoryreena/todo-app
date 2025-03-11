@@ -247,15 +247,32 @@ dateInput.setAttribute("min", localDate);
       const taskItem = taskList.children[index + 1]; // Skip the header
       const checkmarkCircle = taskItem.querySelector(".inner-circle");
   
+      // Array of unicorn images
+      const unicornImages = [
+        'https://images.vexels.com/media/users/3/300422/isolated/preview/13b76e494fb4c3be066067eb87211a9e-cute-otters-holding-hands.png',
+        'https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png',
+        'https://image.spreadshirtmedia.com/image-server/v1/designs/1031459131,width=178,height=178.png',
+        'https://images.vexels.com/media/users/3/235729/isolated/preview/1f45cabb11f6aac3567b12b53ffa44ff-flying-profile-phoenix-bird-color-stroke.png',
+      ];
+  
       // If task is marked as completed
       if (tasks[index].completed) {
         checkmarkCircle.classList.add("checked");
   
-        // Show unicorn and make it fly across the page
+        // Show unicorn and make it fly across the page with a random image
         const unicorn = document.querySelector(".unicorn");
+        const randomImage = unicornImages[Math.floor(Math.random() * unicornImages.length)];
         unicorn.style.animation = "none"; // Reset animation
         unicorn.offsetHeight; // Trigger reflow to restart the animation
         unicorn.style.animation = "flyDiagonal 5s forwards"; // Apply the diagonal flying animation
+        unicorn.style.backgroundImage = `url(${randomImage})`; // Set the random image
+  
+        // Only flip the first unicorn image (the otter one)
+        if (randomImage === unicornImages[0]) {
+          unicorn.style.transform = 'scaleX(-1)'; // Flip the otter image
+        } else {
+          unicorn.style.transform = 'scaleX(1)'; // Keep the others unflipped
+        }
   
         // Add the rainbow gradient to the body
         document.body.classList.add("task-checked");
@@ -271,6 +288,8 @@ dateInput.setAttribute("min", localDate);
       renderTasks(); // Re-render the tasks list to reflect changes
     }
   }
+  
+  
   
   
   
