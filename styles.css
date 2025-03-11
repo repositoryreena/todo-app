@@ -982,7 +982,6 @@ body {
   @media (max-width: 768px) {
     .task-header,
     .task-item {
-      flex-direction: column;  /* Stack the elements vertically */
       align-items: stretch;    /* Make each item take up full width */
     }
   
@@ -1033,6 +1032,155 @@ body {
     }
     100% {
       transform: translate(300px, 400px) scale(1); /* Move closer to the bottom of the screen */
+    }
+  }
+  
+  /* Mobile-specific styles */
+@media (max-width: 768px) {
+    /* Hide the task header on mobile (the column names) */
+    .task-header {
+      display: none !important; /* Ensure it's removed even if other styles apply */
+    }
+  
+    /* Hide the unicorn on mobile */
+    .unicorn {
+      display: none;
+    }
+  
+    /* Adjust the flying animal position for mobile */
+    .unicorn.flyDiagonal {
+      animation: flyDiagonalMobile 5s forwards;
+    }
+  
+    /* Mobile flying animation */
+    @keyframes flyDiagonalMobile {
+      0% {
+        transform: translate(0, 0) scale(0.5);
+      }
+      100% {
+        transform: translate(300px, 400px) scale(1);
+      }
+    }
+  }
+
+  /* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .task-header {
+      display: none !important; /* Hide task header on mobile */
+    }
+  
+    /* Adjust task items for mobile */
+    .task-item {
+      display: flex;                   /* Use flexbox for horizontal layout */
+      flex-direction: row;             /* Ensure the items are in a row */
+      justify-content: space-between;  /* Space the elements out evenly */
+      align-items: center;             /* Vertically center the items */
+      font-size: 14px;                 /* Reduce font size for mobile */
+      padding: 5px 10px;               /* Add padding between items */
+    }
+  
+    /* Adjust spacing for individual task spans */
+    .task-item span {
+      white-space: nowrap;             /* Prevent text from wrapping */
+      overflow: hidden;                /* Hide overflowed text */
+      text-overflow: ellipsis;         /* Add ellipsis for overflow text */
+      margin-right: 5px;               /* Reduce space between items */
+      font-size: 14px;                 /* Keep the font size consistent */
+    }
+  
+    /* Adjust the size of the bubbles and icons for mobile */
+    .task-item .bubble {
+      font-size: 0.8em;                /* Reduce bubble text size */
+      padding: 3px 6px;                /* Add some padding to make bubbles more compact */
+    }
+  
+    /* Adjust delete button spacing */
+    .delete-btn-container {
+      margin-top: 0;                   /* Remove any extra margin at the top of the delete button */
+      margin-left: 5px;                /* Add space to the left of the delete button */
+    }
+  
+    /* Adjust the priority bubble and category bubble sizes */
+    .task-item .priority, .task-item .category {
+      padding: 3px 6px;                /* Reduce padding on the priority and category bubbles */
+    }
+  }
+  
+  /* Adjustments for very small screens (max-width: 480px) */
+  @media (max-width: 480px) {
+    .task-item {
+      font-size: 12px;                /* Further reduce font size for very small screens */
+    }
+  
+    .task-item .bubble {
+      font-size: 0.7em;               /* Reduce the size of bubble text even further */
+    }
+  
+    /* Adjust spacing for delete button */
+    .delete-btn-container {
+      margin-left: 2px;               /* Reduce space for delete button on small screens */
+    }
+  }
+  
+  /* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .task-header {
+      display: none !important; /* Hide task header on mobile */
+    }
+  
+    /* Adjust task items for mobile */
+    .task-item {
+      display: flex;                  /* Use flexbox for horizontal layout */
+      flex-direction: row;            /* Ensure the items are in a row */
+      justify-content: space-between; /* Space the elements out evenly */
+      align-items: center;            /* Vertically center the items */
+      font-size: 14px;                /* Reduce font size for mobile */
+      padding: 5px 10px;              /* Add padding between items */
+      flex-wrap: wrap;                /* Allow the task item to wrap */
+    }
+  
+    /* Allow text to wrap within each span */
+    .task-item span {
+      white-space: normal;            /* Allow text to wrap if it's too long */
+      overflow: hidden;               /* Hide overflow text */
+      text-overflow: ellipsis;        /* Add ellipsis for overflowed text */
+      margin-right: 5px;              /* Reduced space between items */
+      width: 20%;                     /* Set a maximum width for each span */
+      font-size: 14px;                /* Ensure text is consistent */
+    }
+  
+    /* Adjust the size of the bubbles and icons for mobile */
+    .task-item .bubble {
+      font-size: 0.8em;               /* Reduce bubble text size */
+      padding: 3px 6px;               /* Add some padding to make bubbles more compact */
+    }
+  
+    /* Adjust delete button spacing */
+    .delete-btn-container {
+      margin-top: 0;                  /* Remove extra margin at the top of the delete button */
+      margin-left: 5px;               /* Add space to the left of the delete button */
+    }
+  
+    /* Adjust the priority bubble and category bubble sizes */
+    .task-item .priority,
+    .task-item .category {
+      padding: 3px 6px;               /* Reduce padding on the priority and category bubbles */
+    }
+  }
+  
+  /* Adjustments for very small screens (max-width: 480px) */
+  @media (max-width: 480px) {
+    .task-item {
+      font-size: 12px;                /* Further reduce font size for very small screens */
+    }
+  
+    .task-item .bubble {
+      font-size: 0.7em;               /* Reduce the size of bubble text even further */
+    }
+  
+    /* Adjust spacing for delete button */
+    .delete-btn-container {
+      margin-left: 2px;               /* Reduce space for delete button on small screens */
     }
   }
   
