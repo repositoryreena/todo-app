@@ -132,14 +132,28 @@ document.addEventListener("DOMContentLoaded", () => {
 // Render tasks in the list
 function renderTasks(taskListData = tasks) {
   taskList.innerHTML = ''; // Clear current task list
+
+  // Add the header row
+  const header = document.createElement('li');
+  header.classList.add('task-header');  // Add class for styling
+
+  header.innerHTML = `
+      <span>Item Name</span>
+      <span>Due Date</span>
+      <span>Priority</span>
+      <span>Category</span>
+      <span>Completed</span>
+      <span>Delete</span>
+  `;
+
+  taskList.appendChild(header);  // Append the header to the task list
+
+  // Render each task
   taskListData.forEach((task, index) => {
       const li = document.createElement('li');
       li.classList.add('task-item'); // Adding class for styling
 
       let taskHTML = `
-          <span class="checkmark-container" data-index="${index}">
-              <span class="checkmark ${task.completed ? 'checked' : ''}">&#10003;</span>
-          </span>
           <span>${task.text}</span>
           <span>${task.dueDate}</span>
       `;
@@ -163,7 +177,20 @@ function renderTasks(taskListData = tasks) {
           taskHTML += `<span class="bubble category" style="background-color: ${categoryColor};">${task.category}</span>`;
       }
 
-      taskHTML += `<button class="delete-btn" data-index="${index}">❌</button>`;
+      // Add the completed status and delete button (one checkmark per task)
+      taskHTML += `
+          <span class="checkmark-container" data-index="${index}">
+              <!-- Outer circle (just decorative) -->
+              <div class="outer-circle"></div>
+              <!-- Inner circle (clickable) -->
+              <div class="inner-circle ${task.completed ? 'checked' : ''}">
+                  ${task.completed ? '✔' : ''}
+              </div>
+          </span>
+          <span class="delete-btn-container">
+              <button class="delete-btn" data-index="${index}">❌</button>
+          </span>
+      `;
 
       // Set the inner HTML for the task item
       li.innerHTML = taskHTML;
@@ -171,15 +198,29 @@ function renderTasks(taskListData = tasks) {
       // Add the task item to the list
       taskList.appendChild(li);
 
-      // Add event listener for the checkmark circles
-      const checkmarkContainer = li.querySelector('.checkmark-container');
-      checkmarkContainer.addEventListener('click', () => toggleComplete(index));
+      // Add event listener for the inner circle to toggle completion
+      const innerCircle = li.querySelector('.inner-circle');
+      innerCircle.addEventListener('click', (e) => {
+          e.stopPropagation(); // Prevent event from propagating to parent elements
+          toggleComplete(index); // Toggle completion when inner circle is clicked
+      });
 
       // Add event listener for the delete buttons
       const deleteButton = li.querySelector('.delete-btn');
       deleteButton.addEventListener('click', () => deleteTask(index));
   });
 }
+
+// Toggle task completion
+
+
+// Toggle task completion
+
+
+
+
+
+
 
 
 
@@ -222,22 +263,23 @@ function getCategoryColor(categoryIndex) {
 // Toggle task completion
 function toggleComplete(index) {
   if (index !== null && tasks[index]) {
-      tasks[index].completed = !tasks[index].completed;
+      tasks[index].completed = !tasks[index].completed;  // Toggle the completion status
       saveData();  // Save updated tasks to localStorage
 
       // Apply the rainbow gradient on task completion
       if (tasks[index].completed) {
-          document.body.classList.add('task-checked'); // Add class to apply gradient
+          document.body.classList.add('task-checked');  // Add class to apply gradient
           setTimeout(() => {
-              document.body.classList.remove('task-checked'); // Remove class after animation ends
-          }, 3000); // After 3 seconds, remove the gradient effect
+              document.body.classList.remove('task-checked');  // Remove class after animation ends
+          }, 3000);  // After 3 seconds, remove the gradient effect
       }
 
-      renderTasks();  // Re-render the tasks list
+      renderTasks();  // Re-render the tasks list to reflect changes
   } else {
-      console.error(`Task at index ${index} not found`);
+      console.error(`Task at index ${index} not found`);  // Error if task not found
   }
 }
+
 
 
 
