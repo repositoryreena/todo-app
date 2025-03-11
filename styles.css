@@ -1013,3 +1013,26 @@ body {
     }
   }
   
+  /* Mobile-specific styles */
+@media (max-width: 768px) {
+    /* Remove the unicorn from the screen on mobile */
+    .unicorn {
+      display: none; /* Hide unicorn initially on mobile */
+    }
+  
+    /* Modify the flying animal animation for mobile */
+    .unicorn.flyDiagonal {
+      animation: flyDiagonalMobile 5s forwards; /* Use a mobile-specific animation */
+    }
+  }
+  
+  /* Mobile flying animation */
+  @keyframes flyDiagonalMobile {
+    0% {
+      transform: translate(0, 0) scale(0.5); /* Start small and from the top */
+    }
+    100% {
+      transform: translate(300px, 400px) scale(1); /* Move closer to the bottom of the screen */
+    }
+  }
+  
