@@ -310,21 +310,7 @@ select#priority-input {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Set the background color for each priority option */
-select#priority-input option[value="Critical"] {
-    background-color: #F15B5B; /* Red background for critical */
-    color: black; /* Black text */
-}
 
-select#priority-input option[value="Normal"] {
-    background-color: #F2D35F; /* Yellow background for normal */
-    color: black; /* Black text */
-}
-
-select#priority-input option[value="Low"] {
-    background-color: #60B83F; /* Green background for low */
-    color: black; /* Black text */
-}
 
 /* Style for the header row */
 .task-header {
@@ -783,4 +769,62 @@ body {
 .checkmark.checked {
     display: block; /* Show the checkmark when checked */
     color: #4caf50; /* Green color for checkmark */
+}
+
+/* Pastel-colored bubbles for priority */
+.bubble.priority.low {
+    background-color: #A8D8D8; /* Pastel light teal for low priority */
+    color: #2D4A4A; /* Darker teal text for contrast */
+}
+
+.bubble.priority.medium {
+    background-color: #F1C6A4; /* Pastel peach for medium priority */
+    color: #5A3C1D; /* Darker brownish text */
+}
+
+.bubble.priority.high {
+    background-color: #F7C1B5; /* Pastel pink for high priority */
+    color: #A74B4C; /* Darker red for text */
+}
+
+/* Pastel-colored bubbles for categories */
+.bubble.category {
+    background-color: #D1A6FF; /* Pastel lavender for category bubbles */
+    color: #3E2A8C; /* Darker purple text */
+}
+
+/* Pastel colors for the category dropdown options */
+select option {
+    background-color: #D8C7F5; /* Light pastel purple for dropdown options */
+    color: #5E3C7E; /* Darker purple for text */
+}
+
+
+
+/* Pastel colors for the "SHOW" dropdown (categories) */
+#show-dropdown {
+    background-color: #E5D3F3; /* Very light pastel purple for the dropdown background */
+    color: #5E3C7E; /* Darker purple text */
+}
+
+#priority-input option[value="Critical"] {
+    background-color: #ffd6d6; /* Very light pastel red */
+}
+
+#priority-input option[value="Normal"] {
+    background-color: #ffffe0; /* Very light pastel yellow */
+}
+
+#priority-input option[value="Low"] {
+    background-color: #d9ffd9; /* Very light pastel green */
+}
+
+#show-dropdown option[value=""] {
+    background-color: #f0f0f0; /* Light gray pastel color */
+    color: #555; /* Darker text for contrast */
+}
+
+#order-dropdown option {
+    background-color: #f0f0f0; /* Light pastel gray */
+    color: #555; /* Darker text for contrast */
 }

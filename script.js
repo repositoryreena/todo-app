@@ -242,11 +242,11 @@ function getPriorityColor(priority) {
 // Function to get category color based on index (cycled)
 // Helper function to get the background color for the category
 function getCategoryColor(categoryIndex) {
-  const colors = [
-      '#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#d6a7ff', // pastel colors
-      '#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#d6a7ff'  // Repeat
+  const pastelColors = [
+      '#F8C8DC', '#F9F9C8', '#F5E1FF', '#D8F1F2', '#E1F7D5', '#F0F0D4', // Lighter pastel colors
+      '#F8C8DC', '#F9F9C8', '#F5E1FF', '#D8F1F2', '#E1F7D5', '#F0F0D4'  // Repeat for more variety
   ];
-  return colors[categoryIndex % colors.length]; // Cycle through the colors
+  return pastelColors[categoryIndex % pastelColors.length]; // Cycle through pastel colors
 }
 
 
@@ -308,6 +308,7 @@ function deleteTask(index) {
   // Render categories in the "SHOW" dropdown and task form dropdown
 // Render categories in the "SHOW" dropdown and task form dropdown
 // Render categories in the "SHOW" dropdown
+// Render categories in the "SHOW" dropdown and task form dropdown
 function renderCategories() {
   // Clear existing options to avoid duplicates
   showDropdown.innerHTML = '';
@@ -321,33 +322,58 @@ function renderCategories() {
   showDropdown.appendChild(showOption);
 
   // Add the 'ALL' and 'INCOMPLETE' options (no color)
-  showDropdown.appendChild(createOption('ALL', 'All'));
-  showDropdown.appendChild(createOption('INCOMPLETE', 'Incomplete'));
+  showDropdown.appendChild(createOption('ALL', 'All', '#F0E6F7'));  // Light pastel purple
+  showDropdown.appendChild(createOption('INCOMPLETE', 'Incomplete', '#F0E6F7')); // Light pastel purple
 
-  // Add the categories to the dropdown dynamically with matching color
+  // Add the categories to the dropdown dynamically with matching pastel colors
   categories.forEach((category, index) => {
-      const categoryColor = getCategoryColor(index);
-      const option = createOption(category, category);
-      option.style.backgroundColor = categoryColor;  // Apply color to dropdown option
+      const categoryColor = getCategoryColor(index);  // Get pastel color from the color array
+      const option = createOption(category, category, categoryColor);
       showDropdown.appendChild(option);
   });
 
-  // Populate the category input dropdown in the task form with matching color
+  // Populate the category input dropdown in the task form with matching pastel colors
   categoryInput.innerHTML = '';  // Clear existing options in the category dropdown
-  categoryInput.appendChild(createOption('', 'Select a category'));  // Default option
+  categoryInput.appendChild(createOption('', 'Select a category', '#F0E6F7'));  // Default option
+
   categories.forEach((category, index) => {
-      const categoryColor = getCategoryColor(index);
-      const option = createOption(category, category);
-      option.style.backgroundColor = categoryColor;  // Apply color to dropdown option
+      const categoryColor = getCategoryColor(index);  // Get pastel color from the color array
+      const option = createOption(category, category, categoryColor);
       categoryInput.appendChild(option);
+  });
+
+  // Update priority dropdown with pastel colors matching the priority levels
+  updatePriorityDropdown(); // Call this function to update the priority dropdown
+}
+
+// Function to update the priority dropdown to use pastel colors
+function updatePriorityDropdown() {
+  const priorityOptions = {
+    'Critical': '#ff6f61', // Red color for Critical
+    'Normal': '#F9F9C8',    // Light pastel yellow for Normal
+    'Low': '#B7F7C1',       // Light pastel green for Low
+  };
+
+  Array.from(orderByDropdown.options).forEach(option => {
+    if (option.value === 'Critical') {
+      option.style.backgroundColor = priorityOptions['Critical'];
+    } else if (option.value === 'Normal') {
+      option.style.backgroundColor = priorityOptions['Normal'];
+    } else if (option.value === 'Low') {
+      option.style.backgroundColor = priorityOptions['Low'];
+    }
+    option.style.color = '#5E3C7E'; // Dark purple text for better contrast
   });
 }
 
-// Helper function to create dropdown options
-function createOption(value, text) {
+
+// Helper function to create dropdown options with background color
+function createOption(value, text, bgColor) {
   const option = document.createElement('option');
   option.value = value;
   option.textContent = text;
+  option.style.backgroundColor = bgColor;  // Set the background color to pastel
+  option.style.color = '#5E3C7E';  // Dark purple text color for better contrast
   return option;
 }
 
