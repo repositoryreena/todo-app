@@ -904,3 +904,112 @@ select option {
     z-index: 1000; /* Ensure it appears above other elements */
   }
   
+  /* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+  
+  #task-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .task-header,
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  
+  .task-header {
+    font-weight: bold;
+    background-color: #f9f9f9;
+  }
+  
+  .task-item span {
+    flex: 1; /* Allow elements to grow */
+    text-align: center;
+  }
+  
+  /* Add some colors to the bubbles for priority and category */
+  .bubble {
+    padding: 5px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    display: inline-block;
+  }
+  
+  .priority.low {
+    background-color: #4caf50; /* Green */
+  }
+  
+  .priority.medium {
+    background-color: #ffcc00; /* Yellow */
+  }
+  
+  .priority.high {
+    background-color: #ff6f61; /* Red */
+  }
+  
+  .category {
+    background-color: #f8c8dc; /* Pink-ish */
+  }
+  
+  .checkmark-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .delete-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .delete-btn {
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  /* Mobile responsive adjustments */
+  @media (max-width: 768px) {
+    .task-header,
+    .task-item {
+      flex-direction: column;  /* Stack the elements vertically */
+      align-items: stretch;    /* Make each item take up full width */
+    }
+  
+    .task-header span,
+    .task-item span {
+      width: 100%;             /* Make each span take full width */
+      text-align: left;        /* Align text to the left */
+      padding: 5px;
+    }
+  
+    .task-item {
+      font-size: 14px;        /* Adjust font size for smaller screens */
+    }
+  
+    .delete-btn-container {
+      margin-top: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .task-header,
+    .task-item {
+      font-size: 12px;         /* Further reduce font size for very small screens */
+    }
+  
+    .task-item .bubble {
+      font-size: 0.7em;        /* Reduce size of the bubble text */
+    }
+  }
+  
