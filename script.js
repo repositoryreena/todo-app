@@ -250,72 +250,109 @@ dateInput.setAttribute("min", localDate);
   }
 
   // Toggle task completion
-  function toggleComplete(index) {
-    if (index !== null && tasks[index]) {
-      tasks[index].completed = !tasks[index].completed; // Toggle the completion status
-      saveData(); // Save updated tasks to localStorage
-  
-      // Find the task list item that has the task at the specific index
-      const taskItem = taskList.children[index + 1]; // Skip the header
-      const checkmarkCircle = taskItem.querySelector(".inner-circle");
-  
-      // Array of unicorn images
-      const unicornImages = [
-        'https://images.vexels.com/media/users/3/300422/isolated/preview/13b76e494fb4c3be066067eb87211a9e-cute-otters-holding-hands.png',
-        'https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png',
-        'https://image.spreadshirtmedia.com/image-server/v1/designs/1031459131,width=178,height=178.png',
-        'https://images.vexels.com/media/users/3/235729/isolated/preview/1f45cabb11f6aac3567b12b53ffa44ff-flying-profile-phoenix-bird-color-stroke.png',
-        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2ac48f00-ac85-4f4a-9495-7de757935cfd/dctgh43-0388601c-7d1b-4bbf-b7bc-95eddbf5a0da.png/v1/fill/w_1920,h_1920/mary_poppins_by_thatjoegunderson_dctgh43-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyMCIsInBhdGgiOiJcL2ZcLzJhYzQ4ZjAwLWFjODUtNGY0YS05NDk1LTdkZTc1NzkzNWNmZFwvZGN0Z2g0My0wMzg4NjAxYy03ZDFiLTRiYmYtYjdiYy05NWVkZGJmNWEwZGEucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.MS6GVkQBH8O81AP63a4Omonwl5GhK2t2hw7moZDccd4',
-        'https://www.drawingwars.com/assets/img/cartoons/how-to-draw-the-house-from-up-step-by-step/how-to-draw-the-house-from-up-step-by-step_transparent.png',
-        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c92b1cb3-0580-489f-8a32-ff0a3571b156/dg61upf-7696aa27-1685-4061-8807-a9967cc567ff.png/v1/fill/w_1280,h_501/superman_flying_by_godzilla200004444_dg61upf-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTAxIiwicGF0aCI6IlwvZlwvYzkyYjFjYjMtMDU4MC00ODlmLThhMzItZmYwYTM1NzFiMTU2XC9kZzYxdXBmLTc2OTZhYTI3LTE2ODUtNDA2MS04ODA3LWE5OTY3Y2M1NjdmZi5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.nASHHidWLFJ_H8_RfYSeEO8w-ewVx8oHwEJL-2HX1IQ',
-        'https://pngimg.com/d/paper_plane_PNG20.png',
-        'https://spaces-cdn.clipsafari.com/9onkiw666oziwcm3huevgbi9zrym',
-        'https://static.vecteezy.com/system/resources/previews/049/326/102/non_2x/boy-flying-kite-free-png.png',
-        'https://www.pngmart.com/files/17/Flying-Toothless-Transparent-Background.png',
-        'https://www.tbsnews.net/sites/default/files/styles/infograph/public/images/2021/03/18/pngitem_4869353.png',
-        'https://content.mycutegraphics.com/graphics/space/alien-flying-ufo.png',
-        'https://www.nicepng.com/png/full/434-4349081_dumbo-flying-with-goggles-portable-network-graphics.png',
-        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3175cc46-8efb-4992-a9c1-d0c0c6f194c4/dhjju9h-df66d794-6854-44ea-81a3-1cc2262cb324.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzMxNzVjYzQ2LThlZmItNDk5Mi1hOWMxLWQwYzBjNmYxOTRjNFwvZGhqanU5aC1kZjY2ZDc5NC02ODU0LTQ0ZWEtODFhMy0xY2MyMjYyY2IzMjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.KC4Up5cSNTBG_JuvClCM6rBVUg0257NZITBX-FnZAj4',
-        'https://www.disneyclips.com/images/images/hercules_pegasus.gif',
-        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0a071573-3155-4a1f-8610-3289c87744e0/dgjeotl-f020baac-7fd7-4ca0-be82-2595c87dac6d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBhMDcxNTczLTMxNTUtNGExZi04NjEwLTMyODljODc3NDRlMFwvZGdqZW90bC1mMDIwYmFhYy03ZmQ3LTRjYTAtYmU4Mi0yNTk1Yzg3ZGFjNmQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.sV0cXa-o3gYfOzZUMp4gCQehePkiHkSrh_eos4mS5C0',
-        'https://imgproxy.attic.sh/5H_M7UpFmeMa-kqGirC7irvMFKuWmdUKVl6P-OKFU-8/rs:fit:540:540:1:1/t:1:FF00FF:false:false/aHR0cHM6Ly9hdHRp/Yy5zaC8zeHptY3R1/cWR6OWVoYTlpNncw/dmpjcm54c3l4.webp',
-        'https://www.petfed.org/images/blog/harry/Buckbeak.png',
-        'https://www.ambiance-sticker.com/images/Image/sticker-et-velo-volant-ambiance-sticker-cinema-ET-bike-R005.png',
-      ];
-  
-      // If task is marked as completed
-      if (tasks[index].completed) {
-        checkmarkCircle.classList.add("checked");
-  
-        // Show unicorn and make it fly across the page with a random image
-        const unicorn = document.querySelector(".unicorn");
-        const randomImage = unicornImages[Math.floor(Math.random() * unicornImages.length)];
-        unicorn.style.animation = "none"; // Reset animation
-        unicorn.offsetHeight; // Trigger reflow to restart the animation
-        unicorn.style.animation = "flyDiagonal 5s forwards"; // Apply the diagonal flying animation
-        unicorn.style.backgroundImage = `url(${randomImage})`; // Set the random image
-  
-        // Only flip the first unicorn image (the otter one)
-        if (randomImage === unicornImages[0]) {
-          unicorn.style.transform = 'scaleX(-1)'; // Flip the otter image
-        } else {
-          unicorn.style.transform = 'scaleX(1)'; // Keep the others unflipped
-        }
-  
-        // Add the rainbow gradient to the body
-        document.body.classList.add("task-checked");
-  
-        // Remove the rainbow gradient after animation ends
-        setTimeout(() => {
-          document.body.classList.remove("task-checked");
-        }, 5000); // Match the unicorn animation duration (5s)
+// Function to speak text using the Web Speech API
+function speak(text) {
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = 'en-US'; // Set language to English
+  window.speechSynthesis.speak(speech);
+}
+
+// Modify the toggleComplete function to add speech
+function toggleComplete(index) {
+  if (index !== null && tasks[index]) {
+    tasks[index].completed = !tasks[index].completed; // Toggle the completion status
+    saveData(); // Save updated tasks to localStorage
+
+    // Find the task list item that has the task at the specific index
+    const taskItem = taskList.children[index + 1]; // Skip the header
+    const checkmarkCircle = taskItem.querySelector(".inner-circle");
+
+    // Array of unicorn images
+    const unicornImages = [
+      'https://images.vexels.com/media/users/3/300422/isolated/preview/13b76e494fb4c3be066067eb87211a9e-cute-otters-holding-hands.png',
+      'https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png',
+      'https://image.spreadshirtmedia.com/image-server/v1/designs/1031459131,width=178,height=178.png',
+      'https://images.vexels.com/media/users/3/235729/isolated/preview/1f45cabb11f6aac3567b12b53ffa44ff-flying-profile-phoenix-bird-color-stroke.png',
+      'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2ac48f00-ac85-4f4a-9495-7de757935cfd/dctgh43-0388601c-7d1b-4bbf-b7bc-95eddbf5a0da.png/v1/fill/w_1920,h_1920/mary_poppins_by_thatjoegunderson_dctgh43-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyMCIsInBhdGgiOiJcL2ZcLzJhYzQ4ZjAwLWFjODUtNGY0YS05NDk1LTdkZTc1NzkzNWNmZFwvZGN0Z2g0My0wMzg4NjAxYy03ZDFiLTRiYmYtYjdiYy05NWVkZGJmNWEwZGEucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.MS6GVkQBH8O81AP63a4Omonwl5GhK2t2hw7moZDccd4',
+      'https://www.drawingwars.com/assets/img/cartoons/how-to-draw-the-house-from-up-step-by-step/how-to-draw-the-house-from-up-step-by-step_transparent.png',
+      'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c92b1cb3-0580-489f-8a32-ff0a3571b156/dg61upf-7696aa27-1685-4061-8807-a9967cc567ff.png/v1/fill/w_1280,h_501/superman_flying_by_godzilla200004444_dg61upf-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTAxIiwicGF0aCI6IlwvZlwvYzkyYjFjYjMtMDU4MC00ODlmLThhMzItZmYwYTM1NzFiMTU2XC9kZzYxdXBmLTc2OTZhYTI3LTE2ODUtNDA2MS04ODA3LWE5OTY3Y2M1NjdmZi5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.nASHHidWLFJ_H8_RfYSeEO8w-ewVx8oHwEJL-2HX1IQ',
+      'https://pngimg.com/d/paper_plane_PNG20.png',
+      'https://spaces-cdn.clipsafari.com/9onkiw666oziwcm3huevgbi9zrym',
+      'https://static.vecteezy.com/system/resources/previews/049/326/102/non_2x/boy-flying-kite-free-png.png',
+      'https://www.pngmart.com/files/17/Flying-Toothless-Transparent-Background.png',
+      'https://www.tbsnews.net/sites/default/files/styles/infograph/public/images/2021/03/18/pngitem_4869353.png',
+      'https://content.mycutegraphics.com/graphics/space/alien-flying-ufo.png',
+      'https://www.nicepng.com/png/full/434-4349081_dumbo-flying-with-goggles-portable-network-graphics.png',
+      'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3175cc46-8efb-4992-a9c1-d0c0c6f194c4/dhjju9h-df66d794-6854-44ea-81a3-1cc2262cb324.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzMxNzVjYzQ2LThlZmItNDk5Mi1hOWMxLWQwYzBjNmYxOTRjNFwvZGhqanU5aC1kZjY2ZDc5NC02ODU0LTQ0ZWEtODFhMy0xY2MyMjYyY2IzMjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.KC4Up5cSNTBG_JuvClCM6rBVUg0257NZITBX-FnZAj4',
+      'https://www.disneyclips.com/images/images/hercules_pegasus.gif',
+      'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0a071573-3155-4a1f-8610-3289c87744e0/dgjeotl-f020baac-7fd7-4ca0-be82-2595c87dac6d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBhMDcxNTczLTMxNTUtNGExZi04NjEwLTMyODljODc3NDRlMFwvZGdqZW90bC1mMDIwYmFhYy03ZmQ3LTRjYTAtYmU4Mi0yNTk1Yzg3ZGFjNmQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.sV0cXa-o3gYfOzZUMp4gCQehePkiHkSrh_eos4mS5C0',
+      'https://imgproxy.attic.sh/5H_M7UpFmeMa-kqGirC7irvMFKuWmdUKVl6P-OKFU-8/rs:fit:540:540:1:1/t:1:FF00FF:false:false/aHR0cHM6Ly9hdHRp/Yy5zaC8zeHptY3R1/cWR6OWVoYTlpNncw/dmpjcm54c3l4.webp',
+      'https://www.petfed.org/images/blog/harry/Buckbeak.png',
+      'https://www.ambiance-sticker.com/images/Image/sticker-et-velo-volant-ambiance-sticker-cinema-ET-bike-R005.png',
+    ];
+
+    // If task is marked as completed
+    if (tasks[index].completed) {
+      checkmarkCircle.classList.add("checked");
+
+      // Show unicorn and make it fly across the page with a random image
+      const unicorn = document.querySelector(".unicorn");
+      const randomImage = unicornImages[Math.floor(Math.random() * unicornImages.length)];
+      unicorn.style.animation = "none"; // Reset animation
+      unicorn.offsetHeight; // Trigger reflow to restart the animation
+      unicorn.style.animation = "flyDiagonal 5s forwards"; // Apply the diagonal flying animation
+      unicorn.style.backgroundImage = `url(${randomImage})`; // Set the random image
+
+      // Only flip the first unicorn image (the otter one)
+      if (randomImage === unicornImages[0]) {
+        unicorn.style.transform = 'scaleX(-1)'; // Flip the otter image
       } else {
-        checkmarkCircle.classList.remove("checked");
+        unicorn.style.transform = 'scaleX(1)'; // Keep the others unflipped
       }
-  
-      renderTasks(); // Re-render the tasks list to reflect changes
+
+      // Add the rainbow gradient to the body
+      document.body.classList.add("task-checked");
+
+      // Speak based on the image
+      if (randomImage === unicornImages[0]) {
+        speak("The otter is flying! So cute!");
+      } else if (randomImage === unicornImages[1]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      } else if (randomImage === unicornImages[2]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      }else if (randomImage === unicornImages[3]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      }else if (randomImage === unicornImages[4]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      }else if (randomImage === unicornImages[5]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      }else if (randomImage === unicornImages[6]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      }else if (randomImage === unicornImages[7]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      }else if (randomImage === unicornImages[8]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      }else if (randomImage === unicornImages[9]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      }else if (randomImage === unicornImages[10]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      }else if (randomImage === unicornImages[11]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      }else if (randomImage === unicornImages[12]) {
+        speak("A rainbow unicorn is flying across the sky!");
+      }
+
+      // Remove the rainbow gradient after animation ends
+      setTimeout(() => {
+        document.body.classList.remove("task-checked");
+      }, 5000); // Match the unicorn animation duration (5s)
+    } else {
+      checkmarkCircle.classList.remove("checked");
     }
+
+    renderTasks(); // Re-render the tasks list to reflect changes
   }
+}
   
   
   
