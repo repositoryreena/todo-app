@@ -516,18 +516,7 @@ select option {
 }
 
 /* Unicorn element */
-.unicorn {
-  width: 250px;
-  height: 250px;
-  background-image: url("https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  position: absolute;
-  bottom: 0;
-  left: -250px; /* Start off-screen */
-  animation: none; /* Initially no animation */
-}
+
 
 /* When the checkmark is checked, trigger the unicorn flying animation */
 .checkmark.checked + .unicorn {
@@ -537,38 +526,48 @@ select option {
 /* Unicorn flying animation */
 @keyframes flyDiagonal {
   0% {
-    bottom: -100px;  /* Start from below the screen */
-    left: 50%; /* Starting from the middle */
-    opacity: 1; /* Fully visible */
-  }
-  50% {
-    left: 50%; /* Move to the center horizontally */
-    bottom: 50%; /* Move up diagonally */
-    opacity: 1; /* Stay visible in the center */
+    bottom: -200px; /* Start further below the screen */
+    left: 50%; /* Start in the center */
   }
   100% {
-    bottom: 80%; /* End near the top */
+    bottom: 80%; /* End near the top but with enough room */
     left: 80%; /* End near the right side */
-    opacity: 0; /* Fade out */
   }
 }
 
 
 
 
-/* Unicorn image settings */
+
+
+@keyframes fly {
+  0% {
+    transform: translateY(100%); /* Start from bottom */
+    opacity: 1; /* Fully visible */
+  }
+  100% {
+    transform: translateY(-100%); /* Move off the top of the screen */
+    opacity: 0; /* Fully fade out */
+  }
+}
+
 .unicorn {
+  z-index: 999;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 250px; /* Unicorn size */
-  height: 250px;
-  background-image: url("https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png");
+  bottom: 0; /* Start at the bottom of the screen */
+  left: 50%;
+  transform: translateX(-50%);
+  animation: fly 3s forwards; /* 3s duration for the animation */
+  background-image: url('your-animal-image-url');
   background-size: contain;
   background-repeat: no-repeat;
-  background-color: transparent;
-  z-index: 1000; /* Ensure it appears above other elements */
+  width: 200px; /* Adjust to your preferred size */
+  height: 200px; /* Adjust to your preferred size */
 }
+
+
+
+
 
 .task-header,
 .task-item {
@@ -703,5 +702,19 @@ select option {
   /* Adjust spacing for delete button */
   .delete-btn-container {
     margin-left: 2px; /* Reduce space for delete button on small screens */
+  }
+}
+
+@media (max-width: 767px) {
+  .unicorn {
+    width: 150px;  /* Adjust image size for smaller screens */
+    height: 150px; /* Adjust image size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .unicorn {
+    width: 120px;  /* Further adjust for very small screens */
+    height: 120px; /* Further adjust for very small screens */
   }
 }
