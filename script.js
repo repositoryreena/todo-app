@@ -253,6 +253,15 @@ dateInput.setAttribute("min", localDate);
         'https://png.pngtree.com/png-clipart/20241024/original/pngtree-cute-rainbow-unicorn-clipart-illustration-perfect-for-kids-png-image_16485172.png',
         'https://image.spreadshirtmedia.com/image-server/v1/designs/1031459131,width=178,height=178.png',
         'https://images.vexels.com/media/users/3/235729/isolated/preview/1f45cabb11f6aac3567b12b53ffa44ff-flying-profile-phoenix-bird-color-stroke.png',
+        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2ac48f00-ac85-4f4a-9495-7de757935cfd/dctgh43-0388601c-7d1b-4bbf-b7bc-95eddbf5a0da.png/v1/fill/w_1920,h_1920/mary_poppins_by_thatjoegunderson_dctgh43-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyMCIsInBhdGgiOiJcL2ZcLzJhYzQ4ZjAwLWFjODUtNGY0YS05NDk1LTdkZTc1NzkzNWNmZFwvZGN0Z2g0My0wMzg4NjAxYy03ZDFiLTRiYmYtYjdiYy05NWVkZGJmNWEwZGEucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.MS6GVkQBH8O81AP63a4Omonwl5GhK2t2hw7moZDccd4',
+        'https://www.drawingwars.com/assets/img/cartoons/how-to-draw-the-house-from-up-step-by-step/how-to-draw-the-house-from-up-step-by-step_transparent.png',
+        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c92b1cb3-0580-489f-8a32-ff0a3571b156/dg61upf-7696aa27-1685-4061-8807-a9967cc567ff.png/v1/fill/w_1280,h_501/superman_flying_by_godzilla200004444_dg61upf-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTAxIiwicGF0aCI6IlwvZlwvYzkyYjFjYjMtMDU4MC00ODlmLThhMzItZmYwYTM1NzFiMTU2XC9kZzYxdXBmLTc2OTZhYTI3LTE2ODUtNDA2MS04ODA3LWE5OTY3Y2M1NjdmZi5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.nASHHidWLFJ_H8_RfYSeEO8w-ewVx8oHwEJL-2HX1IQ',
+        'https://pngimg.com/d/paper_plane_PNG20.png',
+        'https://spaces-cdn.clipsafari.com/9onkiw666oziwcm3huevgbi9zrym',
+        'https://static.vecteezy.com/system/resources/previews/049/326/102/non_2x/boy-flying-kite-free-png.png',
+        'https://www.pngmart.com/files/17/Flying-Toothless-Transparent-Background.png',
+        'https://www.tbsnews.net/sites/default/files/styles/infograph/public/images/2021/03/18/pngitem_4869353.png',
+        'https://content.mycutegraphics.com/graphics/space/alien-flying-ufo.png',
       ];
   
       // If task is marked as completed
