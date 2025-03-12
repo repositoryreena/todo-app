@@ -315,31 +315,51 @@ function toggleComplete(index) {
 
       // Speak based on the image
       if (randomImage === unicornImages[0]) {
-        speak("The otter is flying! So cute!");
+        speak("Stay otterly awesome!");
       } else if (randomImage === unicornImages[1]) {
-        speak("A rainbow unicorn is flying across the sky!");
-      } else if (randomImage === unicornImages[2]) {
-        speak("A rainbow unicorn is flying across the sky!");
-      }else if (randomImage === unicornImages[3]) {
-        speak("A rainbow unicorn is flying across the sky!");
+        speak("Believe in magic.");
+      }else if (randomImage===unicornImages[2]){
+        speak("I'm just here for the sparkle.")
+      
+      } else if (randomImage === unicornImages[3]) {
+        speak("Rise from the ashes and soar higher than ever before.");
       }else if (randomImage === unicornImages[4]) {
-        speak("A rainbow unicorn is flying across the sky!");
+        speak("Supercalifragilisticexpialidocious");
       }else if (randomImage === unicornImages[5]) {
-        speak("A rainbow unicorn is flying across the sky!");
+        speak("Adventure is out there!");
       }else if (randomImage === unicornImages[6]) {
-        speak("A rainbow unicorn is flying across the sky!");
+        speak("Up, up, and away!");
       }else if (randomImage === unicornImages[7]) {
-        speak("A rainbow unicorn is flying across the sky!");
+        speak("Even the smallest of dreams can soar high.");
       }else if (randomImage === unicornImages[8]) {
-        speak("A rainbow unicorn is flying across the sky!");
+        speak("Fuel your dreams and shoot for the stars.");
       }else if (randomImage === unicornImages[9]) {
-        speak("A rainbow unicorn is flying across the sky!");
+        speak("Let your spirit fly as high as the winds take you.");
       }else if (randomImage === unicornImages[10]) {
-        speak("A rainbow unicorn is flying across the sky!");
+        speak("Together, we’ll fly into the unknown.");
       }else if (randomImage === unicornImages[11]) {
-        speak("A rainbow unicorn is flying across the sky!");
+        speak("All it takes is faith, trust, and a little bit of pixie dust.");
       }else if (randomImage === unicornImages[12]) {
-        speak("A rainbow unicorn is flying across the sky!");
+        speak("The sky is not the limit—it’s just the beginning.");
+      }else if (randomImage === unicornImages[13]) {
+        speak("With a little faith and a big heart, anything is possible.");
+      }
+      else if (randomImage === unicornImages[14]) {
+        speak("Do you trust me?");
+      }
+      else if (randomImage === unicornImages[15]) {
+        speak("Wings of freedom, boundless skies.");
+      }
+      else if (randomImage === unicornImages[16]) {
+        speak("To infinity and beyond!");
+      }
+      else if (randomImage === unicornImages[17]) {
+        speak("Up, up, and away on a broomstick!");
+      }
+      else if (randomImage === unicornImages[18]) {
+        speak("Fly with grace, land with honor.");
+      }else if (randomImage === unicornImages[19]) {
+        speak("Be good.")
       }
 
       // Remove the rainbow gradient after animation ends
