@@ -128,11 +128,9 @@ dateInput.setAttribute("min", localDate);
   // Render tasks in the list
   function renderTasks(taskListData = tasks) {
     taskList.innerHTML = ""; // Clear current task list
-
-    // Add the header row
+  
     const header = document.createElement("li");
-    header.classList.add("task-header"); // Add class for styling
-
+    header.classList.add("task-header");
     header.innerHTML = `
       <span>Item Name</span>
       <span>Due Date</span>
@@ -140,72 +138,86 @@ dateInput.setAttribute("min", localDate);
       <span>Category</span>
       <span>Complete</span>
       <span>Delete</span>
-  `;
-
-    taskList.appendChild(header); // Append the header to the task list
-
-    // Render each task
+    `;
+    taskList.appendChild(header);
+  
     taskListData.forEach((task, index) => {
       const li = document.createElement("li");
-      li.classList.add("task-item"); // Adding class for styling
-
+      li.classList.add("task-item");
+      li.setAttribute("draggable", true);  // Make the task item draggable
+      li.dataset.index = index; // Store the index in data-index for reference
+  
       let taskHTML = `
           <span>${task.text}</span>
           <span>${task.dueDate}</span>
       `;
-
-      // Add the priority bubble if a priority exists
+  
       if (task.priority) {
-        let priorityClass = "low"; // Default to low priority
-        if (task.priority === "Critical") {
-          priorityClass = "high"; // High priority is red
-        } else if (task.priority === "Normal") {
-          priorityClass = "medium"; // Medium priority is yellow
-        }
-
+        let priorityClass = "low";
+        if (task.priority === "Critical") priorityClass = "high";
+        else if (task.priority === "Normal") priorityClass = "medium";
+  
         taskHTML += `<span class="bubble priority ${priorityClass}">${task.priority}</span>`;
       }
-
-      // Add the category bubble if a category exists
+  
       if (task.category) {
-        const categoryIndex = categories.indexOf(task.category); // Find the category index
-        const categoryColor = getCategoryColor(categoryIndex); // Get color based on category index
+        const categoryIndex = categories.indexOf(task.category);
+        const categoryColor = getCategoryColor(categoryIndex);
         taskHTML += `<span class="bubble category" style="background-color: ${categoryColor};">${task.category}</span>`;
       }
-
-      // Add the completed status and delete button (one checkmark per task)
+  
       taskHTML += `
-          <span class="checkmark-container" data-index="${index}">
-              <!-- Outer circle (just decorative) -->
-              <div class="outer-circle"></div>
-              <!-- Inner circle (clickable) -->
-              <div class="inner-circle ${task.completed ? "checked" : ""}">
-                  ${task.completed ? "✔" : ""}
-              </div>
-          </span>
-          <span class="delete-btn-container">
-              <button class="delete-btn" data-index="${index}">❌</button>
-          </span>
+        <span class="checkmark-container" data-index="${index}">
+          <div class="outer-circle"></div>
+          <div class="inner-circle ${task.completed ? "checked" : ""}">
+            ${task.completed ? "✔" : ""}
+          </div>
+        </span>
+        <span class="delete-btn-container">
+          <button class="delete-btn" data-index="${index}">❌</button>
+        </span>
       `;
-
-      // Set the inner HTML for the task item
+  
       li.innerHTML = taskHTML;
-
-      // Add the task item to the list
       taskList.appendChild(li);
-
-      // Add event listener for the inner circle to toggle completion
+  
+      // Add event listener for completing task
       const innerCircle = li.querySelector(".inner-circle");
       innerCircle.addEventListener("click", (e) => {
-        e.stopPropagation(); // Prevent event from propagating to parent elements
-        toggleComplete(index); // Toggle completion when inner circle is clicked
+        e.stopPropagation();
+        toggleComplete(index);
       });
-
-      // Add event listener for the delete buttons
+  
+      // Add event listener for delete button
       const deleteButton = li.querySelector(".delete-btn");
       deleteButton.addEventListener("click", () => deleteTask(index));
+  
+      // Add drag events
+      li.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", index);
+      });
+
+      
+  
+      li.addEventListener("dragover", (e) => {
+        e.preventDefault(); // Enable dropping
+      });
+  
+      li.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const draggedIndex = e.dataTransfer.getData("text/plain");
+        const targetIndex = e.target.closest('li').dataset.index;
+  
+        // Swap tasks in the array and re-render
+        const draggedTask = tasks[draggedIndex];
+        tasks.splice(draggedIndex, 1);
+        tasks.splice(targetIndex, 0, draggedTask);
+        saveData();
+        renderTasks();
+      });
     });
   }
+  
 
   // Helper function to get the background color for the priority
   function getPriorityColor(priority) {

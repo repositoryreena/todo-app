@@ -10,6 +10,11 @@ body {
   padding: 10px;
 }
 
+li:hover {
+    cursor: pointer;
+}
+  
+
 /* General button styling */
 button {
   background-color: #76c7c0; /* Pastel teal */
