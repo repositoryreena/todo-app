@@ -290,6 +290,7 @@ function toggleComplete(index) {
       'https://imgproxy.attic.sh/5H_M7UpFmeMa-kqGirC7irvMFKuWmdUKVl6P-OKFU-8/rs:fit:540:540:1:1/t:1:FF00FF:false:false/aHR0cHM6Ly9hdHRp/Yy5zaC8zeHptY3R1/cWR6OWVoYTlpNncw/dmpjcm54c3l4.webp',
       'https://www.petfed.org/images/blog/harry/Buckbeak.png',
       'https://www.ambiance-sticker.com/images/Image/sticker-et-velo-volant-ambiance-sticker-cinema-ET-bike-R005.png',
+      'https://static.vecteezy.com/system/resources/thumbnails/024/599/761/small_2x/kawaii-shooting-star-over-white-png.png',
     ];
     // If task is marked as completed
     if (tasks[index].completed) {
@@ -374,6 +375,8 @@ function toggleComplete(index) {
         speak("Fly with grace, land with honor.");
       }else if (randomImage === unicornImages[19]) {
         speak("You did it!")
+      }else if (randomImage === unicornImages[20]) {
+        speak("You've made your wish a reality! Keep shining bright!")
       }
 
       // Remove the rainbow gradient after animation ends
