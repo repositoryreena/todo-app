@@ -354,7 +354,7 @@ function toggleComplete(index) {
         speak("To infinity and beyond!");
       }
       else if (randomImage === unicornImages[17]) {
-        speak("Up, up, and away on a broomstick!");
+        speak("Diagonally");
       }
       else if (randomImage === unicornImages[18]) {
         speak("Fly with grace, land with honor.");
