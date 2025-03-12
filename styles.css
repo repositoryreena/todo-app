@@ -118,13 +118,19 @@ label {
 }
 
 /* Style for the task list items */
+
 .task-item {
   display: flex;
+  justify-content: space-between; /* Align columns */
+  border-bottom: 1px solid #ddd; /* Add bottom border for task items */
+  width: 100%; /* Ensure task items take up full width */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+  flex-wrap: wrap; /* Allow task items to wrap if necessary */
+  font-size: 14px;
+  padding: 10px 15px;
+  max-width: 100%; /* Ensure no item overflows the container */
   align-items: center;
   margin-bottom: 10px;
-  justify-content: space-between; /* Align columns */
-  padding: 10px 20px;
-  border-bottom: 1px solid #ddd; /* Add bottom border for task items */
 }
 
 /* Optional: style for the other spans (text, priority, etc.) */
@@ -157,16 +163,10 @@ span {
 }
 
 /* Styling for the checkmark */
-.checkmark {
-  font-size: 18px; /* Size of the checkmark (adjusted to fit the circle) */
-  color: white; /* Color of the checkmark */
-  display: none; /* Initially hidden */
-  margin: 0; /* Remove any margin or extra space */
-}
 
 /* When the task is completed, show the checkmark */
 .checkmark.checked {
-  display: inline-block; /* Show the checkmark when checked */
+  display: block; /* Show the checkmark when checked */
   color: green; /* Green color for completed task */
   border-radius: 50%;
 }
@@ -190,20 +190,17 @@ body.rainbow-gradient {
   transition: background 0.3s ease; /* Smooth transition for the background */
 }
 
-/* Style for the bubble appearance of priority and category */
 /* Styling for the bubbles around priority and category */
 .bubble {
   display: inline-block;
-  padding: 8px 16px;
+  padding: 5px;
   margin: 5px;
-  border-radius: 20px;
-  font-size: 14px;
+  border-radius: 12px;
+  font-size: 0.8em;
   font-weight: bold;
   color: white;
 }
 
-/* Priority bubbles - colored based on priority */
-/* Priority bubbles */
 /* Bubbles for priority */
 .bubble.priority {
   padding: 8px 16px;
@@ -328,15 +325,8 @@ select#priority-input {
   padding: 5px;
 }
 
-/* Style the checkmark container */
-
-.checkmark-container .checkmark.checked {
-  display: block; /* Show when checked */
-}
-
 /* Adjust the delete button container */
 
-/* Optional: Style the checkmark and delete button */
 .delete-btn-container {
   display: flex;
   justify-content: center;
@@ -353,47 +343,6 @@ select#priority-input {
   text-align: center;
 }
 
-/* Style for the task items */
-.task-item {
-  display: flex;
-  justify-content: space-between; /* Align columns */
-  border-bottom: 1px solid #ddd; /* Add bottom border for task items */
-  width: 100%; /* Ensure task items take up full width */
-  box-sizing: border-box; /* Include padding and border in width calculation */
-  flex-wrap: wrap; /* Allow task items to wrap if necessary */
-  font-size: 14px;
-  padding: 10px 15px;
-  max-width: 100%; /* Ensure no item overflows the container */
-}
-
-.task-item span {
-  text-align: center; /* Center-align text under each column */
-  word-wrap: break-word; /* Ensure words break and wrap within the column */
-  white-space: normal; /* Allow the text to wrap naturally */
-  overflow-wrap: break-word; /* Modern way to ensure word wrapping */
-  width: 16%; /* Adjust percentage or use auto for flexible width */
-  box-sizing: border-box; /* Prevent overflow */
-  flex-basis: 16%; /* Allow flexibility with width of each column */
-  flex-grow: 1; /* Allow columns to grow and adjust based on content */
-  min-width: 100px; /* Prevent columns from becoming too small */
-  max-width: 25%; /* Prevent columns from stretching too wide */
-}
-
-/* Style the checkmark container */
-
-.checkmark-container .checkmark.checked {
-  display: block; /* Show when checked */
-}
-
-/* Checkmark styling when it's checked */
-
-/* When the task is completed, show the checkmark */
-.checkmark-container .checkmark.checked {
-  display: block; /* Show the checkmark when checked */
-}
-
-/* Ensure the checkmark container circle displays the checkmark correctly */
-
 /* Ensure checkmark is visible when checked */
 .checkmark-container .checkmark {
   font-size: 16px; /* Adjust font size to fit better in the circle */
@@ -408,7 +357,10 @@ select#priority-input {
 }
 
 .checkmark {
-  font-size: 20px;
+  font-size: 16px; /* Size of the checkmark (adjusted to fit the circle) */
+  position: absolute;
+  display: none; /* Initially hidden */
+  margin: 0; /* Remove any margin or extra space */
   z-index: 2; /* Make sure the checkmark is on top of the inner circle */
   color: #4caf50; /* Green color for the checkmark */
 }
@@ -421,8 +373,11 @@ select#priority-input {
   word-wrap: break-word; /* Allow words to break and wrap inside each column */
   white-space: normal; /* Allow normal text wrapping */
   overflow-wrap: break-word; /* Break long words */
-  width: 16%; /* Or adjust this percentage to suit your layout */
+  width: 14%; /* Or adjust this percentage to suit your layout */
   text-align: center; /* Center align text in each column */
+  max-width: 180px;
+  min-width: 100px;
+  padding: 5px;
 }
 
 /* Optional: Add a max-width for task name to limit the width of long names */
@@ -431,44 +386,20 @@ select#priority-input {
   overflow-wrap: break-word;
   white-space: normal;
   width: 100%; /* Let it fill up the available space */
-  max-width: 200px; /* You can adjust the max-width as needed */
-}
-
-/* Ensure the task item list doesn't overflow and no horizontal scrollbar */
-#task-list {
-  width: 100%; /* Ensure the task list uses the full width */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch; /* Stretch the task items across the container */
-}
-
-/* Ensure no horizontal overflow when text overflows within the task name */
-.task-item .task-name {
-  word-wrap: break-word; /* Allow text to break */
-  overflow-wrap: break-word;
-  white-space: normal; /* Allow the text to wrap */
-  width: 100%; /* Allow the task name to fill available space */
-  max-width: calc(100% - 60px); /* Adjust to prevent overflow with checkmark */
-}
-
-/* Ensure the task item list doesn't overflow and no horizontal scrollbar */
-#task-list {
-  width: 100%; /* Ensure the task list uses the full width */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  display: flex;
-  flex-direction: column;
-  align-items: stretch; /* Stretch the task items across the container */
-}
-
-/* Ensure no horizontal overflow when text overflows within the task name */
-.task-item .task-name {
-  word-wrap: break-word; /* Allow text to break */
-  overflow-wrap: break-word;
-  white-space: normal; /* Allow the text to wrap */
-  flex-grow: 1; /* Allow this column to expand if necessary */
-  max-width: calc(100% - 60px); /* Adjust to prevent overflow with checkmark */
+  max-width: calc(100% - 60px); /* You can adjust the max-width as needed */
   padding: 0 5px;
+  flex-grow: 1;
+}
+
+/* Ensure the task item list doesn't overflow and no horizontal scrollbar */
+#task-list {
+  width: 100%; /* Ensure the task list uses the full width */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Stretch the task items across the container */
+  list-style-type: none;
+  padding: 0;
 }
 
 /* Prevent horizontal scrollbar */
@@ -481,28 +412,12 @@ body {
   box-sizing: border-box; /* Prevents overflow due to padding/border */
 }
 
-/* Reduce width of each column slightly */
-.task-header span,
-.task-item span {
-  width: 14%; /* Reduce column width slightly */
-  text-align: center; /* Center-align text under each column */
-}
-
 /* Optional: Reduce padding/margin */
 
 * {
   box-sizing: border-box; /* Include padding and borders within element width */
   margin: 0;
   padding: 0;
-}
-
-.task-header span,
-.task-item span {
-  width: 14%; /* Adjust width to make them narrower */
-  max-width: 180px; /* Limit the maximum width of each column */
-  min-width: 100px; /* Ensure columns don't get too small */
-  text-align: center;
-  padding: 5px;
 }
 
 /* Ensure the checkmark container is centered properly */
@@ -527,21 +442,6 @@ body {
   background-color: #d3d3d3; /* Light gray background */
   position: absolute; /* Position it inside the checkmark container */
   z-index: 1; /* Keep it behind the checkmark */
-}
-
-/* Checkmark styles */
-.checkmark {
-  font-size: 16px; /* Adjust font size to fit better inside the circle */
-  color: #4caf50; /* Green color for the checkmark */
-  position: absolute; /* Position it inside the circle */
-  z-index: 2; /* Ensure the checkmark is on top of the inner circle */
-  display: none; /* Initially hide the checkmark */
-}
-
-/* When the task is completed, show the checkmark */
-.checkmark.checked {
-  display: block; /* Show the checkmark when checked */
-  color: #4caf50; /* Green color for checkmark */
 }
 
 /* Pastel-colored bubbles for priority */
@@ -598,21 +498,6 @@ select option {
 #order-dropdown option {
   background-color: #f0f0f0; /* Light pastel gray */
   color: #555; /* Darker text for contrast */
-}
-
-/* The checkmark styles */
-.checkmark {
-  font-size: 16px; /* Adjust font size to fit better inside the circle */
-  color: #4caf50; /* Green color for the checkmark */
-  position: absolute; /* Position it inside the circle */
-  z-index: 2; /* Ensure the checkmark is on top of the inner circle */
-  display: none; /* Initially hide the checkmark */
-}
-
-/* When the task is completed, show the checkmark */
-.checkmark.checked {
-  display: block; /* Show the checkmark when checked */
-  color: #4caf50; /* Green color for checkmark */
 }
 
 /* Unicorn flying animation */
@@ -677,11 +562,6 @@ select option {
   z-index: 1000; /* Ensure it appears above other elements */
 }
 
-#task-list {
-  list-style-type: none;
-  padding: 0;
-}
-
 .task-header,
 .task-item {
   display: flex;
@@ -703,17 +583,20 @@ select option {
 }
 
 .task-item span {
-  flex: 1; /* Allow elements to grow */
-  text-align: center;
+  text-align: center; /* Center-align text under each column */
+  word-wrap: break-word; /* Ensure words break and wrap within the column */
+  white-space: normal; /* Allow the text to wrap naturally */
+  overflow-wrap: break-word; /* Modern way to ensure word wrapping */
+  width: 16%; /* Adjust percentage or use auto for flexible width */
+  box-sizing: border-box; /* Prevent overflow */
+  flex-basis: 16%; /* Allow flexibility with width of each column */
+  flex-grow: 1; /* Allow columns to grow and adjust based on content */
+  min-width: 100px; /* Prevent columns from becoming too small */
+  max-width: 25%; /* Prevent columns from stretching too wide */
+  flex: 1;
 }
 
 /* Add some colors to the bubbles for priority and category */
-.bubble {
-  padding: 5px;
-  border-radius: 12px;
-  font-size: 0.8em;
-  display: inline-block;
-}
 
 .priority.low {
   background-color: #4caf50; /* Green */
@@ -729,12 +612,6 @@ select option {
 
 .category {
   background-color: #f8c8dc; /* Pink-ish */
-}
-
-.checkmark-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* Mobile responsive adjustments */
@@ -796,8 +673,6 @@ select option {
     font-size: 0.8em; /* Reduce bubble text size */
     padding: 3px 6px; /* Add some padding to make bubbles more compact */
   }
-
-  /* Adjust delete button spacing */
 
   /* Adjust the priority bubble and category bubble sizes */
   .task-item .priority,
