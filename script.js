@@ -262,6 +262,13 @@ dateInput.setAttribute("min", localDate);
         'https://www.pngmart.com/files/17/Flying-Toothless-Transparent-Background.png',
         'https://www.tbsnews.net/sites/default/files/styles/infograph/public/images/2021/03/18/pngitem_4869353.png',
         'https://content.mycutegraphics.com/graphics/space/alien-flying-ufo.png',
+        'https://www.nicepng.com/png/full/434-4349081_dumbo-flying-with-goggles-portable-network-graphics.png',
+        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3175cc46-8efb-4992-a9c1-d0c0c6f194c4/dhjju9h-df66d794-6854-44ea-81a3-1cc2262cb324.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzMxNzVjYzQ2LThlZmItNDk5Mi1hOWMxLWQwYzBjNmYxOTRjNFwvZGhqanU5aC1kZjY2ZDc5NC02ODU0LTQ0ZWEtODFhMy0xY2MyMjYyY2IzMjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.KC4Up5cSNTBG_JuvClCM6rBVUg0257NZITBX-FnZAj4',
+        'https://www.disneyclips.com/images/images/hercules_pegasus.gif',
+        'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0a071573-3155-4a1f-8610-3289c87744e0/dgjeotl-f020baac-7fd7-4ca0-be82-2595c87dac6d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBhMDcxNTczLTMxNTUtNGExZi04NjEwLTMyODljODc3NDRlMFwvZGdqZW90bC1mMDIwYmFhYy03ZmQ3LTRjYTAtYmU4Mi0yNTk1Yzg3ZGFjNmQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.sV0cXa-o3gYfOzZUMp4gCQehePkiHkSrh_eos4mS5C0',
+        'https://imgproxy.attic.sh/5H_M7UpFmeMa-kqGirC7irvMFKuWmdUKVl6P-OKFU-8/rs:fit:540:540:1:1/t:1:FF00FF:false:false/aHR0cHM6Ly9hdHRp/Yy5zaC8zeHptY3R1/cWR6OWVoYTlpNncw/dmpjcm54c3l4.webp',
+        'https://www.petfed.org/images/blog/harry/Buckbeak.png',
+        'https://www.ambiance-sticker.com/images/Image/sticker-et-velo-volant-ambiance-sticker-cinema-ET-bike-R005.png',
       ];
   
       // If task is marked as completed
