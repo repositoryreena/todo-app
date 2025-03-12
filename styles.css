@@ -537,8 +537,8 @@ select option {
 /* Unicorn flying animation */
 @keyframes flyDiagonal {
   0% {
-    left: -250px; /* Start off-screen to the left */
-    bottom: 0; /* Start at the bottom */
+    bottom: -100px;  /* Start from below the screen */
+    left: 50%; /* Starting from the middle */
     opacity: 1; /* Fully visible */
   }
   50% {
@@ -547,11 +547,14 @@ select option {
     opacity: 1; /* Stay visible in the center */
   }
   100% {
-    left: 100%; /* End off-screen to the right */
-    bottom: 100%; /* End at the top */
+    bottom: 80%; /* End near the top */
+    left: 80%; /* End near the right side */
     opacity: 0; /* Fade out */
   }
 }
+
+
+
 
 /* Unicorn image settings */
 .unicorn {

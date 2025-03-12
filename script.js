@@ -258,6 +258,7 @@ function speak(text) {
 }
 
 // Modify the toggleComplete function to add speech
+// Modify the toggleComplete function to add the flying start from the bottom of the viewport
 function toggleComplete(index) {
   if (index !== null && tasks[index]) {
     tasks[index].completed = !tasks[index].completed; // Toggle the completion status
@@ -290,17 +291,30 @@ function toggleComplete(index) {
       'https://www.petfed.org/images/blog/harry/Buckbeak.png',
       'https://www.ambiance-sticker.com/images/Image/sticker-et-velo-volant-ambiance-sticker-cinema-ET-bike-R005.png',
     ];
-
     // If task is marked as completed
     if (tasks[index].completed) {
       checkmarkCircle.classList.add("checked");
 
       // Show unicorn and make it fly across the page with a random image
       const unicorn = document.querySelector(".unicorn");
-      const randomImage = unicornImages[Math.floor(Math.random() * unicornImages.length)];
-      unicorn.style.animation = "none"; // Reset animation
+
+      // Make sure the unicorn is visible
+      unicorn.style.display = "block";  // Make the unicorn visible
+
+      // Get the position of the bottom of the viewport
+      const viewportHeight = window.innerHeight;
+      
+      // Set initial position of the unicorn at the bottom of the screen
+      unicorn.style.bottom = `-${viewportHeight}px`; // Place it below the viewport
+      unicorn.style.left = `${Math.random() * 100}%`; // Randomize the starting horizontal position
+
+      unicorn.style.animation = "none"; // Reset animation to restart it
       unicorn.offsetHeight; // Trigger reflow to restart the animation
+
+      // Apply the flying animation (now starting from the bottom of the screen)
       unicorn.style.animation = "flyDiagonal 5s forwards"; // Apply the diagonal flying animation
+
+      const randomImage = unicornImages[Math.floor(Math.random() * unicornImages.length)];
       unicorn.style.backgroundImage = `url(${randomImage})`; // Set the random image
 
       // Only flip the first unicorn image (the otter one)
@@ -373,6 +387,8 @@ function toggleComplete(index) {
     renderTasks(); // Re-render the tasks list to reflect changes
   }
 }
+
+
   
   
   
