@@ -324,9 +324,9 @@ function toggleComplete(index) {
       } else if (randomImage === unicornImages[3]) {
         speak("Rise from the ashes and soar higher than ever before.");
       }else if (randomImage === unicornImages[4]) {
-        speak("Supercalifragilisticexpialidocious");
+        speak("Supercalifrajilistickexpialidocious");
       }else if (randomImage === unicornImages[5]) {
-        speak("Adventure is out there!");
+        speak("That’s the stuff!");
       }else if (randomImage === unicornImages[6]) {
         speak("Up, up, and away!");
       }else if (randomImage === unicornImages[7]) {
@@ -345,7 +345,7 @@ function toggleComplete(index) {
         speak("With a little faith and a big heart, anything is possible.");
       }
       else if (randomImage === unicornImages[14]) {
-        speak("Do you trust me?");
+        speak("I'm like a shooting star, I've come so far.");
       }
       else if (randomImage === unicornImages[15]) {
         speak("Wings of freedom, boundless skies.");
@@ -359,7 +359,7 @@ function toggleComplete(index) {
       else if (randomImage === unicornImages[18]) {
         speak("Fly with grace, land with honor.");
       }else if (randomImage === unicornImages[19]) {
-        speak("Be good.")
+        speak("You did it!")
       }
 
       // Remove the rainbow gradient after animation ends
