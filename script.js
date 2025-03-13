@@ -368,7 +368,7 @@ function toggleComplete(index) {
       } else if (randomImage === unicornImages[3]) {
         speak("Rise from the ashes and soar higher than ever before.");
       }else if (randomImage === unicornImages[4]) {
-        speak("Supercalifrajilistickexpialidocious");
+        speak("Super cali fraji listick expi ali docious");
       }else if (randomImage === unicornImages[5]) {
         speak("That’s the stuff!");
       }else if (randomImage === unicornImages[6]) {
