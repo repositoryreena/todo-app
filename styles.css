@@ -11,9 +11,8 @@ body {
 }
 
 li:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
-  
 
 /* General button styling */
 button {
@@ -517,7 +516,6 @@ select option {
 
 /* Unicorn element */
 
-
 /* When the checkmark is checked, trigger the unicorn flying animation */
 .checkmark.checked + .unicorn {
   animation: flyAcross 5s forwards; /* Apply the flying animation */
@@ -534,11 +532,6 @@ select option {
     left: 80%; /* End near the right side */
   }
 }
-
-
-
-
-
 
 @keyframes fly {
   0% {
@@ -558,16 +551,11 @@ select option {
   left: 50%;
   transform: translateX(-50%);
   animation: fly 3s forwards; /* 3s duration for the animation */
-  background-image: url('your-animal-image-url');
   background-size: contain;
   background-repeat: no-repeat;
   width: 200px; /* Adjust to your preferred size */
   height: 200px; /* Adjust to your preferred size */
 }
-
-
-
-
 
 .task-header,
 .task-item {
@@ -707,14 +695,14 @@ select option {
 
 @media (max-width: 767px) {
   .unicorn {
-    width: 150px;  /* Adjust image size for smaller screens */
+    width: 150px; /* Adjust image size for smaller screens */
     height: 150px; /* Adjust image size for smaller screens */
   }
 }
 
 @media (max-width: 480px) {
   .unicorn {
-    width: 120px;  /* Further adjust for very small screens */
+    width: 120px; /* Further adjust for very small screens */
     height: 120px; /* Further adjust for very small screens */
   }
 }
