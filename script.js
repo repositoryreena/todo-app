@@ -98,15 +98,43 @@ dateInput.setAttribute("min", localDate);
   // Filter tasks by category or show all
   function filterTasksByCategory() {
     const selectedCategory = showDropdown.value;
-    const filteredTasks = tasks.filter((task) => {
+    const tasksArray = tasks.filter((task) => {
       return (
         selectedCategory === "ALL" ||
         task.category === selectedCategory ||
         (selectedCategory === "INCOMPLETE" && !task.completed)
       );
     });
-    renderTasks(filteredTasks);
+  
+    // Then, sort the tasks after filtering
+    tasksArray.sort((a, b) => {
+      // Sorting by 'completed' status first
+      const aCompleted = a.completed; // Assuming 'completed' is a boolean property
+      const bCompleted = b.completed;
+  
+      if (aCompleted === bCompleted) {
+        // If both tasks have the same completed status, sort by priority
+        const priorityLevels = {
+          "Critical": 1,
+          "Normal": 2,
+          "Low": 3
+        };
+  
+        const aPriority = a.priority; // Assuming 'priority' is a property on the task object
+        const bPriority = b.priority;
+  
+        // Sort by priority (Critical < Normal < Low)
+        return priorityLevels[aPriority] - priorityLevels[bPriority];
+      }
+  
+      // Otherwise, sort by completed status (incomplete tasks first)
+      return aCompleted - bCompleted;
+    });
+  
+    renderTasks(tasksArray); // Render the sorted tasks
   }
+  
+  
 
   // Sort tasks by date or priority
   function sortTasks() {
