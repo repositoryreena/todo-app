@@ -96,10 +96,12 @@ dateInput.setAttribute("min", localDate);
   }
 
   // Filter tasks by category or show all
+  // Filter tasks by category or show all
   function filterTasksByCategory() {
     const selectedCategory = showDropdown.value;
   
-    const tasksArray = tasks.filter((task) => {
+    // Filter tasks based on the selected category
+    let filteredTasks = tasks.filter((task) => {
       return (
         selectedCategory === "ALL" ||
         task.category === selectedCategory ||
@@ -107,33 +109,33 @@ dateInput.setAttribute("min", localDate);
       );
     });
   
-    // Sorting the tasks (this will only happen once)
-    tasksArray.sort((a, b) => {
-      const aCompleted = a.completed;
-      const bCompleted = b.completed;
+    // If "ALL" is selected, modify the original tasks array in place
+    if (selectedCategory === "ALL") {
+      // Sort the original `tasks` array in place
+      tasks.sort((a, b) => {
+        // First, sort by completion status (Incomplete -> Complete)
+        if (a.completed === b.completed) {
+          // If completion status is the same, sort by priority (Critical -> Normal -> Low)
+          const priorityLevels = { Critical: 1, Normal: 2, Low: 3 };
+          return priorityLevels[a.priority] - priorityLevels[b.priority];
+        } else {
+          return a.completed ? 1 : -1; // Incomplete tasks first
+        }
+      });
+      // After sorting the original array, use it for rendering
+      filteredTasks = [...tasks];  // Update filteredTasks to reflect the sorted `tasks`
+    }
   
-      if (aCompleted === bCompleted) {
-        const priorityLevels = {
-          "Critical": 1,
-          "Normal": 2,
-          "Low": 3
-        };
-  
-        const aPriority = a.priority;
-        const bPriority = b.priority;
-  
-        return priorityLevels[aPriority] - priorityLevels[bPriority];
-      }
-  
-      return aCompleted - bCompleted;
-    });
-  
-    // Only render if the filter/sort changes
-    renderTasks(tasksArray); // Renders once, no need to re-render unless the category/sort is changed
+    // Render the tasks (filtered or sorted, depending on the category)
+    renderTasks(filteredTasks);
   }
   
   
   
+  
+  
+  
+
 
   // Sort tasks by date or priority
   function sortTasks() {
