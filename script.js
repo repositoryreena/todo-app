@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // The tasks will be sorted by completion status and priority within the selected category
   function filterTasksByCategory() {
     const selectedCategory = showDropdown.value;
-
+  
     // Filter tasks based on the selected category
     let filteredTasks = tasks.filter((task) => {
       return (
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
         (selectedCategory === "INCOMPLETE" && !task.completed)
       );
     });
-
+  
     // If "ALL" is selected, modify the original tasks array in place
     if (selectedCategory === "ALL") {
       // Sort the original `tasks` array in place
@@ -148,17 +148,18 @@ document.addEventListener("DOMContentLoaded", () => {
           return a.completed ? 1 : -1; // Incomplete tasks first
         }
       });
-
+  
       // Save the sorted tasks to localStorage
-      localStorage.setItem("sortedTasks", JSON.stringify(tasks));
-
+      saveData(); // Make sure to save the updated tasks after sorting
+  
       // After sorting the original array, use it for rendering
       filteredTasks = [...tasks]; // Update filteredTasks to reflect the sorted `tasks`
     }
-
+  
     // Render the tasks (filtered or sorted, depending on the category)
     renderTasks(filteredTasks);
   }
+  
 
   // Load the tasks from localStorage when the page loads (if available)
   window.addEventListener("DOMContentLoaded", () => {
@@ -169,6 +170,17 @@ document.addEventListener("DOMContentLoaded", () => {
       renderTasks(tasks);
     }
   });
+
+  function loadData() {
+    const savedTasks = localStorage.getItem("tasks");
+    if (savedTasks) {
+      tasks = JSON.parse(savedTasks);
+    }
+    filterTasksByCategory(); // Apply the current filter and render tasks
+  }
+  
+  window.onload = loadData; // Ensure loadData() is called when the page loads
+  
 
   // Sort tasks by date or priority
   // This function will sort the tasks based on the selected option and re-render the tasks list
