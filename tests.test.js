@@ -1,5 +1,4 @@
-// Create a new list item.  Set the text content.  Set a custom attribute.  Return the li element.
-
+// This function takes a taskText and dueDate as arguments and creates a new list item element (li) with the task text and due date. The task text is displayed as the text content of the list item, and the due date is included in parentheses after the task text. The due date is also stored as a data attribute (data-dueDate) on the list item element. If the task text is empty or contains only spaces, the function returns null to indicate that no task should be added to the list. This function helps in creating task items with due dates for display in a task list.
 function addTaskToList(taskText, dueDate) {
   if (!taskText.trim()) {
     return null; // Return null if taskText is empty or only contains spaces
@@ -11,14 +10,12 @@ function addTaskToList(taskText, dueDate) {
   return li;
 }
 
-// Filter the tasks array.  Return a new array containing only the tasks that match the condition provided inside the filter method.  Check if the completed property of each task matches the status passed to the function.  Check if task.completed is equal to status.  If the condition is true, that task will be included in the filtered result.
-
+// This function takes an array of tasks and a status (true or false) as arguments and filters the tasks based on their completion status. It uses the filter method to create a new array containing only tasks that match the specified completion status. The function returns the filtered array of tasks, which can be used to display completed or incomplete tasks separately. This function helps in organizing tasks based on their completion status.
 function filterTasks(tasks, status) {
   return tasks.filter((task) => task.completed === status);
 }
 
-// Remove the task from the original position.  Remove one element starting at the from index.  The splice method returns an array of the removed elements.  Use 0 to access the first and only element from the array returned by splice.  This task is now stored in the variable task and is removed from the tasks array.  Insert the task at the new position.  Return the updated array.
-
+//This function takes an array of tasks, the index of the task to move (fromIndex), and the index to move the task to (toIndex) as arguments. It uses the splice method to remove the task at the fromIndex and then inserts the task at the toIndex in the same array. The function returns the updated array of tasks with the task reordered based on the specified indices. This function enables users to reorder tasks in a list by dragging and dropping them to different positions.
 function reorderTasks(tasks, fromIndex, toIndex) {
   const task = tasks.splice(fromIndex, 1)[0];
   tasks.splice(toIndex, 0, task);
@@ -90,6 +87,7 @@ test("Do not add task with only a date", () => {
 });
 
 // Function to get the priority color based on the priority
+// The getPriorityColor function takes a priority as an argument and returns a corresponding color based on the priority level. It uses an object, priorityColors, to map priority levels (Critical, Normal, and Low) to specific hex color values: red (#ff6f61) for Critical, yellow (#ffcc00) for Normal, and green (#4caf50) for Low. If the function receives an unrecognized priority value, it defaults to returning white (#fff). This function helps in visually indicating different priority levels by color coding.
 function getPriorityColor(priority) {
   const priorityColors = {
     Critical: "#ff6f61",
@@ -109,6 +107,7 @@ test("Get priority color", () => {
 });
 
 // Assuming you have a function that toggles task completion and displays the unicorn animation.
+// The toggleTaskCompletionAndShowUnicorn function is designed to toggle the completion state of a task and trigger a unicorn animation when a task is marked as completed. It takes a taskIndex as an argument, which corresponds to the index of a specific task in a list of elements with the class .task-item. First, it selects the task item and the unicorn element. When called, it toggles the checked class on the selected task, which is typically used to indicate that a task is completed. If the task is marked as completed (i.e., it contains the checked class), the function makes the unicorn visible and applies a flying animation (flyDiagonal) that lasts for 5 seconds. If the task is not completed (i.e., the checked class is removed), the unicorn is hidden. This function combines task management with a fun, animated effect.
 function toggleTaskCompletionAndShowUnicorn(taskIndex) {
   const taskItem = document.querySelectorAll(".task-item")[taskIndex];
   const unicorn = document.querySelector(".unicorn");
@@ -146,6 +145,7 @@ test("Toggle task completion with unicorn flying", () => {
 });
 
 // Function to render categories in a dropdown
+// The renderCategories function populates a dropdown menu with category options based on an array of category names. It takes an array of category names as an argument and appends an option element for each category to the specified dropdown element. This function is useful for dynamically generating category options in a form or selection menu.
 function renderCategories(categories) {
   const categoryDropdown = document.querySelector("#categoryInput");
 
@@ -173,6 +173,7 @@ test("Render categories", () => {
 });
 
 // Function to update the priority dropdown with colors
+// The updatePriorityDropdown function populates a dropdown menu with priority options and assigns a background color to each option based on the priority level. It creates option elements for each priority level (Critical, Normal, Low) and sets the background color of each option to a corresponding color value. This function enhances the visual representation of priority levels in a dropdown menu.
 function updatePriorityDropdown() {
   const priorityDropdown = document.querySelector("#orderByDropdown");
   const priorityColors = [
@@ -205,6 +206,7 @@ test("Update priority dropdown with colors", () => {
 });
 
 // Function to delete a task from the tasks array
+// The deleteTask function removes a task from an array of tasks based on the task index. It uses the splice method to remove the task at the specified index and updates the tasks array in place. This function allows users to delete tasks from a list by providing the index of the task to be removed.
 function deleteTask(tasks, taskIndex) {
   tasks.splice(taskIndex, 1);
 }
@@ -222,6 +224,7 @@ test("Delete task", () => {
 });
 
 // Function to toggle completion and show flying unicorn
+// The toggleComplete function toggles the completion status of a task in a tasks array and visually indicates the completion state by adding or removing a checked class from the corresponding task item. If a task is marked as completed, the function displays a flying unicorn animation by setting the display property of the unicorn element to block and applying a flying animation. When the task is marked as incomplete, the unicorn is hidden by setting the display property to none. This function combines task completion management with a fun visual effect.
 function toggleComplete(index, tasks) {
   const task = tasks[index];
   task.completed = !task.completed;
