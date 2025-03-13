@@ -122,6 +122,10 @@ dateInput.setAttribute("min", localDate);
           return a.completed ? 1 : -1; // Incomplete tasks first
         }
       });
+  
+      // Save the sorted tasks to localStorage
+      localStorage.setItem("sortedTasks", JSON.stringify(tasks));
+  
       // After sorting the original array, use it for rendering
       filteredTasks = [...tasks];  // Update filteredTasks to reflect the sorted `tasks`
     }
@@ -129,6 +133,17 @@ dateInput.setAttribute("min", localDate);
     // Render the tasks (filtered or sorted, depending on the category)
     renderTasks(filteredTasks);
   }
+  
+  // Load the tasks from localStorage when the page loads (if available)
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTasks = localStorage.getItem('sortedTasks');
+    if (savedTasks) {
+      tasks = JSON.parse(savedTasks);
+      // After loading tasks from localStorage, you may want to re-render them
+      renderTasks(tasks);
+    }
+  });
+  
   
   
   
