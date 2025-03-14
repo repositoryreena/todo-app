@@ -517,7 +517,7 @@ select option {
 @keyframes flyDiagonal {
   0% {
     bottom: -800px; /* Start further below the screen */
-    left: 50%; /* Start in the center */
+    left: 0%; /* Start in the center */
   }
   100% {
     bottom: 80%; /* End near the top but with enough room */
@@ -701,5 +701,3 @@ select option {
     height: 150px; /* Adjust image size for smaller screens */
   }
 }
-
-
