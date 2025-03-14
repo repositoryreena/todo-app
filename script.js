@@ -21,6 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   let categories = JSON.parse(localStorage.getItem("categories")) || [];
 
+  // Calculate dynamic bottom position based on the document height
+  const pageHeight = document.documentElement.scrollHeight;
+  const dynamicBottom = Math.min(pageHeight * 0.6, 80); // Adjust as needed
+
+  // Set the CSS custom property for dynamic bottom position
+  document.documentElement.style.setProperty('--dynamic-bottom', `${dynamicBottom}%`);
+
   // Add event listeners
   addTaskButton.addEventListener("click", () => toggleTaskForm(true));
   addCategoryButton.addEventListener("click", () => toggleCategoryForm(true));

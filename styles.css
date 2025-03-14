@@ -516,13 +516,18 @@ select option {
 /* Unicorn flying animation */
 @keyframes flyDiagonal {
   0% {
-    bottom: -800px; /* Start further below the screen */
-    left: 0%; /* Start in the center */
+    bottom: 0%; /* Start at the bottom left */
+    left: 0%;   /* Start at the bottom left */
   }
   100% {
-    bottom: 80%; /* End near the top but with enough room */
-    left: 80%; /* End near the right side */
+    bottom: 80%; /* End near the top, but you can adjust as needed */
+    left: 80%;   /* End near the right side */
   }
+}
+
+.fly {
+  position: absolute;
+  animation: flyDiagonal 10s infinite;
 }
 
 @keyframes fly {
