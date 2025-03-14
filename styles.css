@@ -495,11 +495,16 @@ select option {
 @keyframes flyAcross {
   0% {
     left: -250px; /* Start off-screen to the left */
+    bottom: -250px;
   }
   100% {
     left: 100%; /* Move to the right edge of the page */
+    bottom: 0; /* Adjust bottom to stay in view */
   }
 }
+
+
+
 
 /* Unicorn element */
 
@@ -511,7 +516,7 @@ select option {
 /* Unicorn flying animation */
 @keyframes flyDiagonal {
   0% {
-    bottom: -200px; /* Start further below the screen */
+    bottom: -800px; /* Start further below the screen */
     left: 50%; /* Start in the center */
   }
   100% {
