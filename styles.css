@@ -544,6 +544,7 @@ select option {
   transform: translateX(
     -50%
   ); /* Offset the unicorn by 50% of its width to perfectly center it */
+  
   animation: fly 3s forwards; /* Apply the 'fly' animation with a 3-second duration, and keep the final state after the animation completes */
   background-size: contain; /* Ensure the unicorn image is scaled to fit within the container without being distorted */
   background-repeat: no-repeat; /* Prevent the background image from repeating */
@@ -616,7 +617,6 @@ select option {
 
   .task-header span,
   .task-item span {
-    width: 100%; /* Set each span element to take up the full width */
     text-align: left; /* Align text to the left for better readability on mobile */
     padding: 5px; /* Add padding inside the spans for spacing */
   }
@@ -650,13 +650,13 @@ select option {
     flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
   }
 
-  /* Allow text to wrap within each span */
+  /* Adjust the width and wrapping of task item spans */
   .task-item span {
     white-space: normal; /* Allow text to break and wrap naturally */
     overflow: hidden; /* Hide overflowed text that doesn’t fit within the container */
     text-overflow: ellipsis; /* Add ellipsis (…) for text that overflows */
     margin-right: 5px; /* Reduced space between the spans */
-    width: 20%; /* Set a maximum width for each span */
+    flex-basis: 100%; /* Allow each span to take up the full width of the container */
     font-size: 14px; /* Keep font size consistent with other items */
   }
 
@@ -688,6 +688,11 @@ select option {
   .delete-btn-container {
     margin-left: 2px; /* Reduce space for delete button on small screens */
   }
+
+  .unicorn {
+    width: 120px; /* Further adjust for very small screens */
+    height: 120px; /* Further adjust for very small screens */
+  }
 }
 
 @media (max-width: 767px) {
@@ -697,9 +702,4 @@ select option {
   }
 }
 
-@media (max-width: 480px) {
-  .unicorn {
-    width: 120px; /* Further adjust for very small screens */
-    height: 120px; /* Further adjust for very small screens */
-  }
-}
+
