@@ -270,7 +270,7 @@ body.task-checked {
     #bae1ff,
     #d6a7ff
   );
-  background-size: 100% 100%; /* Ensures the gradient stretches across */
+  background-size: 300% 300%; /* Ensures the gradient stretches across */
   animation: rainbow-background 3s ease-out forwards; /* Add animation for smooth transition */
 }
 

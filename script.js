@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   let categories = JSON.parse(localStorage.getItem("categories")) || [];
 
+  let filteredTasks = []
+
   // Calculate dynamic bottom position based on the document height
   const pageHeight = document.documentElement.scrollHeight;
   const dynamicBottom = Math.min(pageHeight * 0.6, 80); // Adjust as needed
@@ -113,52 +115,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedCategory = showDropdown.value;
 
     // Filter tasks based on the selected category
-    let filteredTasks = tasks.filter((task) => {
-      return (
-        selectedCategory === "ALL" ||
-        task.category === selectedCategory ||
-        (selectedCategory === "INCOMPLETE" && !task.completed)
-      );
+    filteredTasks = tasks.filter((task) => {
+        return (
+            selectedCategory === "ALL" ||
+            task.category === selectedCategory ||
+            (selectedCategory === "INCOMPLETE" && !task.completed)
+        );
     });
 
-    // If "ALL" is selected, modify the original tasks array in place
+    // If "ALL" is selected, sort the original `tasks` array in place
     if (selectedCategory === "ALL") {
-      // Sort the original `tasks` array in place
-      tasks.sort((a, b) => {
-        // First, sort by completion status (Incomplete -> Complete)
-        if (a.completed === b.completed) {
-          // If completion status is the same, sort by priority (Critical -> Normal -> Low)
-          const priorityLevels = { Critical: 1, Normal: 2, Low: 3 };
-          return priorityLevels[a.priority] - priorityLevels[b.priority];
-        } else {
-          return a.completed ? 1 : -1; // Incomplete tasks first
-        }
-      });
-      // After sorting the original array, use it for rendering
-      filteredTasks = [...tasks]; // Update filteredTasks to reflect the sorted `tasks`
+        tasks.sort((a, b) => {
+            // First, sort by completion status (Incomplete -> Complete)
+            if (a.completed === b.completed) {
+                // If completion status is the same, sort by priority (Critical -> Normal -> Low)
+                const priorityLevels = { Critical: 1, Normal: 2, Low: 3 };
+                return priorityLevels[a.priority] - priorityLevels[b.priority];
+            } else {
+                return a.completed ? 1 : -1; // Incomplete tasks first
+            }
+        });
+        // After sorting the original array, update the filteredTasks array
+        filteredTasks = [...tasks]; // Update filteredTasks to reflect the sorted `tasks`
     }
 
-    // Render the tasks (filtered or sorted, depending on the category)
+    // Render the filtered tasks
     renderTasks(filteredTasks);
-  }
+}
 
   // Sort tasks by date or priority
   // The sortTasks function sorts the tasks based on the user's selection from a dropdown (orderByDropdown). It first retrieves the selected sorting option (sortBy), which can either be "DATE" or "PRIORITY". If "DATE" is selected, it creates a sorted version of the tasks array, ordering the tasks by their due date (earliest to latest). If "PRIORITY" is selected, it sorts the tasks based on priority, with "Critical" having the highest priority, followed by "Normal" and "Low" priorities. The sorting is done by creating a shallow copy of the tasks array to avoid modifying the original array directly. Once sorted, it calls renderTasks to update the task display with the sorted tasks. This function enables the user to view tasks sorted by either their due date or priority.
   function sortTasks() {
     const sortBy = orderByDropdown.value;
     let sortedTasks;
+
     if (sortBy === "DATE") {
-      sortedTasks = [...tasks].sort(
-        (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
-      );
+        sortedTasks = [...filteredTasks].sort(
+            (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+        );
     } else if (sortBy === "PRIORITY") {
-      const priorityLevels = { Critical: 1, Normal: 2, Low: 3 };
-      sortedTasks = [...tasks].sort(
-        (a, b) => priorityLevels[a.priority] - priorityLevels[b.priority]
-      );
+        const priorityLevels = { Critical: 1, Normal: 2, Low: 3 };
+        sortedTasks = [...filteredTasks].sort(
+            (a, b) => priorityLevels[a.priority] - priorityLevels[b.priority]
+        );
     }
+
+    // Render the sorted tasks
     renderTasks(sortedTasks);
-  }
+}
 
   // Render tasks in the list
   // The renderTasks function is responsible for displaying a list of tasks on the webpage, updating the task list based on the provided taskListData (or the default tasks array). It first clears the current task list in the taskList container. Then, it creates and appends a header with column labels (Item Name, Due Date, Priority, Category, Complete, and Delete). After that, it iterates over each task in the provided data, generating a new list item (li) for each task.
