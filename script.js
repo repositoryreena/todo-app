@@ -270,19 +270,20 @@ document.addEventListener("DOMContentLoaded", () => {
   // The getCategoryColor function returns a pastel color based on the index of a category. It takes a categoryIndex parameter and uses an array (pastelColors) that contains several light pastel color values. The function ensures that it cycles through the array of pastel colors by using the modulo operator (%). This means that if the categoryIndex exceeds the length of the pastelColors array, it will loop back to the beginning, providing a repeating set of pastel colors. This function is typically used to assign a unique color to each category, ensuring a visually distinct but soft color scheme for different categories.
   function getCategoryColor(categoryIndex) {
     const pastelColors = [
-      "#F8C8DC",
-      "#F9F9C8",
-      "#F5E1FF",
-      "#D8F1F2",
-      "#E1F7D5",
-      "#F0F0D4", // Lighter pastel colors
-      "#F8C8DC",
-      "#F9F9C8",
-      "#F5E1FF",
-      "#D8F1F2",
-      "#E1F7D5",
-      "#F0F0D4", // Repeat for more variety
+      "#D0E1F9",  // Light pastel blue
+      "#D9C9F5",  // Light pastel lavender
+      "#B6D0E2",  // Light pastel blue-gray
+      "#D1E2E3",  // Light pastel aqua
+      "#D8D1F3",  // Soft pastel periwinkle
+      "#D1D1D1",  // Light pastel gray
+      "#C2D9F1",  // Soft pastel light blue
+      "#D8C9F1",  // Light lavender with blue tint
+      "#C7D3F1",  // Soft pastel light blue
+      "#E0D3F4",  // Pastel lilac-gray
+      "#D3D6D6",  // Soft pastel grayish blue
+      "#BFD1F0",  // Light pastel soft blue
     ];
+    
     return pastelColors[categoryIndex % pastelColors.length]; // Cycle through pastel colors
   }
 

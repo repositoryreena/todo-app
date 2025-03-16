@@ -54,29 +54,30 @@ select {
 /* Dynamic pastel rainbow colors for dropdown options */
 /* The nth-child(6n+1) selector is a CSS trick to create a repeating cycle for the colors. It applies the background color to every 6th item in the list, starting from the first. */
 
-select option:nth-child(6n + 1) {
-  background-color: #ffb3ba; /* Pastel pink */
+.bubble.category:nth-child(6n + 1) {
+  background-color: #d0e1f9; /* Light pastel blue */
 }
 
-select option:nth-child(6n + 2) {
-  background-color: #ffdfba; /* Pastel orange */
+.bubble.category:nth-child(6n + 2) {
+  background-color: #f5e1a4; /* Soft pastel gold */
 }
 
-select option:nth-child(6n + 3) {
-  background-color: #ffffba; /* Pastel yellow */
+.bubble.category:nth-child(6n + 3) {
+  background-color: #d9c9f5; /* Light pastel lavender */
 }
 
-select option:nth-child(6n + 4) {
-  background-color: #baffc9; /* Pastel green */
+.bubble.category:nth-child(6n + 4) {
+  background-color: #c3f0c3; /* Light pastel teal */
 }
 
-select option:nth-child(6n + 5) {
-  background-color: #bae1ff; /* Pastel blue */
+.bubble.category:nth-child(6n + 5) {
+  background-color: #e1d5f1; /* Soft pastel mauve */
 }
 
-select option:nth-child(6n + 6) {
-  background-color: #d6a7ff; /* Pastel purple */
+.bubble.category:nth-child(6n + 6) {
+  background-color: #f3d1e2; /* Soft pastel coral */
 }
+
 
 .container {
   display: flex; /* Use flexbox layout to arrange the child elements */
@@ -234,28 +235,30 @@ body.rainbow-gradient {
 
 /* Specific color for categories based on index */
 .bubble.category:nth-child(6n + 1) {
-  background-color: #ffb3ba; /* Pastel pink */
+  background-color: #d0e1f9; /* Light pastel blue */
 }
 
 .bubble.category:nth-child(6n + 2) {
-  background-color: #ffdfba; /* Pastel orange */
+  background-color: #f5e1a4; /* Soft pastel gold */
 }
 
 .bubble.category:nth-child(6n + 3) {
-  background-color: #ffffba; /* Pastel yellow */
+  background-color: #d9c9f5; /* Light pastel lavender */
 }
 
 .bubble.category:nth-child(6n + 4) {
-  background-color: #baffc9; /* Pastel green */
+  background-color: #c3f0c3; /* Light pastel teal */
 }
 
 .bubble.category:nth-child(6n + 5) {
-  background-color: #bae1ff; /* Pastel blue */
+  background-color: #e1d5f1; /* Soft pastel mauve */
 }
 
 .bubble.category:nth-child(6n + 6) {
-  background-color: #d6a7ff; /* Pastel purple */
+  background-color: #f3d1e2; /* Soft pastel coral */
 }
+
+
 
 body.task-checked {
   background: linear-gradient(
@@ -593,9 +596,7 @@ select option {
   background-color: #ff6f61; /* Red */
 }
 
-.category {
-  background-color: #f8c8dc; /* Pink-ish */
-}
+
 
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
