@@ -286,7 +286,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return pastelColors[categoryIndex % pastelColors.length]; // Cycle through pastel colors
   }
 
-  // Toggle task completion
   // Function to speak text using the Web Speech API
   // The speak function uses the Web Speech API to convert text into speech. It takes a text parameter, which is the content to be spoken. The function creates a new SpeechSynthesisUtterance object, which represents the speech to be synthesized. The lang property of the speech object is set to "en-US" to specify the language as English (US). Finally, the window.speechSynthesis.speak(speech) method is called to initiate the speech synthesis, causing the text to be read aloud by the browser. This function is typically used to add text-to-speech functionality to web applications.
   function speak(text) {
@@ -370,50 +369,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Speak based on the image
         if (randomImage === unicornImages[0]) {
-          speak("Stay otterly awesome!");
+          speak("Great job, you're on fire!");
         } else if (randomImage === unicornImages[1]) {
-          speak("Believe in magic.");
+          speak("Awesome! Keep it up, you're going places!");
         } else if (randomImage === unicornImages[2]) {
-          speak("I'm just here for the sparkle.");
+          speak("You're crushing it, amazing work!");
         } else if (randomImage === unicornImages[3]) {
-          speak("Rise from the ashes and soar higher than ever before.");
+          speak("Fantastic effort, you're unstoppable!");
         } else if (randomImage === unicornImages[4]) {
-          speak("Super cali fraji listick expi ali docious");
+          speak("Incredible! You're making waves!");
         } else if (randomImage === unicornImages[5]) {
-          speak("That’s the stuff!");
+          speak("You're doing awesome, keep shining!");
         } else if (randomImage === unicornImages[6]) {
-          speak("Up, up, and away!");
+          speak("You're going places, keep up the great work!");
         } else if (randomImage === unicornImages[7]) {
-          speak("Even the smallest of dreams can soar high.");
+          speak("Well done! You're on the path to greatness!");
         } else if (randomImage === unicornImages[8]) {
-          speak("Fuel your dreams and shoot for the stars.");
+          speak("Keep it up, you're nailing it!");
         } else if (randomImage === unicornImages[9]) {
-          speak("Let your spirit fly as high as the winds take you.");
+          speak("You're amazing, keep pushing forward!");
         } else if (randomImage === unicornImages[10]) {
-          speak("Together, we’ll fly into the unknown.");
+          speak("Awesome work! You're making an impact!");
         } else if (randomImage === unicornImages[11]) {
-          speak(
-            "All it takes is faith, trust, and a little bit of pixie dust."
-          );
+          speak("You're rocking it! Keep up the fantastic work!");
         } else if (randomImage === unicornImages[12]) {
-          speak("The sky is not the limit—it’s just the beginning.");
+          speak("Incredible! You’re doing great things!");
         } else if (randomImage === unicornImages[13]) {
-          speak("With a little faith and a big heart, anything is possible.");
+          speak("You're doing amazing, keep up the momentum!");
         } else if (randomImage === unicornImages[14]) {
-          speak("I'm like a shooting star, I've come so far.");
+          speak("You're killing it! Keep going!");
         } else if (randomImage === unicornImages[15]) {
-          speak("Wings of freedom, boundless skies.");
+          speak("You're shining bright, awesome work!");
         } else if (randomImage === unicornImages[16]) {
-          speak("To infinity and beyond!");
+          speak("Great job, keep up the awesome effort!");
         } else if (randomImage === unicornImages[17]) {
-          speak("Diagonally");
+          speak("You're unstoppable, keep pushing forward!");
         } else if (randomImage === unicornImages[18]) {
-          speak("Fly with grace, land with honor.");
+          speak("Incredible job, you're heading straight for success!");
         } else if (randomImage === unicornImages[19]) {
-          speak("You did it!");
+          speak("You're on fire! Keep going strong!");
         } else if (randomImage === unicornImages[20]) {
-          speak("You've made your wish a reality! Keep shining bright!");
+          speak("Fantastic! You're on your way to greatness!");
         }
+        
 
         // Remove the rainbow gradient after animation ends
         setTimeout(() => {

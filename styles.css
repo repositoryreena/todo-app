@@ -1,5 +1,5 @@
 /* Reset default browser styles */
-body {
+body { 
   font-family: "Courier New", Courier, monospace; /* Set the font to "Courier New" as the primary, and fall back to Courier or monospace if unavailable */
   background-color: #e0f7ff; /* Set the background color to a light blue (#e0f7ff) */
   color: #333; /* Set the text color to a dark gray (#333) for readability */
@@ -134,7 +134,7 @@ span {
   margin-right: 10px; /* Add 10px of space to the right of the span element */
 }
 
-.task-item.completed {
+.task-item.completed { 
   background: linear-gradient(
     135deg,
     #ffb3ba,
@@ -205,18 +205,19 @@ body.rainbow-gradient {
 
 /* For low priority (green) */
 .bubble.priority.low {
-  background-color: #60b83f; /* Green background */
+  background-color: #d9ffd9; /* Green background */
+  color: black;
 }
 
 /* For normal priority (yellow) */
 .bubble.priority.medium {
-  background-color: #f2d35f; /* Yellow background */
+  background-color: #ffffe0; /* Yellow background */
   color: black; /* Ensure black text on yellow background */
 }
 
 /* For critical priority (red) */
 .bubble.priority.high {
-  background-color: #f15b5b; /* Red background */
+  background-color: #ffd6d6; /* Red background */
   color: black; /* Ensure black text */
 }
 
@@ -266,7 +267,7 @@ body.task-checked {
     #bae1ff,
     #d6a7ff
   );
-  background-size: 300% 300%; /* Ensures the gradient stretches across */
+  background-size: 100% 100%; /* Ensures the gradient stretches across */
   animation: rainbow-background 3s ease-out forwards; /* Add animation for smooth transition */
 }
 
@@ -436,20 +437,7 @@ body {
 }
 
 /* Pastel-colored bubbles for priority */
-.bubble.priority.low {
-  background-color: #a8d8d8; /* Pastel light teal for low priority */
-  color: #2d4a4a; /* Darker teal text for contrast */
-}
 
-.bubble.priority.medium {
-  background-color: #f1c6a4; /* Pastel peach for medium priority */
-  color: #5a3c1d; /* Darker brownish text */
-}
-
-.bubble.priority.high {
-  background-color: #f7c1b5; /* Pastel pink for high priority */
-  color: #a74b4c; /* Darker red for text */
-}
 
 /* Pastel-colored bubbles for categories */
 .bubble.category {

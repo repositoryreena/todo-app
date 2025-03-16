@@ -99,6 +99,7 @@ function getPriorityColor(priority) {
 }
 
 // Test for Get priority color
+// This test verifies that the getPriorityColor function returns the correct color values for different priority levels. It checks the color values for Critical, Normal, Low, and a non-existent priority. The function should return the corresponding color value for known priorities and default to white (#fff) for unknown priorities.
 test("Get priority color", () => {
   expect(getPriorityColor("Critical")).toBe("#ff6f61");
   expect(getPriorityColor("Normal")).toBe("#ffcc00");
@@ -125,6 +126,7 @@ function toggleTaskCompletionAndShowUnicorn(taskIndex) {
 }
 
 // Test for Toggle task completion with unicorn flying
+// This test checks the behavior of the toggleTaskCompletionAndShowUnicorn function when toggling the completion state of a task. It simulates the process of marking a task as completed and then toggling it back to an incomplete state. The test verifies that the unicorn animation is displayed when a task is marked as completed and hidden when the task is incomplete. The function should show the unicorn flying animation when a task is completed and hide the unicorn when the task is incomplete.
 test("Toggle task completion with unicorn flying", () => {
   document.body.innerHTML = `
         <div class="task-item">Task 1</div>
@@ -157,6 +159,7 @@ function renderCategories(categories) {
 }
 
 // Test for Render categories
+// This test verifies that the renderCategories function correctly populates a dropdown menu with category options based on an array of category names. It creates a dropdown element with the id categoryInput and calls the renderCategories function with an array of category names. The test checks that the dropdown menu contains the correct number of options and that each option has the expected text content. 
 test("Render categories", () => {
   document.body.innerHTML = `<select id="categoryInput"></select>`;
 
