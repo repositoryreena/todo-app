@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
   // Sort tasks by date or priority
-  // The sortTasks function sorts a list of tasks based on the selected sorting criterion, which is determined by the value of a dropdown (orderByDropdown). If the selected criterion is "DATE", the tasks are sorted by their dueDate in ascending order, using the JavaScript Date object for comparison. If the criterion is "PRIORITY", the tasks are sorted based on predefined priority levels, with "Critical" having the highest priority, followed by "Normal", and "Low" having the lowest. The function creates a copy of the filteredTasks array to avoid directly modifying it, sorts the tasks accordingly, and then calls the renderTasks function to display the sorted list.
+  // The sortTasks function sorts an array of tasks based on the selected sorting criterion from a dropdown menu. It first checks whether there are any filtered tasks available (i.e., tasks that match a specific filter), and if not, it falls back to the original tasks array. Depending on the value selected in the dropdown ("DATE" or "PRIORITY"), the function either sorts the tasks by their due date or by their priority level. For sorting by date, it compares the dueDate of each task, while for priority, it uses a predefined ranking for the priority levels (Critical, Normal, Low). After sorting, the function calls renderTasks to display the sorted list of tasks.
   function sortTasks() {
     const sortBy = orderByDropdown.value;
     let sortedTasks;
@@ -250,15 +250,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const draggedIndex = e.dataTransfer.getData("text/plain");
         const targetIndex = e.target.closest("li").dataset.index;
 
-        // Swap tasks in the array and re-render
-        const draggedTask = tasks[draggedIndex];
-        tasks.splice(draggedIndex, 1);
-        tasks.splice(targetIndex, 0, draggedTask);
-        saveData();
-        renderTasks();
+        // Swap tasks in the correct array (either tasks or filteredTasks)
+        const sourceArray = taskListData === tasks ? tasks : filteredTasks;
+        const draggedTask = sourceArray[draggedIndex];
+        
+        // Remove the dragged task and add it to the new position
+        sourceArray.splice(draggedIndex, 1);
+        sourceArray.splice(targetIndex, 0, draggedTask);
+        
+        saveData(); // Persist changes
+        renderTasks(filteredTasks.length ? filteredTasks : tasks); // Re-render with correct list
       });
     });
-  }
+}
+
 
   // Helper function to get the background color for the priority
   // The getPriorityColor function returns a color based on the priority level of a task. It takes a priority parameter and uses an object (priorityColors) to map the priority levels to specific colors: red (#ff6f61) for "Critical," yellow (#ffcc00) for "Normal," and green (#4caf50) for "Low." If the provided priority does not match any of the predefined values, the function defaults to returning white (#fff). This function is typically used to visually represent the priority of tasks by assigning a corresponding color.
