@@ -22,7 +22,7 @@ describe('example to-do app', () => {
 
   
 
-  it('should add a category, add a task, check a task', () => {
+  it('should add a category, add a task, check a task, show all, show incomplete, order within whatevers displayed', () => {
 
     cy.get('#add-category-btn').click();
     cy.get('#category-form').should('be.visible');
@@ -76,8 +76,14 @@ describe('example to-do app', () => {
 
     cy.get("#order-dropdown").select("Date");
     cy.get("#task-list").children().eq(1).should("contain", "Test Task 2");
+    cy.get("#task-list").children().eq(2).should("contain", "Test Task 3");
 
-    
+    cy.get("#order-dropdown").select("Priority");
+    cy.get("#task-list").children().eq(1).should("contain", "Test Task 2");
+    cy.get("#task-list").children().eq(2).should("contain", "Test Task 3");
+
+    cy.get("#show-dropdown").select("Test Category");
+    cy.get("#task-list").children().should("have.length", 4);
 
   })
 
