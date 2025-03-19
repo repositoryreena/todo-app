@@ -167,9 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // Render tasks in the list
-  // The renderTasks function is responsible for displaying a list of tasks on the webpage, updating the task list based on the provided taskListData (or the default tasks array). It first clears the current task list in the taskList container. Then, it creates and appends a header with column labels (Item Name, Due Date, Priority, Category, Complete, and Delete). After that, it iterates over each task in the provided data, generating a new list item (li) for each task.
-  // For each task, the function sets up task details such as text, due date, priority (with different classes based on priority level), and category (with a corresponding color). It also adds a checkmark to indicate whether the task is completed and a delete button to remove the task. These elements are made interactive through event listeners: clicking the checkmark toggles the completion status, while clicking the delete button removes the task. Additionally, each task item is made draggable, with event listeners for drag-and-drop functionality. When a task is dragged and dropped, the order of tasks is updated, and the changes are saved.
-  // Finally, the function calls renderTasks again after any changes, ensuring the task list is dynamically updated with each action, such as sorting, adding, completing, or deleting tasks. This function handles the dynamic display and interaction of tasks, including their sorting, dragging, and task management features.
+  // The renderTasks function dynamically renders a list of tasks (either the full tasks array or the filteredTasks array) into a task list element in the DOM. It first clears the existing list and adds a header with task categories like "Item Name," "Due Date," "Priority," "Category," "Complete," and "Delete." For each task, it creates a list item (<li>) that displays the task's details, such as text, due date, priority (with a corresponding class for styling), category (with a background color), and a checkmark for completion status. It also includes a delete button and makes the list item draggable. Event listeners are added for completing tasks (by clicking the checkmark), deleting tasks, and for handling drag-and-drop functionality. The drag events allow tasks to be moved within the list, updating the appropriate array (tasks or filteredTasks) when the task is dropped, and the list is re-rendered accordingly. The function ensures that the task list is always up-to-date with the latest state, including any changes made through task completion, deletion, or drag-and-drop actions.
   function renderTasks(taskListData = tasks) {
     taskList.innerHTML = ""; // Clear current task list
 
@@ -265,16 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
 
-  // Helper function to get the background color for the priority
-  // The getPriorityColor function returns a color based on the priority level of a task. It takes a priority parameter and uses an object (priorityColors) to map the priority levels to specific colors: red (#ff6f61) for "Critical," yellow (#ffcc00) for "Normal," and green (#4caf50) for "Low." If the provided priority does not match any of the predefined values, the function defaults to returning white (#fff). This function is typically used to visually represent the priority of tasks by assigning a corresponding color.
-  function getPriorityColor(priority) {
-    const priorityColors = {
-      Critical: "#ff6f61", // Red for Critical
-      Normal: "#ffcc00", // Yellow for Normal
-      Low: "#4caf50", // Green for Low
-    };
-    return priorityColors[priority] || "#fff"; // Default to white if undefined
-  }
+
 
   // Function to get category color based on index (cycled)
   // Helper function to get the background color for the category
