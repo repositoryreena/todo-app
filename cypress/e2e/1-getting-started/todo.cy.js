@@ -34,11 +34,17 @@ describe('example to-do app', () => {
 
     cy.get('#add-task-btn').click();
     cy.get('#task-form').should('be.visible');
+    cy.get('#task-form').should('be.visible');
     cy.get('#task-input').type('Test Task');
     cy.get('#date-input').type('2021-12-12');
     cy.get('#category-input').select('Test Category');
     cy.get('#priority-input').select('Critical');
     cy.get('#task-ok-btn').click();
+    cy.get('#task-list').should('contain', 'Test Task');
+    cy.get('#task-list').should('contain', '2021-12-12');
+    cy.get('#task-list').should('contain', 'Test Category');
+    cy.get('#task-list').should('contain', 'Critical');
+    cy.get('#task-form').should('be.hidden');
 
     cy.get('#add-task-btn').click();
     cy.get('#task-form').should('be.visible');
