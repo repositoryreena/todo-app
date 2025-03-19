@@ -22,7 +22,7 @@ describe('example to-do app', () => {
 
   
 
-  it('should add a category, add a task', () => {
+  it('should add a category, add a task, check a task', () => {
 
     cy.get('#add-category-btn').click();
     cy.get('#category-form').should('be.visible');

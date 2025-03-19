@@ -307,6 +307,39 @@ document.addEventListener("DOMContentLoaded", () => {
       const taskItem = taskList.children[index + 1]; // Skip the header
       const checkmarkCircle = taskItem.querySelector(".inner-circle");
 
+      if (tasks[index].completed && tasks[index].priority === "Critical") {
+        const criticalMessages = [
+            "Fantastic! You've conquered a critical task! You're a star!",
+            "Incredible! You've nailed a critical task! Keep up the amazing work!",
+            "Outstanding! Completing a critical task like this takes true focus!",
+            "Boom! Critical task done! You're unstoppable!",
+            "Wow! You've smashed that critical task! You're on fire!"
+        ];
+        const randomMessage = criticalMessages[Math.floor(Math.random() * criticalMessages.length)];
+        speak(randomMessage); // Random critical task message
+    } else if (tasks[index].completed && tasks[index].priority === "Normal") {
+        const normalMessages = [
+            "Great job! Task completed! You're doing well.",
+            "Nice work! Another task down!",
+            "Well done! You’re staying on track with your tasks!",
+            "Good job! Task completed, keep it up!",
+            "Great! Task completed! One step closer to the goal."
+        ];
+        const randomMessage = normalMessages[Math.floor(Math.random() * normalMessages.length)];
+        speak(randomMessage); // Random normal task message
+    } else if (tasks[index].completed && tasks[index].priority === "Low") {
+        const lowMessages = [
+            "Nicely done! That was a small one, but still important!",
+            "Good job! That task may have been small, but it counts!",
+            "Well done! Nice job with that low-priority task!",
+            "Nice! A quick win with that low-priority task!",
+            "Good work! Low-priority task completed!"
+        ];
+        const randomMessage = lowMessages[Math.floor(Math.random() * lowMessages.length)];
+        speak(randomMessage); // Random low-priority task message
+    }
+    
+
       // Array of unicorn images
       const unicornImages = [
         "https://images.vexels.com/media/users/3/300422/isolated/preview/13b76e494fb4c3be066067eb87211a9e-cute-otters-holding-hands.png",
@@ -368,50 +401,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Add the rainbow gradient to the body
         document.body.classList.add("task-checked");
 
-        // Speak based on the image
-        if (randomImage === unicornImages[0]) {
-          speak("Great job, you're on fire!");
-        } else if (randomImage === unicornImages[1]) {
-          speak("Awesome! Keep it up, you're going places!");
-        } else if (randomImage === unicornImages[2]) {
-          speak("You're crushing it, amazing work!");
-        } else if (randomImage === unicornImages[3]) {
-          speak("Fantastic effort, you're unstoppable!");
-        } else if (randomImage === unicornImages[4]) {
-          speak("Incredible! You're making waves!");
-        } else if (randomImage === unicornImages[5]) {
-          speak("You're doing awesome, keep shining!");
-        } else if (randomImage === unicornImages[6]) {
-          speak("You're going places, keep up the great work!");
-        } else if (randomImage === unicornImages[7]) {
-          speak("Well done! You're on the path to greatness!");
-        } else if (randomImage === unicornImages[8]) {
-          speak("Keep it up, you're nailing it!");
-        } else if (randomImage === unicornImages[9]) {
-          speak("You're amazing, keep pushing forward!");
-        } else if (randomImage === unicornImages[10]) {
-          speak("Awesome work! You're making an impact!");
-        } else if (randomImage === unicornImages[11]) {
-          speak("You're rocking it! Keep up the fantastic work!");
-        } else if (randomImage === unicornImages[12]) {
-          speak("Incredible! You’re doing great things!");
-        } else if (randomImage === unicornImages[13]) {
-          speak("You're doing amazing, keep up the momentum!");
-        } else if (randomImage === unicornImages[14]) {
-          speak("You're killing it! Keep going!");
-        } else if (randomImage === unicornImages[15]) {
-          speak("You're shining bright, awesome work!");
-        } else if (randomImage === unicornImages[16]) {
-          speak("Great job, keep up the awesome effort!");
-        } else if (randomImage === unicornImages[17]) {
-          speak("You're unstoppable, keep pushing forward!");
-        } else if (randomImage === unicornImages[18]) {
-          speak("Incredible job, you're heading straight for success!");
-        } else if (randomImage === unicornImages[19]) {
-          speak("You're on fire! Keep going strong!");
-        } else if (randomImage === unicornImages[20]) {
-          speak("Fantastic! You're on your way to greatness!");
-        }
+        
+
         
 
         // Remove the rainbow gradient after animation ends
