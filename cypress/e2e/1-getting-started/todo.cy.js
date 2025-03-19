@@ -46,6 +46,9 @@ describe('example to-do app', () => {
     cy.get('#task-list').should('contain', 'Critical');
     cy.get('#task-form').should('be.hidden');
 
+    cy.get('.inner-circle').click();
+    cy.get('#task-list').should('contain', "✔");
+
     cy.get('#add-task-btn').click();
     cy.get('#task-form').should('be.visible');
     cy.get('#task-input').type('Test Task');
@@ -61,6 +64,8 @@ describe('example to-do app', () => {
     cy.get('#category-input').select('Test Category');
     cy.get('#priority-input').select('Low');
     cy.get('#task-ok-btn').click();
+
+    
 
     
 
