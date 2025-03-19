@@ -71,6 +71,12 @@ describe('example to-do app', () => {
     cy.get('#task-list').children().eq(2).should('contain', 'Test Task 3');
     cy.get('#task-list').children().eq(3).should('contain', 'Test Task 1');
 
+    cy.get("#show-dropdown").select("Incomplete");
+    cy.get("#task-list").children().should("have.length", 3);
+
+    cy.get("#order-dropdown").select("Date");
+    cy.get("#task-list").children().eq(1).should("contain", "Test Task 2");
+
     
 
   })

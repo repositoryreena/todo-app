@@ -482,17 +482,22 @@ select option {
   color: #555; /* Darker text for contrast */
 }
 
-/* Unicorn flying animation */
 @keyframes flyAcross {
   0% {
     left: -250px; /* Start off-screen to the left */
-    bottom: -250px;
+    bottom: -250px; /* Start below the viewport */
+    visibility: visible; /* Make sure it's visible at the start */
   }
   100% {
-    left: 100%; /* Move to the right edge of the page */
-    bottom: 0; /* Adjust bottom to stay in view */
+    left: 200vw; /* Move far beyond the right side of the screen */
+    bottom: -250px; /* Keep it out of the visible area at the bottom */
+    visibility: hidden; /* Make it disappear when the animation is complete */
   }
 }
+
+
+
+
 
 
 
@@ -511,8 +516,8 @@ select option {
     left: 0%;   /* Start at the bottom left */
   }
   100% {
-    bottom: 80%; /* End near the top, but you can adjust as needed */
-    left: 80%;   /* End near the right side */
+    bottom: 100%; /* End near the top, but you can adjust as needed */
+    left: 100%;   /* End near the right side */
   }
 }
 
