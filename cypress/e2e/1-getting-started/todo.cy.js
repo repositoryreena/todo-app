@@ -34,6 +34,27 @@ describe('example to-do app', () => {
 
     cy.get('#add-task-btn').click();
     cy.get('#task-form').should('be.visible');
+    cy.get('#task-input').type('Test Task');
+    cy.get('#date-input').type('2021-12-12');
+    cy.get('#category-input').select('Test Category');
+    cy.get('#priority-input').select('Critical');
+    cy.get('#task-ok-btn').click();
+
+    cy.get('#add-task-btn').click();
+    cy.get('#task-form').should('be.visible');
+    cy.get('#task-input').type('Test Task');
+    cy.get('#date-input').type('2021-12-13');
+    cy.get('#category-input').select('Test Category');
+    cy.get('#priority-input').select('Normal');
+    cy.get('#task-ok-btn').click();
+
+    cy.get('#add-task-btn').click();
+    cy.get('#task-form').should('be.visible');
+    cy.get('#task-input').type('Test Task');
+    cy.get('#date-input').type('2021-12-14');
+    cy.get('#category-input').select('Test Category');
+    cy.get('#priority-input').select('Low');
+    cy.get('#task-ok-btn').click();
 
     
 
