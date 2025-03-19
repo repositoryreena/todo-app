@@ -35,12 +35,12 @@ describe('example to-do app', () => {
     cy.get('#add-task-btn').click();
     cy.get('#task-form').should('be.visible');
     cy.get('#task-form').should('be.visible');
-    cy.get('#task-input').type('Test Task');
+    cy.get('#task-input').type('Test Task 1');
     cy.get('#date-input').type('2021-12-12');
     cy.get('#category-input').select('Test Category');
     cy.get('#priority-input').select('Critical');
     cy.get('#task-ok-btn').click();
-    cy.get('#task-list').should('contain', 'Test Task');
+    cy.get('#task-list').should('contain', 'Test Task 1');
     cy.get('#task-list').should('contain', '2021-12-12');
     cy.get('#task-list').should('contain', 'Test Category');
     cy.get('#task-list').should('contain', 'Critical');
@@ -51,7 +51,7 @@ describe('example to-do app', () => {
 
     cy.get('#add-task-btn').click();
     cy.get('#task-form').should('be.visible');
-    cy.get('#task-input').type('Test Task');
+    cy.get('#task-input').type('Test Task 2');
     cy.get('#date-input').type('2021-12-13');
     cy.get('#category-input').select('Test Category');
     cy.get('#priority-input').select('Normal');
@@ -59,13 +59,17 @@ describe('example to-do app', () => {
 
     cy.get('#add-task-btn').click();
     cy.get('#task-form').should('be.visible');
-    cy.get('#task-input').type('Test Task');
+    cy.get('#task-input').type('Test Task 3');
     cy.get('#date-input').type('2021-12-14');
     cy.get('#category-input').select('Test Category');
     cy.get('#priority-input').select('Low');
     cy.get('#task-ok-btn').click();
 
-    
+    cy.get('#show-dropdown').select('All');
+    cy.get('#task-list').children().should('have.length', 4);
+    cy.get('#task-list').children().eq(1).should('contain', 'Test Task 2');
+    cy.get('#task-list').children().eq(2).should('contain', 'Test Task 3');
+    cy.get('#task-list').children().eq(3).should('contain', 'Test Task 1');
 
     
 
