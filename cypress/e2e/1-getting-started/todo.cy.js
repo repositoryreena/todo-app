@@ -22,7 +22,7 @@ describe('example to-do app', () => {
 
   
 
-  it('should add a category, add a task, check a task, show all, show incomplete, order within whatevers displayed', () => {
+  it('should add a category, add a task, delete a task, check a task, show all, show incomplete, order within whatevers displayed, show category', () => {
 
     cy.get('#add-category-btn').click();
     cy.get('#category-form').should('be.visible');
@@ -31,6 +31,23 @@ describe('example to-do app', () => {
     cy.get('#show-dropdown').should('contain', 'Test Category');
     cy.get('#category-input').should('contain', 'Test Category');
     cy.get('#category-form').should('be.hidden');
+
+    cy.get('#add-task-btn').click();
+    cy.get('#task-form').should('be.visible');
+    cy.get('#task-form').should('be.visible');
+    cy.get('#task-input').type('Test Task 1');
+    cy.get('#date-input').type('2021-12-12');
+    cy.get('#category-input').select('Test Category');
+    cy.get('#priority-input').select('Critical');
+    cy.get('#task-ok-btn').click();
+    cy.get('#task-list').should('contain', 'Test Task 1');
+    cy.get('#task-list').should('contain', '2021-12-12');
+    cy.get('#task-list').should('contain', 'Test Category');
+    cy.get('#task-list').should('contain', 'Critical');
+    cy.get('#task-form').should('be.hidden');
+
+    cy.get(".delete-btn").click();
+    cy.get("#task-list").children().should("have.length", 1);
 
     cy.get('#add-task-btn').click();
     cy.get('#task-form').should('be.visible');
@@ -84,6 +101,8 @@ describe('example to-do app', () => {
 
     cy.get("#show-dropdown").select("Test Category");
     cy.get("#task-list").children().should("have.length", 4);
+
+    
 
   })
 
