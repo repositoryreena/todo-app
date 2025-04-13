@@ -103,6 +103,9 @@ describe('example to-do app', () => {
     cy.get("#task-list").children().should("have.length", 4);
 
     
+    
+    
+
 
   })
 
