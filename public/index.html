@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="unicorn" style="position: absolute; display: none"></div>
+
+    <div id="container">
+      <button id="add-task-btn">ADD TASK</button>
+      <button id="add-category-btn">ADD CATEGORY</button>
+
+      <select id="show-dropdown">
+        <option value="" disabled selected>SHOW</option>
+        <option value="ALL">All</option>
+        <option value="INCOMPLETE">Incomplete</option>
+      </select>
+
+      <select id="order-dropdown">
+        <option value="" disabled selected>ORDER BY</option>
+        <option value="DATE">Date</option>
+        <option value="PRIORITY">Priority</option>
+      </select>
+
+      <!-- Task Form -->
+      <div id="task-form" style="display: none">
+        <input id="task-input" placeholder="Enter Task" />
+        <input id="date-input" type="date" />
+        <select id="category-input">
+          <!-- Categories will be populated dynamically -->
+        </select>
+        <select id="priority-input">
+          <option value="Critical">Critical</option>
+          <option value="Normal">Normal</option>
+          <option value="Low">Low</option>
+        </select>
+        <button id="task-ok-btn">OK</button>
+      </div>
+
+      <!-- Category Form -->
+      <div id="category-form" style="display: none">
+        <input id="new-category-input" placeholder="Enter New Category" />
+        <button id="category-ok-btn">OK</button>
+      </div>
+
+      <ul id="task-list">
+        <!-- <li class="task-header">
+          <span>Item Name</span>
+          <span>Due Date</span>
+          <span>Priority</span>
+          <span>Category</span>
+        </li> -->
+        <!-- Tasks will be rendered here -->
+      </ul>
+    </div>
+
+    <!-- Add your JavaScript here, before closing body tag -->
+    <script src="script.js"></script>
+  </body>
+</html>

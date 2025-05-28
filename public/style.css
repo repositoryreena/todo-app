@@ -1,0 +1,712 @@
+/* Reset default browser styles */
+body { 
+  font-family: "Courier New", Courier, monospace; /* Set the font to "Courier New" as the primary, and fall back to Courier or monospace if unavailable */
+  background-color: #e0f7ff; /* Set the background color to a light blue (#e0f7ff) */
+  color: #333; /* Set the text color to a dark gray (#333) for readability */
+  display: flex; /* Use flexbox layout for the body */
+  flex-direction: column; /* Arrange children elements (e.g., divs, paragraphs) in a vertical column direction */
+  align-items: center; /* Align all child elements to the center horizontally */
+  font-size: 18px; /* Increase font size to 18px for better readability */
+  overflow-x: hidden; /* Prevent horizontal scrolling by hiding the horizontal scrollbar */
+  padding: 10px; /* Add 10px of padding inside the body */
+}
+
+
+
+
+li:hover {
+  cursor: pointer; /* Change the cursor to a pointer (hand) when hovering over a list item (li) */
+}
+
+button {
+  background-color: #76c7c0; /* Set the background color to a pastel teal (#76c7c0) */
+  border: none; /* Remove the border around the button */
+  border-radius: 30px; /* Make the corners of the button rounded with a 30px radius */
+  padding: 15px 30px; /* Add 15px padding on the top and bottom, 30px on the left and right for larger button size */
+  color: white; /* Set the text color to white */
+  font-size: 20px; /* Increase the font size to 20px for better readability */
+  font-family: "Courier New", Courier, monospace; /* Set the font of the button text to Courier New, or fallback to Courier or monospace */
+  cursor: pointer; /* Change the cursor to a pointer (hand) when hovering over the button */
+  margin: 15px; /* Add 15px margin around the button to create space from other elements */
+  transition: background-color 0.3s ease; /* Smooth transition effect for the background-color over 0.3 seconds when hovering or changing */
+}
+
+input {
+  border-radius: 30px; /* Make the corners of the input field rounded with a 30px radius */
+  padding: 15px 30px; /* Add 15px padding on the top and bottom, 30px on the left and right for more space inside the input */
+  font-size: 20px; /* Increase the font size to 20px for better readability */
+  font-family: "Courier New", Courier, monospace; /* Set the font of the input text to Courier New, or fallback to Courier or monospace */
+  cursor: pointer; /* Change the cursor to a pointer (hand) when hovering over the input field */
+  margin: 15px; /* Add 15px margin around the input to create space from other elements */
+  transition: background-color 0.3s ease; /* Smooth transition effect for the background-color over 0.3 seconds when it changes */
+}
+
+select {
+  border: none; /* Remove the border around the select dropdown */
+  background-color: #ffffff; /* Set the background color of the select element to white */
+  border-radius: 30px; /* Make the corners of the select dropdown rounded with a 30px radius */
+  padding: 15px 20px; /* Add 15px padding on the top and bottom, and 20px padding on the left and right for more space inside */
+  font-size: 20px; /* Increase the font size to 20px for better readability */
+  font-family: "Courier New", Courier, monospace; /* Set the font of the text inside the select dropdown to Courier New, or fallback to Courier or monospace */
+  color: #333; /* Set the text color to a dark gray (#333) for readability */
+  margin: 15px; /* Add 15px margin around the select element to create space from other elements */
+  cursor: pointer; /* Change the cursor to a pointer (hand) when hovering over the select element */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect below the select dropdown for depth */
+}
+
+/* Dynamic pastel rainbow colors for dropdown options */
+/* The nth-child(6n+1) selector is a CSS trick to create a repeating cycle for the colors. It applies the background color to every 6th item in the list, starting from the first. */
+
+.bubble.category:nth-child(6n + 1) {
+  background-color: #d0e1f9; /* Light pastel blue */
+}
+
+.bubble.category:nth-child(6n + 2) {
+  background-color: #f5e1a4; /* Soft pastel gold */
+}
+
+.bubble.category:nth-child(6n + 3) {
+  background-color: #d9c9f5; /* Light pastel lavender */
+}
+
+.bubble.category:nth-child(6n + 4) {
+  background-color: #c3f0c3; /* Light pastel teal */
+}
+
+.bubble.category:nth-child(6n + 5) {
+  background-color: #e1d5f1; /* Soft pastel mauve */
+}
+
+.bubble.category:nth-child(6n + 6) {
+  background-color: #f3d1e2; /* Soft pastel coral */
+}
+
+
+.container {
+  display: flex; /* Use flexbox layout to arrange the child elements */
+  flex-direction: column; /* Arrange the child elements in a vertical column */
+  align-items: center; /* Center the child elements horizontally */
+  margin-top: 20px; /* Add 20px margin at the top of the container */
+  flex-wrap: wrap; /* Allow the child elements to wrap onto the next line if there isn’t enough space */
+}
+
+label {
+  font-size: 22px; /* Set the font size to 22px to make the label text larger for better readability */
+  font-weight: bold; /* Make the label text bold for emphasis */
+  color: #333; /* Set the text color to a dark gray (#333) for good contrast and readability */
+  margin-bottom: 10px; /* Add 10px margin below the label to space it from the element that follows */
+  margin-top: 25px; /* Add 25px margin above the label to create space from the element above */
+}
+
+#task-list li {
+  font-size: 20px; /* Increase the font size of the task text to 20px for better readability */
+  padding: 15px; /* Add 15px padding inside the list item for more space around the content */
+  margin: 10px 0; /* Add 10px margin at the top and bottom of each list item to create space between tasks */
+  display: flex; /* Use flexbox layout to arrange the content within the list item */
+  justify-content: space-between; /* Distribute space between elements inside the list item, pushing them to opposite ends */
+  align-items: center; /* Align the items vertically in the center of the list item */
+  background-color: skyblue; /* Set the background color to white for each task */
+  border-radius: 10px; /* Round the corners of the list item with a 10px radius */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect to the list item for depth */
+}
+
+/* Style task text */
+#task-list li span {
+  font-size: 20px; /* Larger font for task text */
+}
+
+/* Style task buttons */
+#task-list li button {
+  font-size: 20px; /* Larger buttons */
+}
+
+.task-item {
+  display: flex; /* Use flexbox layout to arrange elements inside each task item */
+  justify-content: space-between; /* Align columns of content within the task item with space between them */
+  border-bottom: 1px solid #ddd; /* Add a light gray bottom border to separate the task items */
+  width: 100%; /* Make the task items take up the full width of their container */
+  box-sizing: border-box; /* Include padding and border in the width calculation to prevent overflow */
+  flex-wrap: wrap; /* Allow task items to wrap onto the next line if necessary */
+  font-size: 14px; /* Set the font size to 14px for smaller, more compact text */
+  padding: 10px 15px; /* Add 10px padding on the top and bottom, 15px on the left and right inside each task item */
+  max-width: 100%; /* Ensure task items do not overflow beyond their container */
+  align-items: center; /* Vertically align the content in the center of each task item */
+  margin-bottom: 10px; /* Add 10px margin at the bottom of each task item to space them apart */
+}
+
+span {
+  margin-right: 10px; /* Add 10px of space to the right of the span element */
+}
+
+.task-item.completed { 
+  background: linear-gradient(
+    135deg,
+    #ffb3ba,
+    #ffdfba,
+    #ffffba,
+    #baffc9,
+    #bae1ff,
+    #d6a7ff
+  ); /* Rainbow gradient */
+  transition: background 0.3s ease; /* Smooth transition for the background */
+}
+
+.task-item.completed .checkmark.checked {
+  color: green; /* Set the checkmark color to green when the task is completed */
+  font-size: 24px; /* Increase the size of the checkmark to 24px */
+  transition:
+    color 0.3s ease,
+    /* Apply a smooth 0.3s transition effect for the color change */ font-size
+      0.3s ease; /* Apply a smooth 0.3s transition effect for the font size change */
+}
+
+/* Styling for the checkmark */
+
+.checkmark.checked {
+  display: block; /* Display the checkmark as a block element when it is checked */
+  color: green; /* Set the checkmark color to green to indicate a completed task */
+  border-radius: 50%; /* Make the checkmark circular by giving it a 50% border radius */
+}
+
+/* Apply rainbow gradient to the whole body when a task is completed */
+
+/* background-size: 100% 100%: This ensures the gradient spans the entire body and doesn't repeat. It covers the entire page area in one single stretch. */
+body.rainbow-gradient {
+  background: linear-gradient(
+    135deg,
+    #ffb3ba,
+    #ffdfba,
+    #ffffba,
+    #baffc9,
+    #bae1ff,
+    #d6a7ff
+  ); /* Rainbow gradient */
+  background-size: 100% 100%; /* Make the gradient cover the whole screen */
+  background-attachment: fixed; /* Fix the gradient so it doesn't scroll with the page */
+  transition: background 0.3s ease; /* Smooth transition for the background */
+}
+
+/* Styling for the bubbles around priority and category */
+.bubble {
+  display: inline-block; /* Display the bubble as an inline-block element, allowing it to sit alongside other elements */
+  padding: 5px; /* Add 5px padding inside the bubble for spacing around the content */
+  margin: 5px; /* Add 5px margin outside the bubble to create space between it and other elements */
+  border-radius: 12px; /* Round the corners of the bubble with a 12px radius for a smooth, pill-like shape */
+  font-size: 0.8em; /* Set the font size to 0.8em to make the text slightly smaller than the default */
+  font-weight: bold; /* Make the text inside the bubble bold for emphasis */
+  color: white; /* Set the text color to white for contrast, assuming the bubble has a darker background */
+}
+
+/* Bubbles for priority */
+.bubble.priority {
+  padding: 8px 16px; /* Add 8px padding on the top and bottom, and 16px on the left and right for more space inside the bubble */
+  border-radius: 20px; /* Make the corners of the bubble more rounded with a 20px radius */
+  font-size: 14px; /* Set the font size to 14px for a moderate text size */
+  font-weight: bold; /* Make the text inside the bubble bold for emphasis */
+  color: black; /* Set the text color to black for better readability */
+  text-shadow: none; /* Remove any text shadow to ensure the text remains clear and sharp */
+}
+
+/* For low priority (green) */
+.bubble.priority.low {
+  background-color: #d9ffd9; /* Green background */
+  color: black;
+}
+
+/* For normal priority (yellow) */
+.bubble.priority.medium {
+  background-color: #ffffe0; /* Yellow background */
+  color: black; /* Ensure black text on yellow background */
+}
+
+/* For critical priority (red) */
+.bubble.priority.high {
+  background-color: #ffd6d6; /* Red background */
+  color: black; /* Ensure black text */
+}
+
+/* Bubbles for category */
+.bubble.category {
+  padding: 8px 16px; /* Add 8px padding on the top and bottom, and 16px on the left and right for more space inside the bubble */
+  border-radius: 20px; /* Round the corners of the bubble with a 20px radius for a smooth, pill-like shape */
+  font-size: 14px; /* Set the font size to 14px for a moderate text size */
+  font-weight: bold; /* Make the text inside the bubble bold for emphasis */
+  color: black; /* Set the text color to black for better readability */
+  text-shadow: none; /* Remove any text shadow to ensure the text remains clear and sharp */
+  background-color: transparent; /* Ensure the bubble has a transparent background, allowing the background to show through */
+}
+
+/* Specific color for categories based on index */
+.bubble.category:nth-child(6n + 1) {
+  background-color: #d0e1f9; /* Light pastel blue */
+}
+
+.bubble.category:nth-child(6n + 2) {
+  background-color: #f5e1a4; /* Soft pastel gold */
+}
+
+.bubble.category:nth-child(6n + 3) {
+  background-color: #d9c9f5; /* Light pastel lavender */
+}
+
+.bubble.category:nth-child(6n + 4) {
+  background-color: #c3f0c3; /* Light pastel teal */
+}
+
+.bubble.category:nth-child(6n + 5) {
+  background-color: #e1d5f1; /* Soft pastel mauve */
+}
+
+.bubble.category:nth-child(6n + 6) {
+  background-color: #f3d1e2; /* Soft pastel coral */
+}
+
+
+
+body.task-checked {
+  background: linear-gradient(
+    90deg,
+    #ffb3ba,
+    #ffdfba,
+    #ffffba,
+    #baffc9,
+    #bae1ff,
+    #d6a7ff
+  );
+  background-size: 300% 300%; /* Ensures the gradient stretches across */
+  animation: rainbow-background 3s ease-out forwards; /* Add animation for smooth transition */
+}
+
+/* Keyframes for the rainbow animation */
+@keyframes rainbow-background {
+  0% {
+    background-position: 0% 50%; /* At the start of the animation (0%), set the background position to the left side */
+  }
+  50% {
+    background-position: 100% 50%; /* At the midpoint of the animation (50%), move the background to the right side */
+  }
+  100% {
+    background-position: 0% 50%; /* At the end of the animation (100%), return the background to its initial left position */
+  }
+}
+
+/* Styling for the priority dropdown */
+select#priority-input {
+  background-color: #fff; /* Set the background color of the select input to white */
+  color: #333; /* Set the text color inside the select input to dark gray (#333) for readability */
+  font-size: 20px; /* Set the font size to 20px for better readability */
+  border-radius: 30px; /* Make the corners of the select input rounded with a 30px radius */
+  padding: 15px 30px; /* Add 15px padding on the top and bottom, and 30px on the left and right for more space inside the select input */
+  cursor: pointer; /* Change the cursor to a pointer (hand) when hovering over the select input to indicate it's clickable */
+  margin: 15px; /* Add 15px margin around the select input to create space from other elements */
+  font-family: "Courier New", Courier, monospace; /* Set the font family to Courier New, or fallback to Courier or monospace if unavailable */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow below the select input for depth */
+}
+
+/* Style for the header row */
+.task-header span {
+  width: 16%; /* Equal column width */
+  text-align: center; /* Center-align text */
+}
+
+/* Adjust the checkmark and delete button so they are aligned */
+.delete-btn {
+  display: flex; /* Use flexbox layout to arrange the content inside the delete button */
+  justify-content: center; /* Center the content (such as an icon or text) horizontally inside the button */
+  cursor: pointer; /* Change the cursor to a pointer (hand) when hovering over the delete button to indicate it's clickable */
+  background: none; /* Remove the background color of the button */
+  border: none; /* Remove the border from the button */
+  font-size: 18px; /* Set the font size of any text inside the button to 18px */
+  width: 30px; /* Set the width of the button to 30px */
+  text-align: center; /* Align any text or icon inside the button to the center */
+  color: white; /* Set the text (or icon) color to white */
+  padding: 5px; /* Add 5px of padding inside the button to create space around the content */
+}
+
+/* Adjust the delete button container */
+.delete-btn-container {
+  display: flex; /* Use flexbox layout to arrange the content inside the container */
+  justify-content: center; /* Center the content horizontally within the container */
+  align-items: center; /* Center the content vertically within the container */
+  width: 30px; /* Set the width of the container to 30px */
+  text-align: center; /* Align any text or content inside the container to the center */
+  margin-top: 0; /* Remove any extra margin at the top of the container */
+  margin-left: 5px; /* Add 5px margin to the left of the container to create space from adjacent elements */
+}
+
+/* Ensure the task container stays aligned properly */
+.task-item span,
+.delete-btn-container {
+  text-align: center; /* Align the text or content inside both the span within .task-item and .delete-btn-container to the center */
+}
+
+/* Ensure checkmark is visible when checked */
+.checkmark-container .checkmark {
+  font-size: 16px; /* Adjust font size to fit better in the circle */
+  color: #4caf50; /* Green color for the checkmark */
+  display: none; /* Initially hidden */
+}
+
+/* When the task is completed, show the checkmark */
+.checkmark-container .checkmark.checked {
+  display: inline-block; /* Show the checkmark when checked */
+  color: #4caf50; /* Green color for checkmark */
+}
+
+.checkmark {
+  font-size: 16px; /* Set the font size of the checkmark to 16px, adjusted to fit within the circle */
+  position: absolute; /* Position the checkmark absolutely within its containing element */
+  display: none; /* Initially hide the checkmark (will be shown dynamically when needed) */
+  margin: 0; /* Remove any margin or extra space around the checkmark */
+  z-index: 2; /* Set a high z-index to ensure the checkmark appears on top of other elements */
+  color: #4caf50; /* Set the color of the checkmark to green (#4caf50) to indicate completion */
+}
+
+/* Adjust the task item spans to allow text wrapping within each column */
+/* Adjust the columns (task item spans) for proper wrapping */
+.task-header span,
+.task-item span {
+  word-wrap: break-word; /* Allow words to break and wrap to the next line inside each column if they are too long */
+  white-space: normal; /* Allow the text to wrap normally, breaking at spaces when necessary */
+  overflow-wrap: break-word; /* Force long words to break and wrap to the next line to avoid overflow */
+  width: 14%; /* Set the width of the span to 14% of the parent container, which can be adjusted based on layout needs */
+  text-align: center; /* Center align the text inside each span element */
+  max-width: 180px; /* Set the maximum width to 180px to prevent the span from expanding too wide */
+  min-width: 100px; /* Set the minimum width to 100px to ensure the span doesn’t shrink too much */
+  padding: 5px; /* Add 5px padding inside each span element for some internal spacing */
+}
+
+/* Optional: Add a max-width for task name to limit the width of long names */
+.task-item .task-name {
+  word-wrap: break-word; /* Allow long words to break and wrap onto the next line to prevent overflow */
+  overflow-wrap: break-word; /* Ensure long words break and wrap within the container */
+  white-space: normal; /* Allow the text to wrap normally, breaking at spaces when needed */
+  width: 100%; /* Set the width to 100% so that it fills up the available space within its parent container */
+  max-width: calc(
+    100% - 60px
+  ); /* Set a maximum width to fill up the container minus 60px (for padding or other content) */
+  padding: 0 5px; /* Add horizontal padding (5px on each side) for spacing inside the element */
+  flex-grow: 1; /* Allow the element to grow and take up any remaining space in a flex container */
+}
+
+/* Ensure the task item list doesn't overflow and no horizontal scrollbar */
+#task-list {
+  width: 100%; /* Ensure the task list takes up the full width of its container */
+  overflow-x: hidden; /* Prevent horizontal scrolling by hiding any content that overflows horizontally */
+  display: flex; /* Use flexbox layout to arrange the task items in a flexible way */
+  flex-direction: column; /* Arrange the task items in a vertical column */
+  align-items: stretch; /* Stretch the task items to fill the full width of the container */
+  list-style-type: none; /* Remove default list styling (bullet points) from the list */
+  padding: 0; /* Remove any default padding from the list */
+}
+
+/* Prevent horizontal scrollbar */
+html,
+body {
+  overflow-x: hidden; /* Prevents horizontal overflow */
+  width: 100%; /* Ensures that the width is 100% of the viewport */
+  margin: 0; /* Resets default margins */
+  padding: 0; /* Resets default padding */
+  box-sizing: border-box; /* Prevents overflow due to padding/border */
+}
+
+/* Optional: Reduce padding/margin */
+
+* {
+  box-sizing: border-box; /* Include padding and borders in the element's total width and height to prevent overflow */
+  margin: 0; /* Remove all default margins applied to elements */
+  padding: 0; /* Remove all default padding applied to elements */
+}
+
+/* Ensure the checkmark container is centered properly */
+.checkmark-container {
+  width: 30px; /* Set a fixed width of 30px for the checkmark container (circle) */
+  height: 30px; /* Set a fixed height of 30px for the checkmark container (circle) */
+  border-radius: 50%; /* Make the container circular by giving it a 50% border radius */
+  background-color: #e6f4ff; /* Set the background color to white */
+  display: flex; /* Use flexbox to center the content inside the container */
+  justify-content: center; /* Center the content (checkmark) horizontally inside the circle */
+  align-items: center; /* Center the content (checkmark) vertically inside the circle */
+  cursor: pointer; /* Change the cursor to a pointer when hovering over the circle, indicating it's clickable */
+  margin-right: 10px; /* Add 10px margin to the right of the circle to space it from adjacent elements */
+  position: relative; /* Set the position to relative, allowing for absolute positioning of child elements (like the checkmark) */
+}
+
+/* Style for the inner circle */
+.inner-circle {
+  width: 24px; /* Adjust the size to be smaller inside the outer circle */
+  height: 24px; /* Adjust the size to be smaller inside the outer circle */
+  border-radius: 50%; /* Make it circular */
+  border: 1px solid gray;
+  background-color: white; /* Light gray background */
+  position: absolute; /* Position it inside the checkmark container */
+  z-index: 1; /* Keep it behind the checkmark */
+}
+
+/* Pastel-colored bubbles for priority */
+
+
+/* Pastel-colored bubbles for categories */
+.bubble.category {
+  background-color: #d1a6ff; /* Pastel lavender for category bubbles */
+  color: #3e2a8c; /* Darker purple text */
+}
+
+/* Pastel colors for the category dropdown options */
+select option {
+  background-color: #d8c7f5; /* Light pastel purple for dropdown options */
+  color: #5e3c7e; /* Darker purple for text */
+}
+
+/* Pastel colors for the "SHOW" dropdown (categories) */
+#show-dropdown {
+  background-color: #e5d3f3; /* Very light pastel purple for the dropdown background */
+  color: #5e3c7e; /* Darker purple text */
+}
+
+#priority-input option[value="Critical"] {
+  background-color: #ffd6d6; /* Very light pastel red */
+}
+
+#priority-input option[value="Normal"] {
+  background-color: #ffffe0; /* Very light pastel yellow */
+}
+
+#priority-input option[value="Low"] {
+  background-color: #d9ffd9; /* Very light pastel green */
+}
+
+#show-dropdown option[value=""] {
+  background-color: #f0f0f0; /* Light gray pastel color */
+  color: #555; /* Darker text for contrast */
+}
+
+#order-dropdown option {
+  background-color: #f0f0f0; /* Light pastel gray */
+  color: #555; /* Darker text for contrast */
+}
+
+@keyframes flyAcross {
+  0% {
+    left: -250px; /* Start off-screen to the left */
+    bottom: -250px; /* Start below the viewport */
+    visibility: visible; /* Make sure it's visible at the start */
+  }
+  100% {
+    left: 200vw; /* Move far beyond the right side of the screen */
+    bottom: -250px; /* Keep it out of the visible area at the bottom */
+    visibility: hidden; /* Make it disappear when the animation is complete */
+  }
+}
+
+
+
+
+
+
+
+
+/* Unicorn element */
+
+/* When the checkmark is checked, trigger the unicorn flying animation */
+.checkmark.checked + .unicorn {
+  animation: flyAcross 5s forwards; /* Apply the flying animation */
+}
+
+/* Unicorn flying animation */
+@keyframes flyDiagonal {
+  0% {
+    bottom: 0%; /* Start at the bottom left */
+    left: 0%;   /* Start at the bottom left */
+  }
+  100% {
+    bottom: 100%; /* End near the top, but you can adjust as needed */
+    left: 100%;   /* End near the right side */
+  }
+}
+
+.fly {
+  position: absolute;
+  animation: flyDiagonal 10s infinite;
+}
+
+@keyframes fly {
+  0% {
+    transform: translateY(100%); /* Start from bottom */
+    opacity: 1; /* Fully visible */
+  }
+  100% {
+    transform: translateY(-100%); /* Move off the top of the screen */
+    opacity: 0; /* Fully fade out */
+  }
+}
+
+.unicorn {
+  z-index: 999; /* Set a high z-index to ensure the unicorn appears on top of other elements */
+  position: absolute; /* Position the unicorn absolutely relative to its nearest positioned ancestor */
+  bottom: 0; /* Position the unicorn at the bottom of the screen */
+  left: 50%; /* Position the unicorn at the horizontal center of the screen */
+  transform: translateX(
+    -50%
+  ); /* Offset the unicorn by 50% of its width to perfectly center it */
+  
+  animation: fly 3s forwards; /* Apply the 'fly' animation with a 3-second duration, and keep the final state after the animation completes */
+  background-size: contain; /* Ensure the unicorn image is scaled to fit within the container without being distorted */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  width: 200px; /* Set the unicorn's width to 200px */
+  height: 200px; /* Set the unicorn's height to 200px */
+}
+
+.task-header,
+.task-item {
+  display: flex; /* Use flexbox layout to arrange child elements (task header or task item) */
+  justify-content: space-between; /* Distribute space between child elements, pushing them to opposite ends */
+  padding: 10px; /* Add 10px padding inside the elements for spacing around content */
+  margin: 5px 0; /* Add 5px margin on the top and bottom, to separate the elements from others */
+  background-color: #e6f4ff !important; /* Set the background color to white */
+  border: 1px solid #ddd; /* Add a light gray border (1px solid) around the elements */
+}
+
+/* Style for the header row */
+.task-header {
+  font-weight: bold; /* Make the text in the task header bold for emphasis */
+  background-color: #e6f4ff !important; /* Set a light gray background color for the header */
+  padding: 10px 20px; /* Add 10px padding on the top and bottom, and 20px on the left and right for spacing */
+  display: flex; /* Use flexbox layout to arrange child elements in the header */
+  justify-content: space-between; /* Distribute space between child elements, pushing them to opposite ends */
+  border-bottom: 2px solid #ddd; /* Add a 2px solid light gray border at the bottom to separate the header from the rest of the content */
+}
+
+.task-item span {
+  text-align: center; /* Center-align the text within each column */
+  word-wrap: break-word; /* Ensure long words break and wrap to the next line if necessary */
+  white-space: normal; /* Allow text to wrap naturally, respecting spaces */
+  overflow-wrap: break-word; /* Ensure long words break and wrap, preventing overflow */
+  width: 16%; /* Set the width of the span to 16% of the parent container (adjustable as needed) */
+  box-sizing: border-box; /* Include padding and borders within the element's width and height calculations to prevent overflow */
+  flex-basis: 16%; /* Set the initial width of each span to 16% of the parent container, allowing flexibility */
+  flex-grow: 1; /* Allow each column to grow and take up remaining space if there is any */
+  min-width: 100px; /* Prevent the span from shrinking below 100px */
+  max-width: 25%; /* Prevent the span from growing beyond 25% of the parent container */
+  flex: 1; /* Allow the span to be flexible and share available space equally with other columns */
+}
+
+/* Add some colors to the bubbles for priority and category */
+
+.priority.low {
+  background-color: #4caf50; /* Green */
+}
+
+.priority.medium {
+  background-color: #ffcc00; /* Yellow */
+}
+
+.priority.high {
+  background-color: #ff6f61; /* Red */
+}
+
+
+.inner-circle.checked {
+  color: white; /* Color of the ✔ */
+  background-color: #4caf50; /* Background circle color */
+}
+
+
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .unicorn {
+    display: none; /* Hide the unicorn on mobile devices */
+  }
+
+  .task-header,
+  .task-item {
+    align-items: stretch; /* Stretch the task items to take up the full width of the container */
+  }
+
+  .task-header span,
+  .task-item span {
+    text-align: left; /* Align text to the left for better readability on mobile */
+    padding: 5px; /* Add padding inside the spans for spacing */
+  }
+
+  .unicorn.flyDiagonal {
+    animation: flyDiagonalMobile 5s forwards; /* Apply a mobile-specific diagonal flying animation for the unicorn */
+  }
+
+  /* Mobile flying animation */
+  @keyframes flyDiagonalMobile {
+    0% {
+      transform: translate(0, 0) scale(0.5); /* Start the unicorn in the top-left corner and scale it down */
+    }
+    100% {
+      transform: translate(300px, 400px) scale(1); /* Move the unicorn to the bottom-right corner and scale it back to normal size */
+    }
+  }
+
+  .task-header {
+    display: none !important; /* Hide the task header on mobile devices for a cleaner layout */
+  }
+
+  /* Adjust task items for mobile */
+  .task-item {
+    display: flex; /* Use flexbox layout for the task items */
+    flex-direction: row; /* Align items horizontally (in a row) */
+    justify-content: space-between; /* Space out the items evenly */
+    align-items: center; /* Vertically center the items within the row */
+    font-size: 14px; /* Reduce font size for better readability on mobile */
+    padding: 5px 10px; /* Add padding for spacing between items */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+  }
+
+  /* Adjust the width and wrapping of task item spans */
+  .task-item span {
+    white-space: normal; /* Allow text to break and wrap naturally */
+    overflow: hidden; /* Hide overflowed text that doesn’t fit within the container */
+    text-overflow: ellipsis; /* Add ellipsis (…) for text that overflows */
+    margin-right: 5px; /* Reduced space between the spans */
+    flex-basis: 100%; /* Allow each span to take up the full width of the container */
+    font-size: 14px; /* Keep font size consistent with other items */
+  }
+
+  /* Adjust the size of the bubbles and icons for mobile */
+  .task-item .bubble {
+    font-size: 0.8em; /* Reduce bubble text size for better readability on mobile */
+    padding: 3px 6px; /* Add padding to make the bubbles more compact */
+  }
+
+  /* Adjust the priority bubble and category bubble sizes */
+  .task-item .priority,
+  .task-item .category {
+    padding: 3px 6px; /* Reduce padding to make the priority and category bubbles smaller */
+  }
+}
+
+/* Adjustments for very small screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .task-header,
+  .task-item {
+    font-size: 12px; /* Further reduce font size for very small screens */
+  }
+
+  .task-item .bubble {
+    font-size: 0.7em; /* Reduce the size of bubble text even further */
+  }
+
+  /* Adjust spacing for delete button */
+  .delete-btn-container {
+    margin-left: 2px; /* Reduce space for delete button on small screens */
+  }
+
+  .unicorn {
+    width: 120px; /* Further adjust for very small screens */
+    height: 120px; /* Further adjust for very small screens */
+  }
+}
+
+@media (max-width: 767px) {
+  .unicorn {
+    width: 150px; /* Adjust image size for smaller screens */
+    height: 150px; /* Adjust image size for smaller screens */
+  }
+}
